@@ -1,0 +1,45 @@
+% !TEX root = diploma.tex
+
+%% Переименование теорем, аксиом и пр.
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{axiom}{Аксиома}[section]
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{lemma}{Лемма}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+% Черный квадрат в конце доказательства
+\renewcommand{\qedsymbol}{\ensuremath{\blacksquare}} 
+
+%% Мат. символы
+\renewcommand{\epsilon}{\ensuremath{\varepsilon}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
+\renewcommand{\kappa}{\ensuremath{\varkappa}}
+\renewcommand{\le}{\ensuremath{\leqslant}}
+\renewcommand{\leq}{\ensuremath{\leqslant}}
+\renewcommand{\ge}{\ensuremath{\geqslant}}
+\renewcommand{\geq}{\ensuremath{\geqslant}}
+\renewcommand{\emptyset}{\varnothing}
+
+%% Для алгоритмов
+\makeatletter
+\renewcommand{\ALG@name}{Алгоритм}
+%\renewcommand{\listalgorithmname}{Список \ALG@name ов}
+\makeatother
+
+\renewcommand{\algorithmicprocedure}{\textbf{процедура}}
+\renewcommand{\algorithmicrequire}{\textbf{Требуется:}}
+\renewcommand{\algorithmicensure}{\textbf{Проверить:}}
+\renewcommand{\algorithmiccomment}[1]{\{#1\}}
+\renewcommand{\algorithmicend}{\textbf{конец}}
+\renewcommand{\algorithmicif}{\textbf{if}}
+\renewcommand{\algorithmicthen}{\textbf{then}}
+\renewcommand{\algorithmicelse}{\textbf{else}}
+\renewcommand{\algorithmicfor}{\textbf{для}}
+\renewcommand{\algorithmicforall}{\textbf{для всех}}
+\renewcommand{\algorithmicdo}{\textbf{делать}}
+\renewcommand{\algorithmicwhile}{\textbf{пока}}
+\newcommand{\algorithmicelsif}{\algorithmicelse\ \algorithmicif}
+\newcommand{\algorithmicendif}{\algorithmicend\ \algorithmicif}
+\newcommand{\algorithmicendfor}{\algorithmicend\ \algorithmicfor}

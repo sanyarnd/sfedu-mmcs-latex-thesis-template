@@ -1,0 +1,50 @@
+% !TEX root = diploma.tex
+
+%% Математические пакеты
+\usepackage[]{amsthm}
+\usepackage[]{amsfonts}
+\usepackage[]{amsmath}
+\usepackage[]{amssymb}
+\usepackage[]{amscd}
+\usepackage[]{mathtools}
+\usepackage[]{unicode-math}
+\usepackage[]{algorithm}
+\usepackage[]{algpseudocode}
+
+%% Листинги
+\usepackage[]{listings}
+
+%% Таблицы и списки
+\usepackage[]{enumitem}
+\usepackage[]{tabularx}
+
+%% Приложение
+\usepackage[titletoc]{appendix}
+
+%% Работа с изображениями
+\usepackage[]{graphicx}
+\usepackage[]{subfig}
+\usepackage[]{float}
+
+%% Параметры для листинга кода
+\renewcommand{\lstlistingname}{Листинг}
+\lstset{
+	language		= [ISO]C++,
+	basicstyle		= \footnotesize\ttfamily,
+	keywordstyle	= \footnotesize\ttfamily\bfseries,
+	stringstyle		= \footnotesize\ttfamily,
+	commentstyle	= \footnotesize\textit,
+	breaklines		= true,
+	tabsize			= 2,
+	literate		= {\ \ }{{\ }}1,
+	showstringspaces= false,
+	inputencoding 	= utf8x,
+	numbers			= left,
+	stepnumber		= 1,
+	numbersep		= 5pt,
+	backgroundcolor	= \color{white},
+	frame			= tb
+}
+
+%% Стандартный каталог для изображений
+\graphicspath{{images/}}
