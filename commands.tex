@@ -1,6 +1,35 @@
 % !TEX root = diploma.tex
 
+%% -----------------------------------
+%% Стандартный каталог для изображений
+%% -----------------------------------
+\graphicspath{{images/}}
+
+%% ---------------------------
+%% Параметры для листинга кода
+%% ---------------------------
+\renewcommand{\lstlistingname}{Листинг}
+\lstset{
+    language		= [ISO]C++,
+    basicstyle		= \footnotesize\ttfamily,
+    keywordstyle	= \footnotesize\ttfamily\bfseries,
+    stringstyle		= \footnotesize\ttfamily,
+    commentstyle	= \footnotesize\textit,
+    breaklines		= true,
+    tabsize			= 2,
+    literate		= {\ \ }{{\ }}1,
+    showstringspaces= false,
+    inputencoding 	= utf8x,
+    numbers			= left,
+    stepnumber		= 1,
+    numbersep		= 5pt,
+    backgroundcolor	= \color{white},
+    frame			= tb
+}
+
+%% -----------------------------------
 %% Переименование теорем, аксиом и пр.
+%% -----------------------------------
 \newtheorem{theorem}{Теорема}[section]
 \newtheorem{axiom}{Аксиома}[section]
 \newtheorem{corollary}{Следствие}[theorem]
@@ -12,7 +41,9 @@
 % Черный квадрат в конце доказательства
 \renewcommand{\qedsymbol}{\ensuremath{\blacksquare}} 
 
+%% ------------
 %% Мат. символы
+%% ------------
 \renewcommand{\epsilon}{\ensuremath{\varepsilon}}
 \renewcommand{\phi}{\ensuremath{\varphi}}
 \renewcommand{\kappa}{\ensuremath{\varkappa}}
@@ -22,7 +53,9 @@
 \renewcommand{\geq}{\ensuremath{\geqslant}}
 \renewcommand{\emptyset}{\varnothing}
 
+%% --------------
 %% Для алгоритмов
+%% --------------
 \makeatletter
 \renewcommand{\ALG@name}{Алгоритм}
 %\renewcommand{\listalgorithmname}{Список \ALG@name ов}
