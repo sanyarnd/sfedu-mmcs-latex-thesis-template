@@ -37,7 +37,7 @@
 Войдите в настройки и выберите нужный компилятор для текста и библиографии. Делается это на вкладке `Build`. Нас интересует `XeLaTeX` и `Biber`.
 
 <!-- ![Настройки](./images/settings.png) -->
-<img src="./images/settings.png" width="30%">
+<img src="./images/settings.png" width="70%">
 
 ## Как пользоваться
 
