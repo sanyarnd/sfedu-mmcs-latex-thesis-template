@@ -6,31 +6,82 @@
 * Курсовая работа шестого семестра
 * Отчет о преддипломной практике
 * Выпускная квалификационная работа (бакалавриат)
-* Магистерская диссертация (_пока не реализовано_)
+* Магистерская диссертация
 
 Внешний вид работы можно посмотреть [здесь](https://github.com/sanyarnd/sfedu-mmcs-latex-thesis-template/blob/master/diploma.pdf).
 
+
+
 ## Зависимости
 
-* текстовый редактор или специализированная программа, например, [TeXStudio](https://www.texstudio.org/).
-* компилятор `XeLaTeX`
-* система управления библиографией `Biber`
-* некоторые пакеты
+* [Текстовый редактор](https://www.gnu.org/software/emacs/) или [специализированная программа](https://www.texstudio.org/).
+* Компилятор `XeLaTeX`
+* Система управления библиографией `Biber`
+* Обязательные пакеты
+  + [koma-script](https://ctan.org/pkg/koma-script)
+  + [kvoptions](https://ctan.org/pkg/kvoptions)
+  + [etoolbox](https://ctan.org/pkg/etoolbox)
+  + [xkeyval](https://ctan.org/pkg/xkeyval)
+  + [ifthen](https://ctan.org/pkg/ifthen)
+  + [geometry](https://ctan.org/pkg/geometry)
+  + [fancyhdr](https://ctan.org/pkg/fancyhdr)
+  + [fontspec](https://ctan.org/pkg/fontspec)
+  + [polyglossia](https://ctan.org/pkg/polyglossia)
+  + [microtype](https://ctan.org/pkg/microtype)
+  + [indentfirst](https://ctan.org/pkg/indentfirst)
+  + [csquotes](https://ctan.org/pkg/csquotes)
+  + [extdash](https://ctan.org/pkg/extdash)
+  + [amsthm](https://ctan.org/pkg/amsthm)
+  + [amsfonts](https://ctan.org/pkg/amsfonts)
+  + [amsmath](https://ctan.org/pkg/amsmath)
+  + [amssymb](https://ctan.org/pkg/amssymb)
+  + [amscd](https://ctan.org/pkg/amscd)
+  + [mathtools](https://ctan.org/pkg/mathtools)
+  + [unicode-math](https://ctan.org/pkg/unicode-math)
+* Пакеты включенные по-умолчанию
+  + [algorithm](https://ctan.org/pkg/algorithm)
+  + [algpseudocode](https://ctan.org/pkg/algpseudocode)
+  + [listings](https://ctan.org/pkg/listings)
+  + [enumitem](https://ctan.org/pkg/enumitem)
+  + [tabularx](https://ctan.org/pkg/tabularx)
+  + [appendix](https://ctan.org/pkg/appendix)
+  + [graphicx](https://ctan.org/pkg/graphicx)
+  + [subfig](https://ctan.org/pkg/subfig)
+  + [float](float)
+* Пакеты выключенные по-умолчанию
+  + [showframe](https://ctan.org/pkg/showframe)
+  + [pythontex](https://ctan.org/pkg/pythontex)
+
+_`XeLaTeX` и `Biber` используют `UTF-8`, поэтому исключаются проблемы с кодировкой и смешиванием языков, которые присущи другим системам, не требуют дополнительных пакетов и настройки._
 
 Для получения данных зависимостей потребуется дистрибутив `LaTeX`.
-Стандартным кроссплатформенным решением является [TeX Live](https://www.tug.org/texlive/). Присутствует сборка в виде .iso (~3-4GB) и сетевой установки.
+
+_Все пакеты можно скачать и заставить работать по отдельности, но это достаточно сложно и не нужно._
+
+### Установка TeX Live
+
+Стандартным кроссплатформенным решением является [TeX Live](https://www.tug.org/texlive/). Присутствует сборка в виде .iso (~3-4GB) и вариант сетевой установки.
+
+#### Windows
+
+Скачать образ либо сетевой инсталлятор на сайте [TeX Live](https://www.tug.org/texlive/).
+
+#### Linux
 
 Если вы используете `Linux`, то скачивать инсталлятор не требуется. Все необходимые пакеты будут доступны в репозиториях вашего дистрибутива.
-#### Ubuntu, Linux Mint
+
+##### Ubuntu, Linux Mint
 > sudo apt-get install texlive-full biber
-#### Arch Linux
+
+##### Arch Linux
 > sudo pacman -S texlive-most texlive-bin texlive-core texlive-lang biber
-#### Fedora
+
+##### Fedora
 > sudo dnf install texlive-scheme-full biber
 
-Обратите внимание, что в некоторых дистрибутивах `Biber` не входит в состав `TeX Live` и распространяется как отдельный пакет.
+_Обратите внимание, что в некоторых дистрибутивах `Biber` не входит в состав `TeX Live` и распространяется как отдельный пакет, в отличие от `Windows`._
 
-Все пакеты можно скачать и заставить работать по отдельности, но это достаточно сложно и не нужно.
+
 
 ## Настройка TeXStudio
 
@@ -38,6 +89,8 @@
 
 <!-- ![Настройки](./images/settings.png) -->
 <img src="./images/settings.png" width="70%">
+
+
 
 ## Как пользоваться
 
@@ -54,6 +107,7 @@
 Все изображения помещаются в каталог `images/`. Он является корневым для команд, типа `\includegraphics`. В данном каталоге можно создавать дополнительные каталоги.
 
 Например, вы создали каталог `chap01` в который поместили файл `image.png`. Тогда команда включения изображения должна быть следующего вида: `\includegraphics{chap01/image}`. Дописывать расширение файла не обязательно (только в случае отсутствия конфликта имен).
+
 
 
 ## Стандартные ошибки при работе с LaTeX
@@ -78,3 +132,9 @@
 
 * Вы добавили данные в список литературы, все правильно скомпилировали, но список так и не появился. Причина кроется в том, что по-умолчанию LaTeX игнорирует источники на которые нет ссылок. Если вас это не устраивает, то пригодится команда `\nocite{*}`. Ее можно поместить в начало документа.
 
+
+
+## Прочие ошибки
+
+#### Windows:
+* Если сборка даже пустого проекта занимает минуты, то запустите от имени администратора утилиту `fc-cache.exe`, которая находится в папке `C:\texlive\2017\bin\win32`.
