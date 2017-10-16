@@ -1,38 +1,45 @@
-\documentclass[master]{sfedu-mmcs-diploma}
+%% ----------------------------------------
+%% Выбрать необходимый стиль
+%% ----------------------------------------
+\documentclass[bachelor]{sfedu-mmcs-thesis} %% bachelor, master
 
-%% ------------------------------------------------
-%% Здесь находятся макросы подключения доп. пакетов
-%% ------------------------------------------------
 \include{packages}
-
-%% -------------------------------------------
-%% Здесь описываются стили, переопределения и
-%%          вспомогательные команды
-%% -------------------------------------------
 \include{commands}
 
-%% -------------------------------------
+
+%% --------------------------------------
 %% Данные для генерации титульного листа
-%% -------------------------------------
+%% --------------------------------------
 \filltitle{ru}{
-	title              = {\uppercase{очень интересная работа}},
-	type               = {diploma}, % bachelor, master, coursework, bachelorreport
-	sex                = {male}, 	 % male, female
-	course             = 4,
-	author             = {А.\,С. Пупкина},
-	supervisorPosition = {д.\,ф.-м.\,н., профессор},
-	supervisor         = {А.\,А. Выбегалло},
-	chairHead          = {В.\,С. Пилиди},
+    title              = {\uppercase{очень интересная работа}},
+    type               = {bachelor},   % bachelor, master, coursework, bachelorreport
+    sex                = {male},       % male, female
+    course             = 4,
+    author             = {А.\,С. Пупкина},
+    supervisorPosition = {д.\,ф.-м.\,н., профессор},
+    supervisor         = {А.\,А. Выбегалло},
+    chairHead          = {В.\,С. Пилиди},
+}
+%% Английский вариант
+\filltitle{en}{
+    title              = {\uppercase{Very interesting work}},
+    type               = {bachelor},   % bachelor, master, coursework, bachelorreport
+    sex                = {male},       % male, female
+    course             = 4,
+    author             = {A.\,S. Pupkin},
+    supervisorPosition = {д.\,ф.-м.\,н., профессор},
+    supervisor         = {А.\,А. Выбегалло},
+    chairHead          = {В.\,С. Пилиди},
 }
 
 \begin{document}
-	\maketitle
-	\include{items/task}
-	\tableofcontents
-	\include{items/intro}
-	\include{items/chap01}
-	\include{items/ending}
+    \maketitle
+    \include{items/task}
+    \tableofcontents
+    \include{items/intro}
+    \include{items/chap01}
+    \include{items/ending}
 
-	\printbibliography[heading=bibintoc]
-	\include{items/appendix}
+    \printbibliography[heading=bibintoc]
+    \include{items/appendix}
 \end{document}
