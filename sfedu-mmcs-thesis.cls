@@ -4,9 +4,6 @@
 %%
 %% Александр Бирюков <sanya.rnd@gmail.com>
 
-%% TODO:
-%% Переход с fancyhdr на scrpage
-
 \NeedsTeXFormat{LaTeX2e} % Было бы интересно посмотреть на LaTeX3
 \ProvidesClass{sfedu-mmcs-thesis}[2017/10/14 SFedU MMCS thesis class]
 
@@ -33,7 +30,7 @@
 \ProcessKeyvalOptions*
 
 
-%% Загружаем нужный класс
+%% Выбираем нужный класс
 \ifopt@bachelor
     \def\opt@class{scrartcl}
 \fi
@@ -43,17 +40,23 @@
 
 
 %% Загружаем класс
-\LoadClass[a4paper, 14pt, oneside, usegeometry]{\opt@class}
+\LoadClass[a4paper, 
+           14pt, 
+           oneside, 
+           DIV            = 12,
+           headings       = normal,
+           chapterprefix  = true,
+           appendixprefix = true,
+           numbers        = endperiod]{\opt@class}
 
 
 %% Пакеты и их настройки
-\usepackage[pass]{geometry}     % геометрия страницы
-\usepackage[]{fancyhdr}         % колонтитулы
+\usepackage[]{scrlayer-scrpage} % колонтитулы
 \usepackage[]{fontspec}         % загрузка шрифтов, работа с кодировкой и пр.
 \usepackage[]{polyglossia}      % переносы слов
 \usepackage[]{microtype}        % различные исправления типографии
 \usepackage[]{indentfirst}      % красная строка в первом абзаце
-\usepackage[]{csquotes}         % правильные кавычки
+\usepackage[]{csquotes}         % правильные ковычки, цитирование
 \usepackage[shortcuts]{extdash} % Дополнительные команды для различных дефисов, тире и пр.
 \usepackage[]{amsthm}           % окружения теоремы и пр.
 \usepackage[]{amsfonts}         % поддержка ажурных шрифтов и пр.
@@ -66,6 +69,9 @@
 \usepackage[onehalfspacing,
             nodisplayskipstretch]
 {setspace}                      % полуторный интервал
+
+\setlength{\parindent}{1.25cm}  %% Красная строка
+\frenchspacing                  %% убираем лишние отступы после точек
 
 \usepackage[backend   = biber,
             maxnames  = 10,
@@ -85,12 +91,16 @@
 
 
 %% Перенос слов
-\pretolerance=5000      %% Настройки переноса
-\tolerance=9000         %% Настройки переноса
-\emergencystretch=0pt   %% Запрещаем выход за границы
-\righthyphenmin=2       %% целое число, равное наименьшему количеству букв в слове, которые можно переносить на следующую строку
-\lefthyphenmin=2
-\hyphenpenalty=500
+\binoppenalty       = 10000 %% Запрет переносов строк в формулах
+\relpenalty         = 10000
+\pretolerance       = 5000  %% Настройки переноса
+\tolerance          = 9000  %% Настройки переноса
+\emergencystretch   = 0pt   %% Запрещаем выход за границы
+\righthyphenmin     = 2     %% целое число, равное наименьшему количеству букв в слове, которые можно переносить на следующую строку
+\lefthyphenmin      = 2
+\hyphenpenalty      = 500
+\clubpenalty        = 10000 %% Запрет разрывов страниц после первой
+\widowpenalty       = 10000 %% и перед предпоследней строкой абзаца
 
 
 %% Язык
@@ -117,7 +127,9 @@
              BoldItalicFont = {Courier New Bold Italic}]{Courier New}
 \newfontfamily\cyrillicfonttt{Courier New}
 
-\setmathfont{xits-math.otf}
+\setmathfont{xits-math.otf}             %% математический шрифт
+
+\setkomafont{pageheadfoot}{\upshape}    %% шрифт колонтитулов
 
 
 %% Параметры заполнения титульного листа
@@ -170,6 +182,7 @@
             sex                 = {male},
             course              = {course},
             author              = {author},
+            authorgenitive      = {authorgenitive},
             supervisor          = {supervisor},
             supervisorPosition  = {supervisorPosition},
             reviewer            = {reviewer},
@@ -192,6 +205,7 @@
             sex                 = {male},
             course              = {course},
             author              = {author},
+            authorgenitive      = {authorgenitive},
             supervisor          = {supervisor},
             supervisorPosition  = {supervisorPosition},
             reviewer            = {reviewer},
@@ -210,60 +224,31 @@
 }
 
 
-
-%% Титульная страница
-\fancypagestyle{titlepage_style_ru}{
-    \fancyhf{}
-    \renewcommand{\headrulewidth}{0pt}
-    \chead
-    {
-        \vskip 1em
-        \uppercase{министерство образования и науки рф} \\
-        \vskip 1em
-        \opt@title@university@ru \\
-        \vskip 1em
-        \opt@title@faculty@ru \\
-        \vskip 1em
-        \opt@title@chair@ru
-        \vskip 1em
-    }
-    \cfoot
-    { \parbox[b]{\textwidth}{\centering \opt@title@city@ru\\ \opt@title@year@ru} }
-}
-
-\fancypagestyle{titlepage_style_en}{
-    \fancyhf{}
-    \renewcommand{\headrulewidth}{0pt}
-    \chead
-    {
-        \vskip 1em
-        \uppercase{Ministry of Education and Science of the Russian Federation} \\
-        \vskip 1em
-        \opt@title@university@en \\
-        \vskip 1em
-        \opt@title@faculty@en \\
-        \vskip 1em
-        \opt@title@chair@en
-        \vskip 1em
-    }
-    \cfoot
-    { \parbox[b]{\textwidth}{\centering \opt@title@city@en\\ \opt@title@year@en} }
-}
-
-
 \newcommand\makenewtitleru{%
     \begin{titlepage}
-        \newgeometry{top=20mm,bottom=20mm,left=20mm,right=15mm,nohead,includeheadfoot}
-        \thispagestyle{titlepage_style_ru}
+        \thispagestyle{scrheadings}
+        \cfoot
+        { \parbox[b]{\textwidth}{\centering \opt@title@city@ru\\ \opt@title@year@ru} }
+    
         \begin{center}
+            \vskip 1em
+            \uppercase{министерство образования и науки рф} \\
+            \vskip 1em
+            \opt@title@university@ru \\
+            \vskip 1em
+            \opt@title@faculty@ru \\
+            \vskip 1em
+            \opt@title@chair@ru
+            \vskip 1em
+
             \ifthenelse{ \equal{\opt@title@type@ru}{master} }
             {
-                \vspace*{0.35\textheight}
+                \vskip 4em
                 \opt@title@author@ru \\
                 \vskip 1em
             }
             %else
-            { \vspace*{0.33\textheight} }
+            { \vskip 3em }
 
             \ifthenelse{ \not\equal{\opt@title@type@ru}{bachelorreport} }
             {
@@ -339,17 +324,29 @@
 
 \newcommand\makenewtitleen{%
     \begin{titlepage}
-        \newgeometry{top=20mm,bottom=20mm,left=20mm,right=15mm,nohead,includeheadfoot}
-        \thispagestyle{titlepage_style_en}
+        \thispagestyle{scrheadings}
+        \cfoot
+        { \parbox[b]{\textwidth}{\centering \opt@title@city@en\\ \opt@title@year@en} }
+        
         \begin{center}
+            \vskip 1em
+            \uppercase{Ministry of Education and Science of the Russian Federation} \\
+            \vskip 1em
+            \opt@title@university@en \\
+            \vskip 1em
+            \opt@title@faculty@en \\
+            \vskip 1em
+            \opt@title@chair@en
+            \vskip 1em
+            
             \ifthenelse{ \equal{\opt@title@type@en}{master} }
             {
-                \vspace*{0.35\textheight}
+                \vskip 4em
                 \opt@title@author@en \\
                 \vskip 1em
             }
             %else
-            { \vspace*{0.33\textheight} }
+            { \vskip 3em }
 
             \ifthenelse{ \not\equal{\opt@title@type@en}{bachelorreport} }
             {
@@ -430,9 +427,6 @@
     \newcounter{titlepages}
     \setcounter{titlepages}{1}
 
-    % убираем колонтитулы KOMA-Script
-    \pagestyle{plain}
-
     % Выводим титульную страницу
     \begin{spacing}{1.0}
         \ifthenelse{\isundefined{\opt@title@title@ru}}{}{
@@ -448,21 +442,11 @@
 
     % убираем колонтитулы KOMA-Script
     \pagestyle{plain}
-
-    % возвращаем нормальные значения отступов
-    \newgeometry{top=20mm,bottom=20mm,left=25mm,right=20mm,nohead,includeheadfoot}
 }
 
 
 %% Оглавление -> Содержание
 \AtBeginDocument{\renewcommand{\contentsname}{Содержание}}
-
-%% Красная строка
-%\setlength{\parindent}{15pt}
-
-
-% Новая страница с каждой subsection
-%\addtokomafont{subsection}{\clearpage}
 
 
 %\setcounter{secnumdepth}{4} %% глубина нумерации

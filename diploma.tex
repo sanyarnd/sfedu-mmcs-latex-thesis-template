@@ -11,22 +11,24 @@
 %% Данные для генерации титульного листа
 %% --------------------------------------
 \filltitle{ru}{
-    title              = {\uppercase{очень интересная работа}},
+    title              = {\uppercase{очень интересная работа с очень длинным названием, которое не помещается в одной строке}},
     type               = {bachelor},   % bachelor, master, coursework, bachelorreport
     sex                = {male},       % male, female
     course             = 4,
-    author             = {А.\,С. Пупкина},
+    author             = {А.\,С. Пупкин},
+    authorgenitive     = {А.\,С. Пупкина},
     supervisorPosition = {д.\,ф.-м.\,н., профессор},
     supervisor         = {А.\,А. Выбегалло},
     chairHead          = {В.\,С. Пилиди},
 }
 %% Английский вариант
 \filltitle{en}{
-    title              = {\uppercase{Very interesting work}},
+    title              = {\uppercase{очень интересная работа с очень длинным названием, которое не помещается в одной строке}},
     type               = {bachelor},   % bachelor, master, coursework, bachelorreport
     sex                = {male},       % male, female
     course             = 4,
     author             = {A.\,S. Pupkin},
+    authorgenitive     = {A.\,S. Pupkina},
     supervisorPosition = {д.\,ф.-м.\,н., профессор},
     supervisor         = {А.\,А. Выбегалло},
     chairHead          = {В.\,С. Пилиди},
@@ -36,10 +38,12 @@
     \maketitle
     \include{items/task}
     \tableofcontents
+    
     \include{items/intro}
     \include{items/chap01}
     \include{items/ending}
 
     \printbibliography[heading=bibintoc]
+
     \include{items/appendix}
 \end{document}
