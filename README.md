@@ -21,47 +21,47 @@
 _`XeLaTeX` и `Biber` используют `UTF-8` (поэтому исключаются проблемы с кодировкой и смешиванием языков) и не требуют дополнительных пакетов для поддержки мультиязычности._
 
 * Обязательные пакеты
-  + [koma-script](https://ctan.org/pkg/koma-script)
-  + [kvoptions](https://ctan.org/pkg/kvoptions)
-  + [etoolbox](https://ctan.org/pkg/etoolbox)
-  + [xkeyval](https://ctan.org/pkg/xkeyval)
-  + [ifthen](https://ctan.org/pkg/ifthen)
-  + [scrlayer-scrpage](https://ctan.org/pkg/scrlayer-scrpage)
-  + [fontspec](https://ctan.org/pkg/fontspec)
-  + [polyglossia](https://ctan.org/pkg/polyglossia)
-  + [microtype](https://ctan.org/pkg/microtype)
-  + [indentfirst](https://ctan.org/pkg/indentfirst)
-  + [csquotes](https://ctan.org/pkg/csquotes)
-  + [extdash](https://ctan.org/pkg/extdash)
-  + [amsthm](https://ctan.org/pkg/amsthm)
+  + [amscd](https://ctan.org/pkg/amscd)
   + [amsfonts](https://ctan.org/pkg/amsfonts)
   + [amsmath](https://ctan.org/pkg/amsmath)
   + [amssymb](https://ctan.org/pkg/amssymb)
-  + [amscd](https://ctan.org/pkg/amscd)
-  + [mathtools](https://ctan.org/pkg/mathtools)
-  + [unicode-math](https://ctan.org/pkg/unicode-math)
-  + [setspace](https://ctan.org/pkg/setspace)
+  + [amsthm](https://ctan.org/pkg/amsthm)
   + [biblatex](https://ctan.org/pkg/biblatex)
+  + [csquotes](https://ctan.org/pkg/csquotes)
+  + [etoolbox](https://ctan.org/pkg/etoolbox)
+  + [extdash](https://ctan.org/pkg/extdash)
+  + [fontspec](https://ctan.org/pkg/fontspec)
   + [hyperref](https://ctan.org/pkg/hyperref)
+  + [ifthen](https://ctan.org/pkg/ifthen)
+  + [indentfirst](https://ctan.org/pkg/indentfirst)
+  + [koma-script](https://ctan.org/pkg/koma-script)
+  + [kvoptions](https://ctan.org/pkg/kvoptions)
+  + [mathtools](https://ctan.org/pkg/mathtools)
+  + [microtype](https://ctan.org/pkg/microtype)
+  + [polyglossia](https://ctan.org/pkg/polyglossia)
+  + [scrlayer-scrpage](https://ctan.org/pkg/scrlayer-scrpage)
+  + [setspace](https://ctan.org/pkg/setspace)
+  + [unicode-math](https://ctan.org/pkg/unicode-math)
+  + [xkeyval](https://ctan.org/pkg/xkeyval)
 * Пакеты включенные по-умолчанию
   + [algorithm](https://ctan.org/pkg/algorithm)
   + [algpseudocode](https://ctan.org/pkg/algpseudocode)
-  + [listings](https://ctan.org/pkg/listings)
-  + [enumitem](https://ctan.org/pkg/enumitem)
-  + [tabularx](https://ctan.org/pkg/tabularx)
   + [appendix](https://ctan.org/pkg/appendix)
+  + [enumitem](https://ctan.org/pkg/enumitem)
+  + [float](https://ctan.org/pkg/float)
   + [graphicx](https://ctan.org/pkg/graphicx)
+  + [listings](https://ctan.org/pkg/listings)
   + [subfig](https://ctan.org/pkg/subfig)
-  + [float](float)
+  + [tabularx](https://ctan.org/pkg/tabularx)
 * Пакеты выключенные по-умолчанию
-  + [showframe](https://ctan.org/pkg/showframe)
   + [pythontex](https://ctan.org/pkg/pythontex)
+  + [showframe](https://ctan.org/pkg/showframe)
 
 Используемые шрифты:
 
-* Times New Roman
 * Arial
 * Courier New
+* Times New Roman
 * XITS Math
 
 Для получения данных зависимостей потребуется дистрибутив `LaTeX`.
@@ -100,15 +100,27 @@ _Обратите внимание, что в некоторых дистриб�
 <!-- ![Настройки](./images/settings.png) -->
 <img src="./images/settings.png" width="70%">
 
+### LanguageTool
+Дополнительно можно установить средство проверки орфорграфии [LanguageTool](https://languagetool.org/ru/)(для работы требуется [JRE](http://www.oracle.com/technetwork/java/javase/overview/index.html)).
+
+После загрузки распакуйте архив с программой (в случае `Linux` установите программу через пакетный менеджер вашего дистрибутива).
+
+Зайдите в настройки `TeXStudio` и перейдите на владку `Language Checking`. В `Server URL` введите `http://localhost:8081`, А в `LT Path` укажите путь к исполняемому файлу `LanguageTool`.
+
+Также потребуется добавить [русский словарь](https://extensions.openoffice.org/en/project/russian-dictionary) в `TeXStudio` (подойдет любой, определяющийся как `ru_RU`). Для этого перейдите на вкладку `Language Checking` и импортируйте словарь, который вы скачали. Выберите `Default Language` как `ru_RU`.
+
+_Существуют более полные словари, но они определяются как `ru_RU_yo` (или как-нибудь еще), что не является правильным названием, и `LanguageTool` не может понять какой язык нужно проверять._
+
+Для запуска возможно потребуется перезапустить `TeXStudio`.
 
 
 ## Как пользоваться
 
 Открыть `diploma.tex` и вписать свои данные в макрос установки. В окружении `document` присутствуют заготовки для стандартных разделов работы.
 
-По аналогии создать в папке `items/` необходимые вам .tex файлы и включить их в основной документ при помощи команды `\include` (либо `\input`, [разница](https://tex.stackexchange.com/a/32058/72742) для _нас_ не сильно существенная). Обратите внимание, что на `Windows` не допускаются кириллические имена файлов. Причина кроется в кодировке CP-1251. На `Linux` же такой проблемы не существует (UTF-8 на уровне ядра).
+По аналогии создать в папке `items/` необходимые вам .tex файлы и включить их в основной документ при помощи команды `\include` (либо `\input`, [разница](https://tex.stackexchange.com/a/32058/72742) для _нас_ не сильно существенная). На `Windows` не допускаются кириллические имена файлов. Причина кроется в кодировке CP-1251. На `Linux` же такой проблемы не существует (UTF-8 на уровне ядра).
 
-Также обратите внимание на специальный комментарий (который тоже необходимо скопировать), присутствующий на первой строке:
+Обратите внимание на специальный комментарий (который тоже необходимо скопировать), присутствующий на первой строке:
 
 > % !TEX root = ../diploma.tex
 
