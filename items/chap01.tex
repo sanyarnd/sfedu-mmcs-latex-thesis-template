@@ -7,7 +7,7 @@
 
 Для уравнений можно использовать специальное окружение. Любые окружения (в т.ч. уравнения) можно помечать, чтобы в дальнейшем иметь возможность поставить ссылку. Для этого используется \texttt{label}. Для уравнений есть специальная (совсем не обязательная) версия: \texttt{label\{eq:имя\}} Пример:
 \begin{equation}\label{eq:some_eq}
-	e^2 = E\{(F - Y)^2\},
+    e^2 = E\{(F - Y)^2\},
 \end{equation}
 где $E$ -- математическое ожидание.
 
@@ -19,20 +19,20 @@
 
 Маркированные списки:
 \begin{itemize}
-	\item пункт 1
-	\item пункт 2
+    \item пункт 1
+    \item пункт 2
 \end{itemize}
 
 Нумерованные списки:
 \begin{enumerate}
-	\item пункт 1
-	\item пункт 2
+    \item пункт 1
+    \item пункт 2
 \end{enumerate}
 
 Описания:
 \begin{description}
-	\item[Пункт] 1
-	\item[Пункт] 2
+    \item[Пункт] 1
+    \item[Пункт] 2
 \end{description}
 
 Иногда хочется сжать список. Чтобы не настраивать интервал между списками (это делается не очень удобно) достаточно передать параметр \texttt{[noitemsep]}.
@@ -53,14 +53,14 @@
 Вставить код тоже просто. Если настройки листинга не устраивают, их можно изменить. Макрос настройки находится в файле \texttt{commands}.
 
 \begin{lstlisting}[caption={Пример вызова БПФ в библиотеке \texttt{CuFFT}}]
-	cufftComplex *d_signal;
-	cudaMalloc((void **) &d_signal, mem_size); 
-	cudaMemcpy(d_signal, fg, mem_size, cudaMemcpyHostToDevice);
-	
-	cufftHandle plan;
-	cufftPlan2d(&plan, N, N, CUFFT_C2C);
-	
-	cufftExecC2C(plan, (cufftComplex *)d_signal, (cufftComplex *)d_signal, CUFFT_FORWARD);
+    cufftComplex *d_signal;
+    cudaMalloc((void **) &d_signal, mem_size);
+    cudaMemcpy(d_signal, fg, mem_size, cudaMemcpyHostToDevice);
+
+    cufftHandle plan;
+    cufftPlan2d(&plan, N, N, CUFFT_C2C);
+
+    cufftExecC2C(plan, (cufftComplex *)d_signal, (cufftComplex *)d_signal, CUFFT_FORWARD);
 \end{lstlisting}
 
 Также можно писать псевдокод. Ключевые слова можно переводить, вводить новые конструкции и т.д. Пример в файле \texttt{commands}.
@@ -81,19 +81,35 @@
 Здесь используется вспомогательное окружение \texttt{tabularx} (а также симметричное к нему \texttt{tabulary}), которое управляет шириной столбцов и автоматически переносит текст на новую строку в той же ячейке при нехватке размерности, доступной тексту.
 
 \begin{table}[H]
-	\centering
-	\begin{tabularx}{\textwidth}{| X | X | X |}
-		\hline
-		\textbf{Размер изображения} & \textbf{Время GPU} & \textbf{Время CPU} \\ \hline
-		$1920\times 1920$           & 6 мс               & 75 мс              \\ \hline
-		$4096\times 4096$           & 24 мс              & 520 мс             \\ \hline
-		$3648\times 5472$           & 35 мс              & 625 мс             \\ \hline
-	\end{tabularx}
-	\caption{Сравнение скорости работы}
+    \centering
+    \begin{tabularx}{\textwidth}{| X | X | X |}
+        \hline
+        \textbf{Размер изображения} & \textbf{Время GPU} & \textbf{Время CPU} \\ \hline
+        $1920\times 1920$           & 6 мс               & 75 мс              \\ \hline
+        $4096\times 4096$           & 24 мс              & 520 мс             \\ \hline
+        $3648\times 5472$           & 35 мс              & 625 мс             \\ \hline
+    \end{tabularx}
+    \caption{Сравнение скорости работы}
 \end{table}
 
+Таблицы как выше просты в использовании, но их внешний вид оставляет желать лучшего. При оформлении работ можно руководствоваться следующим {\href{https://www.inf.ethz.ch/personal/markusp/teaching/guides/guide-tables.pdf}{\textbf{пособием}}.
+
+
+\begin{table}[H]
+    \centering
+    \caption{\label{tab:widgets}Подпись к таблице --- сверху}
+    \begin{tabular}{llr}
+        \toprule
+                  \multicolumn{2}{c}{Item}            &  \\
+        \cmidrule(r){1-2}
+        Животное & Описание & Цена (\$) \\ \midrule
+        Armadillo                          & frozen   &      8.99 \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+
 \subsection{Фигуры}
-В окружение \texttt{figure} можно помещать обычный \texttt{includegraphics}, таблицы, элементы \texttt{tikz}, создавать массивы изображений и т.д. 
+В окружение \texttt{figure} можно помещать обычный \texttt{includegraphics}, таблицы, элементы \texttt{tikz}, создавать массивы изображений и т.д.
 
 \paragraph{Пример массива изображений.}
 Подписи не обязательны. Нумерацию \\ \texttt{subfloat}'ов можно выключить в \texttt{captionsetup}. Там же находится набор других настроек внешнего вида подписей.
@@ -103,14 +119,14 @@
 Если картинки нет, но необходимо уже сейчас отрегулировать внешний вид и размер, то можно использовать стандартные \texttt{example-image-[a,b,c]}.
 
 \begin{figure}[H]
-	\centering
-	\captionsetup[subfigure]{justification=centering}
-	\subfloat[Пример]{\includegraphics[height=0.1\textwidth]{example-image-a}}%
-	\quad
-	\subfloat[Пример]{\includegraphics[height=0.15\textwidth]{example-image-b}}%
-	\quad
-	\subfloat[Пример]{\includegraphics[height=0.1\textwidth]{example-image-c}}%
-	\quad
-	\subfloat[Очень длинная подпись, которая перенесется на новую строку]{\includegraphics[height=0.15\textwidth]{example-image-a}}%
-	\caption{Общая подпись к фигуре}
+    \centering
+    \captionsetup[subfigure]{justification=centering}
+    \subfloat[Пример]{\includegraphics[height=0.1\textwidth]{example-image-a}}%
+    \quad
+    \subfloat[Пример]{\includegraphics[height=0.15\textwidth]{example-image-b}}%
+    \quad
+    \subfloat[Пример]{\includegraphics[height=0.1\textwidth]{example-image-c}}%
+    \quad
+    \subfloat[Очень длинная подпись, которая перенесется на новую строку]{\includegraphics[height=0.15\textwidth]{example-image-a}}%
+    \caption{Общая подпись к фигуре}
 \end{figure}
