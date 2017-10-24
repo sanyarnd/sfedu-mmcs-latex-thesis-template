@@ -11,6 +11,23 @@
 Внешний вид работы можно посмотреть [здесь](https://github.com/sanyarnd/sfedu-mmcs-latex-thesis-template/blob/master/diploma.pdf).
 
 
+# Содержание
+=================
+* [Зависимости](#Зависимости)
+    * [Установка TeX Live](#Установка-tex-live)
+    * [Windows](#windows)
+    * [Linux](#linux)
+        * [Ubuntu, Linux Mint](#ubuntu-linux-mint)
+        * [Arch Linux](#arch-linux)
+        * [Fedora](#fedora)
+* [Настройка TeXStudio](#Настройка-texstudio)
+    * [LanguageTool](#languagetool)
+* [Как пользоваться](#Как-пользоваться)
+* [Стандартные ошибки при работе с LaTeX](#Стандартные-ошибки-при-работе-с-latex)
+* [Прочие ошибки](#Прочие-ошибки)
+    * [Windows:](#windows-1)
+
+
 
 ## Зависимости
 
