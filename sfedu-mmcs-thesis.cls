@@ -110,24 +110,33 @@
 
 %% Шрифты
 \defaultfontfeatures{Ligatures  = TeX,
-                     Mapping   = tex-text}
+                     Mapping    = tex-text}
 
-\setmainfont[ItalicFont     = {Times New Roman Italic},
-             BoldFont       = {Times New Roman Bold},
-             BoldItalicFont = {Times New Roman Bold Italic}]{Times New Roman}
-\newfontfamily\cyrillicfont{Times New Roman}
+\def\mfont{Times New Roman}
+\def\mfontfallback{CMU Serif}
+\def\sfont{Arial}
+\def\sfontfallback{CMU Sans Serif}
+\def\mnfont{Courier New}
+\def\mnfontfallback{CMU Typewriter Text}
+\def\mthfont{xits-math.otf}
+\def\mthfontfallback{TeX Gyre Termes Math}
 
-\setsansfont[ItalicFont     = {Arial Italic},
-             BoldFont       = {Arial Bold},
-             BoldItalicFont = {Arial Bold Italic}]{Arial}
-\newfontfamily\cyrillicfontsf{Arial}
 
-\setmonofont[ItalicFont     = {Courier New Italic},
-             BoldFont       = {Courier New Bold},
-             BoldItalicFont = {Courier New Bold Italic}]{Courier New}
-\newfontfamily\cyrillicfonttt{Courier New}
+\IfFontExistsTF{\mfont}{}{\def\mfont{\mfontfallback}}
+\IfFontExistsTF{\sfont}{}{\def\sfont{\sfontfallback}}
+\IfFontExistsTF{\mnfont}{}{\def\mnfont{\mnfontfallback}}
+\IfFontExistsTF{\mthfont}{}{\def\mthfont{\mthfontfallback}}
 
-\setmathfont{xits-math.otf}             %% математический шрифт
+\setmainfont{\mfont}
+\newfontfamily\cyrillicfont{\mfont}
+
+\setsansfont{\sfont}
+\newfontfamily\cyrillicfontsf{\sfont}
+
+\setmonofont{\mnfont}
+\newfontfamily\cyrillicfonttt{\mnfont}
+
+\setmathfont{\mthfont}   %% математический шрифт
 
 \setkomafont{pageheadfoot}{\upshape}    %% шрифт колонтитулов
 
