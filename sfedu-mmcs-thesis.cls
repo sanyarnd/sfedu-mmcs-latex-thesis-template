@@ -4,7 +4,7 @@
 %%
 %% Александр Бирюков <sanya.rnd@gmail.com>
 
-\NeedsTeXFormat{LaTeX2e} % Было бы интересно посмотреть на LaTeX3
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sfedu-mmcs-thesis}[2017/10/14 SFedU MMCS thesis class]
 
 
@@ -12,7 +12,7 @@
 \RequirePackage[]{kvoptions}
 %% Вспомогательные функции
 \RequirePackage[]{etoolbox}
-%% Dictionary на макросах
+%% Контейнер типа 'словарь'
 \RequirePackage[]{xkeyval}
 %% Макрос if <...> then <...> else <...>
 \RequirePackage[]{ifthen}
