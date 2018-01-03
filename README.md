@@ -10,6 +10,8 @@
 
 Внешний вид работы можно посмотреть [здесь](https://github.com/sanyarnd/sfedu-mmcs-latex-thesis-template/blob/master/diploma.pdf).
 
+Ссылка на шаблон в [`Overleaf`](https://www.overleaf.com/13026548prrmzysxpfzz).
+
 
 # Содержание
 * [Зависимости](#Зависимости)
