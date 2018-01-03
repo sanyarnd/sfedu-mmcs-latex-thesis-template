@@ -31,8 +31,8 @@ all: main.pdf
 # -interactive=nonstopmode keeps the pdflatex backend from stopping at a
 # missing file reference and interactively asking you for an alternative.
 
-main.pdf: main.tex
-    latexmk -pdf -pdflatex="xelatex" -use-make main.tex
+main.pdf: diploma.tex
+	latexmk -pdf -pdflatex="xelatex" -use-make diploma.tex
 
 clean:
-latexmk -CA
+	latexmk -CA
