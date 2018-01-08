@@ -35,7 +35,7 @@
 * Компилятор `XeLaTeX`
 * Система управления библиографией `Biber`
 
-Шрифты _(при необходимости используемые шрифты можно изменить в `.cls` файле)_:
+Шрифты _(при необходимости используемые шрифты можно изменить в [`.cls`](https://github.com/sanyarnd/sfedu-mmcs-latex-thesis-template/blob/master/sfedu-mmcs-thesis.cls#L111) файле)_:
 
 * [Free Fonts](https://www.gnu.org/software/freefont/)
 * [XITS Math](https://fontlibrary.org/ru/font/xits-math)
