@@ -31,7 +31,7 @@
 ## Зависимости
 
 Основные зависимости:
-* Текстовый редактор[[1](https://www.gnu.org/software/emacs/), [2](https://code.visualstudio.com/), [3](https://atom.io/)] (возможно потребуется установка доп. плагинов!) или специализированная программа[[1](https://www.texstudio.org/), [2](http://www.xm1math.net/texmaker/), [3](http://www.texniccenter.org/), [4](http://www.tug.org/texworks/)].
+* Текстовый редактор [[1](https://www.gnu.org/software/emacs/), [2](https://code.visualstudio.com/), [3](https://atom.io/)] (возможно потребуется установка доп. плагинов!) или специализированная программа [[1](https://www.texstudio.org/), [2](http://www.xm1math.net/texmaker/), [3](http://www.texniccenter.org/), [4](http://www.tug.org/texworks/)].
 * Компилятор `XeLaTeX`
 * Система управления библиографией `Biber`
 
