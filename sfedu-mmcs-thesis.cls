@@ -51,8 +51,8 @@
 
 
 %% Пакеты и их настройки
-\usepackage[]{scrlayer-scrpage} % колонтитулы
 \usepackage[]{fontspec}         % загрузка шрифтов, работа с кодировкой и пр.
+\usepackage[]{scrlayer-scrpage} % колонтитулы
 \usepackage[]{polyglossia}      % переносы слов
 \usepackage[]{microtype}        % различные исправления типографии
 \usepackage[]{indentfirst}      % красная строка в первом абзаце
@@ -109,36 +109,92 @@
 
 
 %% Шрифты
-\defaultfontfeatures{Ligatures  = TeX,
+\defaultfontfeatures{Ligatures  = {TeX, Common},
                      Mapping    = tex-text}
 
-\def\mfont{Times New Roman}
-\def\mfontfallback{CMU Serif}
-\def\sfont{Arial}
-\def\sfontfallback{CMU Sans Serif}
-\def\mnfont{Courier New}
-\def\mnfontfallback{CMU Typewriter Text}
-\def\mthfont{xits-math.otf}
-\def\mthfontfallback{TeX Gyre Termes Math}
+%% Main font 
+\setmainfont
+[	Path			= fonts/,
+	Extension 		= .otf,
+	UprightFont 	= *-Regular,
+	BoldFont 		= *-Bold,
+	ItalicFont 		= *-Italic,
+	BoldItalicFont 	= *-BoldItalic
+]{FreeSerif}
+\newfontfamily\cyrillicfont
+[	Path			= fonts/,
+	Extension 		= .otf,
+	UprightFont 	= *-Regular,
+	BoldFont 		= *-Bold,
+	ItalicFont 		= *-Italic,
+	BoldItalicFont 	= *-BoldItalic
+]{FreeSerif}
+
+%% Roman font
+\setromanfont
+[	Path			= fonts/,
+	Extension 		= .otf,
+	UprightFont 	= *-Regular,
+	BoldFont 		= *-Bold,
+	ItalicFont 		= *-Italic,
+	BoldItalicFont 	= *-BoldItalic
+]{FreeSerif}
+\newfontfamily\cyrillicfontrm
+[	Path			= fonts/,
+	Extension 		= .otf,
+	UprightFont 	= *-Regular,
+	BoldFont 		= *-Bold,
+	ItalicFont 		= *-Italic,
+	BoldItalicFont 	= *-BoldItalic
+]{FreeSerif}
+
+%% Sans font
+\setsansfont
+[	Path			= fonts/,
+	Extension 		= .otf,
+	UprightFont 	= *-Regular,
+	BoldFont 		= *-Bold,
+	ItalicFont 		= *-Oblique,
+	BoldItalicFont 	= *-BoldOblique
+]{FreeSans}
+\newfontfamily\cyrillicfontsf
+[	Path			= fonts/,
+	Extension 		= .otf,
+	UprightFont 	= *-Regular,
+	BoldFont 		= *-Bold,
+	ItalicFont 		= *-Oblique,
+	BoldItalicFont 	= *-BoldOblique
+]{FreeSans}
+
+%% Mono font
+\setmonofont
+[	Path			= fonts/,
+	Extension 		= .otf,
+	UprightFont 	= *-Regular,
+	BoldFont 		= *-Bold,
+	ItalicFont 		= *-Oblique,
+	BoldItalicFont 	= *-BoldOblique
+]{FreeMono}
+\newfontfamily\cyrillicfonttt
+[	Path			= fonts/,
+	Extension 		= .otf,
+	UprightFont 	= *-Regular,
+	BoldFont 		= *-Bold,
+	ItalicFont 		= *-Oblique,
+	BoldItalicFont 	= *-BoldOblique
+]{FreeMono}
+
+%% Math font
+\setmathfont
+[	Path		= fonts/,
+	Extension   = .otf,
+	BoldFont    = *Bold,
+%	range		= {\mathup/{num}, \mathup/{greek,Greek,latin,Latin}, \mathit/{greek,Greek,latin,Latin}}
+]{XITS-Math}
 
 
-\IfFontExistsTF{\mfont}{}{\def\mfont{\mfontfallback}}
-\IfFontExistsTF{\sfont}{}{\def\sfont{\sfontfallback}}
-\IfFontExistsTF{\mnfont}{}{\def\mnfont{\mnfontfallback}}
-\IfFontExistsTF{\mthfont}{}{\def\mthfont{\mthfontfallback}}
-
-\setmainfont{\mfont}
-\newfontfamily\cyrillicfont{\mfont}
-
-\setsansfont{\sfont}
-\newfontfamily\cyrillicfontsf{\sfont}
-
-\setmonofont{\mnfont}
-\newfontfamily\cyrillicfonttt{\mnfont}
-
-\setmathfont{\mthfont}   %% математический шрифт
-
-\setkomafont{pageheadfoot}{\upshape}    %% шрифт колонтитулов
+%% Стиль для шрифта колонтитулов
+\setkomafont{pageheadfoot}{\upshape}
 
 
 %% Параметры заполнения титульного листа
