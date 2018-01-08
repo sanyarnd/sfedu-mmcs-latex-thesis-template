@@ -18,11 +18,8 @@
 # Содержание
 * [Зависимости](#Зависимости)
     * [Установка TeX Live](#Установка-tex-live)
-    * [Windows](#windows)
-    * [Linux](#linux)
-        * [Ubuntu, Linux Mint](#ubuntu-linux-mint)
-        * [Arch Linux](#arch-linux)
-        * [Fedora](#fedora)
+      * [Windows](#windows)
+      * [Linux](#linux)
 * [Настройка TeXStudio](#Настройка-texstudio)
     * [LanguageTool](#languagetool)
 * [Как пользоваться](#Как-пользоваться)
