@@ -40,9 +40,9 @@
 
 
 %% Загружаем класс
-\LoadClass[a4paper, 
-           14pt, 
-           oneside, 
+\LoadClass[a4paper,
+           14pt,
+           oneside,
            DIV            = 12,
            headings       = normal,
            chapterprefix  = true,
@@ -112,84 +112,84 @@
 \defaultfontfeatures{Ligatures  = {TeX, Common},
                      Mapping    = tex-text}
 
-%% Main font 
+%% Main font
 \setmainfont
-[	Path			= fonts/,
-	Extension 		= .otf,
-	UprightFont 	= *-Regular,
-	BoldFont 		= *-Bold,
-	ItalicFont 		= *-Italic,
-	BoldItalicFont 	= *-BoldItalic
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
 \newfontfamily\cyrillicfont
-[	Path			= fonts/,
-	Extension 		= .otf,
-	UprightFont 	= *-Regular,
-	BoldFont 		= *-Bold,
-	ItalicFont 		= *-Italic,
-	BoldItalicFont 	= *-BoldItalic
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
 
 %% Roman font
 \setromanfont
-[	Path			= fonts/,
-	Extension 		= .otf,
-	UprightFont 	= *-Regular,
-	BoldFont 		= *-Bold,
-	ItalicFont 		= *-Italic,
-	BoldItalicFont 	= *-BoldItalic
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
 \newfontfamily\cyrillicfontrm
-[	Path			= fonts/,
-	Extension 		= .otf,
-	UprightFont 	= *-Regular,
-	BoldFont 		= *-Bold,
-	ItalicFont 		= *-Italic,
-	BoldItalicFont 	= *-BoldItalic
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
 
 %% Sans font
 \setsansfont
-[	Path			= fonts/,
-	Extension 		= .otf,
-	UprightFont 	= *-Regular,
-	BoldFont 		= *-Bold,
-	ItalicFont 		= *-Oblique,
-	BoldItalicFont 	= *-BoldOblique
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
 ]{FreeSans}
 \newfontfamily\cyrillicfontsf
-[	Path			= fonts/,
-	Extension 		= .otf,
-	UprightFont 	= *-Regular,
-	BoldFont 		= *-Bold,
-	ItalicFont 		= *-Oblique,
-	BoldItalicFont 	= *-BoldOblique
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
 ]{FreeSans}
 
 %% Mono font
 \setmonofont
-[	Path			= fonts/,
-	Extension 		= .otf,
-	UprightFont 	= *-Regular,
-	BoldFont 		= *-Bold,
-	ItalicFont 		= *-Oblique,
-	BoldItalicFont 	= *-BoldOblique
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
 ]{FreeMono}
 \newfontfamily\cyrillicfonttt
-[	Path			= fonts/,
-	Extension 		= .otf,
-	UprightFont 	= *-Regular,
-	BoldFont 		= *-Bold,
-	ItalicFont 		= *-Oblique,
-	BoldItalicFont 	= *-BoldOblique
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
 ]{FreeMono}
 
 %% Math font
 \setmathfont
-[	Path		= fonts/,
-	Extension   = .otf,
-	BoldFont    = *Bold,
-%	range		= {\mathup/{num}, \mathup/{greek,Greek,latin,Latin}, \mathit/{greek,Greek,latin,Latin}}
+[   Path        = fonts/,
+    Extension   = .otf,
+    BoldFont    = *Bold,
+%   range       = {\mathup/{num}, \mathup/{greek,Greek,latin,Latin}, \mathit/{greek,Greek,latin,Latin}}
 ]{XITS-Math}
 
 
@@ -294,7 +294,7 @@
         \thispagestyle{scrheadings}
         \cfoot
         { \parbox[b]{\textwidth}{\centering \opt@title@city@ru\\ \opt@title@year@ru} }
-    
+
         \begin{center}
             \vskip 1em
             \uppercase{министерство образования и науки рф} \\
@@ -392,7 +392,7 @@
         \thispagestyle{scrheadings}
         \cfoot
         { \parbox[b]{\textwidth}{\centering \opt@title@city@en\\ \opt@title@year@en} }
-        
+
         \begin{center}
             \vskip 1em
             \uppercase{Ministry of Education and Science of the Russian Federation} \\
@@ -403,7 +403,7 @@
             \vskip 1em
             \opt@title@chair@en
             \vskip 1em
-            
+
             \ifthenelse{ \equal{\opt@title@type@en}{master} }
             {
                 \vskip 4em
