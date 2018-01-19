@@ -1,0 +1,81 @@
+\documentclass[a4paper, 14pt, oneside, DIV]{scrartcl}
+
+%% Взято из .cls файла
+
+\usepackage[]{fontspec}         % загрузка шрифтов, работа с кодировкой и пр.
+\usepackage[]{polyglossia}      % переносы слов
+\usepackage[]{microtype}        % различные исправления типографии
+\usepackage[]{indentfirst}      % красная строка в первом абзаце
+
+\usepackage
+[	onehalfspacing,
+    nodisplayskipstretch
+]{setspace} 					% полуторный интервал
+
+\setlength{\parindent}{1.25cm}  %% Красная строка
+\frenchspacing                  %% убираем лишние отступы после точек
+
+%% Перенос слов
+\binoppenalty       = 10000 %% Запрет переносов строк в формулах
+\relpenalty         = 10000
+\pretolerance       = 5000  %% Настройки переноса
+\tolerance          = 9000  %% Настройки переноса
+\emergencystretch   = 0pt   %% Запрещаем выход за границы
+\righthyphenmin     = 2     %% целое число, равное наименьшему количеству букв в слове, которые можно переносить на следующую строку
+\lefthyphenmin      = 2
+\hyphenpenalty      = 500
+\clubpenalty        = 10000 %% Запрет разрывов страниц после первой
+\widowpenalty       = 10000 %% и перед предпоследней строкой абзаца
+
+%% Язык
+\setmainlanguage[spelling=modern]{russian}
+\setotherlanguage{english}
+
+%% Шрифты
+\defaultfontfeatures{Ligatures = {TeX, Common}, Mapping = tex-text}
+
+%% Main font
+\setmainfont
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+\newfontfamily\cyrillicfont
+[   Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+
+\pagestyle{empty} % убираем нумерацию
+
+\begin{document}
+    \noindent\makebox[\textwidth][r]{
+    \begin{minipage}{.5\textwidth}\raggedleft
+        \underline{Данные организации}\\
+        \today
+    \end{minipage}
+    }
+
+    \begin{center}
+        \textbf{Отзыв о прохождении преддипломной практики}
+    \end{center}
+
+    В период с xx.xx.20xx г. по xx.xx.20xx г. \underline{Ф.И.О.} проходил~(-а) преддипломную практику в \underline{место прохождения практики}.
+
+    За время преддипломной производственной практики \underline{И.О.} изучил~(-а) \underline{список} \underline{приобретенных навыков}.
+
+    \underline{И.О.} показал~(-а) себя подготовленным специалистом, правильно применял~(-а) полученные при обучении в университете знания.
+
+    \underline{И.О.} работает производительно, достигает хороших результатов в процессе выполнения заданий. Стремится к повышению своей квалификации, используя для этого все имеющиеся возможности и осуществляя поиск новой информации.
+
+    Считаю, что \underline{Ф.И.О.}, в ходе прохождения практики, как специалист, продемонстрировал~(-а) высокий уровень подготовки и по результатам проделанной работы заслуживает оценки \underline{<<оценка>>}.
+    \\\\
+
+    \noindent \hspace{15mm} \underline{Должность} \hspace{100mm} \underline{Ф.И.О.}
+\end{document}
