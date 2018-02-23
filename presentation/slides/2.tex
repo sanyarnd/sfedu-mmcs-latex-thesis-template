@@ -1,0 +1,19 @@
+% !TEX root = ../presentation.tex
+
+\begin{frame}{Задача 1}
+	Фильтр минимизирует срендеквадратическое отклонение цвета пикселя.
+	
+	\begin{equation*}\label{eq:wiener_nsr}
+	\hat{Y}(i, j) = \left[ \frac{\hat{H}^*(i, j)}{\left|\hat{H}(i, j)\right|^2 + \frac{S_n(i, j)}{S_s(i, j)}} \right] \times \hat{F}(i, j),
+	\end{equation*}
+где
+\begin{itemize}[noitemsep]
+	\item $Y$ -- восстановленное изображение,
+	\item $F$ -- наблюдаемое изображение,
+	\item $H$ -- функция рассеивания,
+	\item $H^*$ --комплексное сопряжение $H$,  
+	\item $S_n$ -- энергетический спектр шума -- $\left| \hat{N} \right|^2$,
+	\item $S_s$ -- энергетический спектр исходного изображения -- $\left| \hat{F} \right|^2$,
+	\item $\times$ -- умножение комплексных чисел.
+\end{itemize}
+\end{frame}

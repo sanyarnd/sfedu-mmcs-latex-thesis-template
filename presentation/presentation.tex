@@ -1,0 +1,147 @@
+\documentclass
+[	10pt, 			% размер шрифта
+	aspectratio=43	% соотношение сторон слайдов
+]{beamer}	
+
+\usetheme[]{metropolis}				% тема презентации
+\usefonttheme[]{professionalfonts}  % запрещаем beamer'у перезаписывать мат. шрифты
+
+%% Пакеты и их настройки
+\usepackage[]{fontspec}         % загрузка шрифтов, работа с кодировкой и пр.
+\usepackage[]{polyglossia}      % переносы слов
+\usepackage[]{microtype}        % различные исправления типографии
+\usepackage[]{unicode-math}     % использование математических символов юникода
+
+\usepackage[]{graphicx}
+\usepackage[]{subfig}
+\usepackage[]{float}
+\usepackage[]{enumitem}
+\usepackage[]{tabularx}
+\usepackage[]{booktabs}
+
+\frenchspacing                  %% убираем лишние отступы после точек
+
+%% Перенос слов
+\binoppenalty       = 10000 %% Запрет переносов строк в формулах
+\relpenalty         = 10000
+\pretolerance       = 5000  %% Настройки переноса
+\tolerance          = 9000  %% Настройки переноса
+\emergencystretch   = 0pt   %% Запрещаем выход за границы
+\righthyphenmin     = 2     %% целое число, равное наименьшему количеству букв в слове, которые можно переносить на следующую строку
+\lefthyphenmin      = 2
+\hyphenpenalty      = 500
+\clubpenalty        = 10000 %% Запрет разрывов страниц после первой
+\widowpenalty       = 10000 %% и перед предпоследней строкой абзаца
+
+%% Язык
+\setmainlanguage[spelling=modern]{russian}
+\setotherlanguage{english}
+
+%% Шрифты
+\defaultfontfeatures{Ligatures  = {TeX, Common},
+	Mapping    = tex-text}
+
+%% Main font
+\setmainfont
+[   Path            = ../fonts/,
+	Extension       = .otf,
+	UprightFont     = *-Regular,
+	BoldFont        = *-Bold,
+	ItalicFont      = *-Italic,
+	BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+\newfontfamily\cyrillicfont
+[   Path            = ../fonts/,
+	Extension       = .otf,
+	UprightFont     = *-Regular,
+	BoldFont        = *-Bold,
+	ItalicFont      = *-Italic,
+	BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+
+%% Roman font
+\setromanfont
+[   Path            = ../fonts/,
+	Extension       = .otf,
+	UprightFont     = *-Regular,
+	BoldFont        = *-Bold,
+	ItalicFont      = *-Italic,
+	BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+\newfontfamily\cyrillicfontrm
+[   Path            = ../fonts/,
+	Extension       = .otf,
+	UprightFont     = *-Regular,
+	BoldFont        = *-Bold,
+	ItalicFont      = *-Italic,
+	BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+
+%% Sans font
+\setsansfont
+[   Path            = ../fonts/,
+	Extension       = .otf,
+	UprightFont     = *-Regular,
+	BoldFont        = *-Bold,
+	ItalicFont      = *-Oblique,
+	BoldItalicFont  = *-BoldOblique
+]{FreeSans}
+\newfontfamily\cyrillicfontsf
+[   Path            = ../fonts/,
+	Extension       = .otf,
+	UprightFont     = *-Regular,
+	BoldFont        = *-Bold,
+	ItalicFont      = *-Oblique,
+	BoldItalicFont  = *-BoldOblique
+]{FreeSans}
+
+%% Mono font
+\setmonofont
+[   Path            = ../fonts/,
+	Extension       = .otf,
+	UprightFont     = *-Regular,
+	BoldFont        = *-Bold,
+	ItalicFont      = *-Oblique,
+	BoldItalicFont  = *-BoldOblique
+]{FreeMono}
+\newfontfamily\cyrillicfonttt
+[   Path            = ../fonts/,
+	Extension       = .otf,
+	UprightFont     = *-Regular,
+	BoldFont        = *-Bold,
+	ItalicFont      = *-Oblique,
+	BoldItalicFont  = *-BoldOblique
+]{FreeMono}
+
+%% Math font
+\setmathfont
+[   Path        = ../fonts/,
+	Extension   = .otf,
+	BoldFont    = *Bold
+]{XITS-Math}
+
+
+%% ---------------------------------------------------------------------
+%% Настройки пользователя
+%% ---------------------------------------------------------------------
+
+\graphicspath{{images/}}
+\metroset{numbering   = fraction,
+	      progressbar = frametitle,
+	      background  = light}
+
+\title{Тема презентации}
+%\subtitle{Южный Федеральный Университет\\ Институт ММиКН им. Воровича}
+\author{Студент 4 курса \\ А.\,А. Иванов \\\vskip 1mm Научный руководитель: \\ д.\,ф.-м.\,н., профессор В.\,С. Пилиди \vskip 1em}
+%\institute{Институт ММиКН им. Воровича}
+\date{30 февраля 2020 г.}
+
+
+\begin{document}
+	\maketitle
+	\include{slides/1}
+	\include{slides/2}
+	\include{slides/3}
+	\include{slides/4}
+	\include{slides/5}	
+\end{document}
