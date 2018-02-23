@@ -19,6 +19,8 @@
 \usepackage[]{enumitem}
 \usepackage[]{tabularx}
 \usepackage[]{booktabs}
+\usepackage[]{multicol}
+\usepackage[]{longtable}
 
 
 %% ----------------------------
@@ -27,12 +29,31 @@
 \usepackage[titletoc]{appendix}
 
 
-%% ----------------------
-%% Работа с изображениями
-%% ----------------------
+%% ----------------------------------
+%% Работа с изображениями и графиками
+%% ----------------------------------
 \usepackage[]{graphicx}
 \usepackage[]{subfig}
 \usepackage[]{float}
+
+\usepackage[]{tikz}
+\usepackage[]{pgfplots}
+\pgfplotsset{compat=newest}
+
+
+%% --------------------
+%% Загрузка данных
+%% --------------------
+\usepackage[]{datatool}
+
+%% -----------------------
+%% Единицы изменения
+%% -----------------------
+\usepackage
+[	binary-units = true, 
+	per-mode 	 = symbol
+]{siunitx}
+
 
 
 %% --------------------------------------
