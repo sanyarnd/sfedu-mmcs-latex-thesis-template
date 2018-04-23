@@ -20,8 +20,8 @@
 
 %% Параметры
 \SetupKeyvalOptions{family=opt, prefix=opt@, setkeys=\kvsetkeys}
-\DeclareBoolOption[false]{bachelor}
-\DeclareBoolOption[false]{master}
+\DeclareBoolOption[false]{scrartcl}
+\DeclareBoolOption[false]{scrbook}
 %\SetupKeyvalOptions{family=opt@page, prefix=opt@page@, setkeys=\kvsetkeys}
 % ...
 
@@ -31,10 +31,10 @@
 
 
 %% Выбираем нужный класс
-\ifopt@bachelor
+\ifopt@scrartcl
     \def\opt@class{scrartcl}
 \fi
-\ifopt@master
+\ifopt@scrbook
     \def\opt@class{scrbook}
 \fi
 
@@ -241,7 +241,7 @@
             type                = {bachelor},
             university          = {Федеральное государственное автономное образовательное\\учреждение высшего образования\\ \vspace*{0.1cm}\uppercase{Южный Федеральный Университет}},
             faculty             = {Институт математики, механики и компьютерных наук\\ имени И. И. Воровича},
-            chair               = {Направление подготовки\\02.\ifopt@bachelor03\fi\ifopt@master04\fi.02 -- Фундаментальная информатика\\и информационные технологии},
+            chair               = {Направление подготовки\\02.\ifthenelse{ \equal{\opt@title@type@ru}{master} }{04}{03}.02 -- Фундаментальная информатика\\и информационные технологии},
             title               = {title},
             company             = {company},
             sex                 = {male},
@@ -264,7 +264,7 @@
             type                = {bachelor},
             university          = {Federal state autonomous educational \\ institution of higher education \\ \vspace*{0.1cm}\uppercase{Southern Federal University}},
             faculty             = {Institute of Mathematics, Mechanics and Computer Science \\ named after I.I. Voronovich},
-                chair               = {Program \\02.\ifopt@bachelor03\fi\ifopt@master04\fi.02 -- Fundamental informatics\\ and information technology},
+            chair               = {Program \\02.\ifthenelse{ \equal{\opt@title@type@en}{master} }{04}{03}.02 -- Fundamental informatics\\ and information technology},
             title               = {title},
             company             = {company},
             sex                 = {male},
