@@ -214,7 +214,7 @@
 \define@key[ru]         {opt@title}{city}                                                       {\def\opt@title@city@ru{#1}}
 \define@key[ru]         {opt@title}{company}                                                    {\def\opt@title@company@ru{#1}}
 \define@choicekey*[ru]  {opt@title}{sex}    {male, female}                                      {\def\opt@title@position@ru{#1}}
-\define@choicekey*[ru]  {opt@title}{type}   {bachelor, master, coursework, bachelorreport}      {\def\opt@title@type@ru{#1}}
+\define@choicekey*[ru]  {opt@title}{type}   {bachelor, master, coursework}                      {\def\opt@title@type@ru{#1}}
 
 \define@key[en]         {opt@title}{university}                                                 {\def\opt@title@university@en{#1}}
 \define@key[en]         {opt@title}{faculty}                                                    {\def\opt@title@faculty@en{#1}}
@@ -232,7 +232,7 @@
 \define@key[en]         {opt@title}{city}                                                       {\def\opt@title@city@en{#1}}
 \define@key[en]         {opt@title}{company}                                                    {\def\opt@title@company@en{#1}}
 \define@choicekey*[en]  {opt@title}{sex}    {male, female}                                      {\def\opt@title@position@en{#1}}
-\define@choicekey*[en]  {opt@title}{type}   {bachelor, master, coursework, bachelorreport}      {\def\opt@title@type@en{#1}}
+\define@choicekey*[en]  {opt@title}{type}   {bachelor, master, coursework}                      {\def\opt@title@type@en{#1}}
 
 \newcommand\filltitle[2]{
     \ifthenelse{\equal{#1}{ru}}
@@ -315,11 +315,8 @@
             %else
             { \vskip 3em }
 
-            \ifthenelse{ \not\equal{\opt@title@type@ru}{bachelorreport} }
-            {
-                \opt@title@title@ru \\
-                \vskip 1em
-            }
+            \opt@title@title@ru \\
+            \vskip 1em
 
             \ifthenelse{ \equal{\opt@title@type@ru}{coursework} }
             { Курсовая работа }
@@ -331,15 +328,6 @@
                 {
                     \ifthenelse{ \equal{\opt@title@type@ru}{bachelor} }
                     { Выпускная квалификационная работа\\на степень бакалавра }
-                    % else
-                    {
-                        \ifthenelse{ \equal{\opt@title@type@ru}{bachelorreport} }
-                        {
-                            \uppercase{Отчет} \\
-                            о преддипломной практике \\
-                            в \opt@title@company@ru
-                        }
-                    }
                 }
                 \\
             }
@@ -413,11 +401,8 @@
             %else
             { \vskip 3em }
 
-            \ifthenelse{ \not\equal{\opt@title@type@en}{bachelorreport} }
-            {
-                \opt@title@title@en \\
-                \vskip 1em
-            }
+            \opt@title@title@en \\
+            \vskip 1em
 
             \ifthenelse{ \equal{\opt@title@type@en}{coursework} }
             { Course work }
@@ -429,15 +414,6 @@
                 {
                     \ifthenelse{ \equal{\opt@title@type@en}{bachelor} }
                     { Graduation qualification work \\ for a bachelor's degree }
-                    % else
-                    {
-                        \ifthenelse{ \equal{\opt@title@type@en}{bachelorreport} }
-                        {
-                            \uppercase{Report} \\
-                            about pre-diploma practice \\
-                            at \opt@title@company@en
-                        }
-                    }
                 }
                 \\
             }
