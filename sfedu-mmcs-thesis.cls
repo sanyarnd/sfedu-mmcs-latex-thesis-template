@@ -32,22 +32,24 @@
 
 %% Выбираем нужный класс
 \ifopt@scrartcl
-    \def\opt@class{scrartcl}
+\def\opt@class{scrartcl}
 \fi
 \ifopt@scrbook
-    \def\opt@class{scrbook}
+\def\opt@class{scrbook}
 \fi
 
 
 %% Загружаем класс
-\LoadClass[a4paper,
-           14pt,
-           oneside,
-           DIV            = 12,
-           headings       = normal,
-           chapterprefix  = true,
-           appendixprefix = true,
-           numbers        = endperiod]{\opt@class}
+\LoadClass[
+    a4paper,
+    oneside,
+    fontsize       = 14pt,
+    DIV            = 12,
+    headings       = normal,
+    chapterprefix  = true,
+    appendixprefix = true,
+    numbers        = endperiod
+]{\opt@class}
 
 
 %% Пакеты и их настройки
@@ -56,7 +58,7 @@
 \usepackage[]{polyglossia}      % переносы слов
 \usepackage[]{microtype}        % различные исправления типографии
 \usepackage[]{indentfirst}      % красная строка в первом абзаце
-\usepackage[]{csquotes}         % правильные ковычки, цитирование
+\usepackage[]{csquotes}         % правильные кавычки, цитирование
 \usepackage[shortcuts]{extdash} % Дополнительные команды для различных дефисов, тире и пр.
 \usepackage[]{amsthm}           % окружения теоремы и пр.
 \usepackage[]{amsfonts}         % поддержка ажурных шрифтов и пр.
@@ -67,27 +69,30 @@
 \usepackage[]{unicode-math}     % использование математических символов юникода
 
 \usepackage[onehalfspacing,
-            nodisplayskipstretch]
+nodisplayskipstretch]
 {setspace}                      % полуторный интервал
 
 \setlength{\parindent}{1.25cm}  %% Красная строка
 \frenchspacing                  %% убираем лишние отступы после точек
 
-\usepackage[backend   = biber,
-            maxnames  = 10,
-            hyperref  = auto,
-            sorting   = none,
-            language  = auto,
-            citestyle = gost-numeric,
-            bibstyle  = gost-numeric]
-{biblatex}                      % оформление списка литературы
-\usepackage[colorlinks = true,
-            urlcolor   = black,
-            linkcolor  = black,
-            filecolor  = black,
-            citecolor  = black,
-            pdfkeywords={thesis}]
-{hyperref}                      % ссылки
+\usepackage[
+    backend   = biber,
+    maxnames  = 10,
+    hyperref  = auto,
+    sorting   = none,
+    language  = auto,
+    citestyle = gost-numeric,
+    bibstyle  = gost-numeric
+]{biblatex}                      % оформление списка литературы
+\usepackage[
+    unicode,
+    colorlinks = true,
+    urlcolor   = black,
+    linkcolor  = black,
+    filecolor  = black,
+    citecolor  = black,
+    pdfkeywords={thesis}
+]{hyperref}                      % ссылки
 
 
 %% Перенос слов
@@ -109,20 +114,22 @@
 
 
 %% Шрифты
-\defaultfontfeatures{Ligatures  = {TeX, Common},
-                     Mapping    = tex-text}
+\defaultfontfeatures{
+    Ligatures  = {TeX, Common},
+    Mapping    = tex-text
+}
 
 %% Main font
-\setmainfont
-[   Path            = fonts/,
+\setmainfont[
+    Path            = fonts/,
     Extension       = .otf,
     UprightFont     = *-Regular,
     BoldFont        = *-Bold,
     ItalicFont      = *-Italic,
     BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
-\newfontfamily\cyrillicfont
-[   Path            = fonts/,
+\newfontfamily\cyrillicfont[
+    Path            = fonts/,
     Extension       = .otf,
     UprightFont     = *-Regular,
     BoldFont        = *-Bold,
@@ -131,16 +138,16 @@
 ]{FreeSerif}
 
 %% Roman font
-\setromanfont
-[   Path            = fonts/,
+\setromanfont[
+    Path            = fonts/,
     Extension       = .otf,
     UprightFont     = *-Regular,
     BoldFont        = *-Bold,
     ItalicFont      = *-Italic,
     BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
-\newfontfamily\cyrillicfontrm
-[   Path            = fonts/,
+\newfontfamily\cyrillicfontrm[
+    Path            = fonts/,
     Extension       = .otf,
     UprightFont     = *-Regular,
     BoldFont        = *-Bold,
@@ -149,16 +156,16 @@
 ]{FreeSerif}
 
 %% Sans font
-\setsansfont
-[   Path            = fonts/,
+\setsansfont[
+    Path            = fonts/,
     Extension       = .otf,
     UprightFont     = *-Regular,
     BoldFont        = *-Bold,
     ItalicFont      = *-Oblique,
     BoldItalicFont  = *-BoldOblique
 ]{FreeSans}
-\newfontfamily\cyrillicfontsf
-[   Path            = fonts/,
+\newfontfamily\cyrillicfontsf[
+    Path            = fonts/,
     Extension       = .otf,
     UprightFont     = *-Regular,
     BoldFont        = *-Bold,
@@ -167,16 +174,16 @@
 ]{FreeSans}
 
 %% Mono font
-\setmonofont
-[   Path            = fonts/,
+\setmonofont[
+    Path            = fonts/,
     Extension       = .otf,
     UprightFont     = *-Regular,
     BoldFont        = *-Bold,
     ItalicFont      = *-Oblique,
     BoldItalicFont  = *-BoldOblique
 ]{FreeMono}
-\newfontfamily\cyrillicfonttt
-[   Path            = fonts/,
+\newfontfamily\cyrillicfonttt[
+    Path            = fonts/,
     Extension       = .otf,
     UprightFont     = *-Regular,
     BoldFont        = *-Bold,
@@ -185,11 +192,11 @@
 ]{FreeMono}
 
 %% Math font
-\setmathfont
-[   Path        = fonts/,
+\setmathfont[
+    Path        = fonts/,
     Extension   = .otf,
     BoldFont    = *Bold,
-%   range       = {\mathup/{num}, \mathup/{greek,Greek,latin,Latin}, \mathit/{greek,Greek,latin,Latin}}
+%    range       = {\mathup/{num}, \mathup/{greek,Greek,latin,Latin}, \mathit/{greek,Greek,latin,Latin}}
 ]{XITS-Math}
 
 
@@ -257,7 +264,7 @@
             year                = {\the\year},
         }{}
     }{}
-
+    
     \ifthenelse{\equal{#1}{en}}
     {
         \presetkeys[#1]{opt@title}{
@@ -280,9 +287,9 @@
             year                = {\the\year},
         }{}
     }{}
-
+    
     \setkeys[#1]{opt@title}{#2}
-
+    
     \ifthenelse{\equal{#1}{ru}}
     {\hypersetup{pdfauthor={\opt@title@author@ru{}}, pdftitle={\opt@title@title@ru{}}}}
     {\hypersetup{pdfauthor={\opt@title@author@en{}}, pdftitle={\opt@title@title@en{}}}}
@@ -294,7 +301,7 @@
         \thispagestyle{scrheadings}
         \cfoot
         { \parbox[b]{\textwidth}{\centering \opt@title@city@ru\\ \opt@title@year@ru} }
-
+        
         \begin{center}
             \vskip 1em
             \uppercase{министерство образования и науки рф} \\
@@ -305,7 +312,7 @@
             \vskip 1em
             \opt@title@chair@ru
             \vskip 1em
-
+            
             \ifthenelse{ \equal{\opt@title@type@ru}{master} }
             {
                 \vskip 4em
@@ -314,10 +321,10 @@
             }
             %else
             { \vskip 3em }
-
+            
             \opt@title@title@ru \\
             \vskip 1em
-
+            
             \ifthenelse{ \equal{\opt@title@type@ru}{coursework} }
             { Курсовая работа }
             %else
@@ -332,7 +339,7 @@
                 \\
             }
             \vskip 3em
-
+            
             \ifthenelse{\equal{\opt@title@type@ru}{master}} % магистерская
             {
                 \vskip 4em
@@ -347,12 +354,12 @@
             {
                 \normalsize\raggedleft
                 \ifthenelse{\equal{\opt@title@position@ru}{male}}{Студента}{Студентки}\space \opt@title@group@ru\space курса \\
-                \opt@title@author@ru \\
+                \opt@title@authorgenitive@ru \\
                 \vskip 0.5em
                 Научный руководитель:\\
                 \opt@title@supervisorPosition@ru\ \opt@title@supervisor@ru \\
             }
-
+            
             \vskip 5em
             \ifthenelse{\equal{\opt@title@type@ru}{bachelor}} % место для допуска
             {
@@ -380,7 +387,7 @@
         \thispagestyle{scrheadings}
         \cfoot
         { \parbox[b]{\textwidth}{\centering \opt@title@city@en\\ \opt@title@year@en} }
-
+        
         \begin{center}
             \vskip 1em
             \uppercase{Ministry of Education and Science of the Russian Federation} \\
@@ -391,7 +398,7 @@
             \vskip 1em
             \opt@title@chair@en
             \vskip 1em
-
+            
             \ifthenelse{ \equal{\opt@title@type@en}{master} }
             {
                 \vskip 4em
@@ -400,10 +407,10 @@
             }
             %else
             { \vskip 3em }
-
+            
             \opt@title@title@en \\
             \vskip 1em
-
+            
             \ifthenelse{ \equal{\opt@title@type@en}{coursework} }
             { Course work }
             %else
@@ -418,7 +425,7 @@
                 \\
             }
             \vskip 3em
-
+            
             \ifthenelse{\equal{\opt@title@type@en}{master}} % магистерская
             {
                 \vskip 4em
@@ -433,12 +440,12 @@
             {
                 \normalsize\raggedleft
                 \ifthenelse{\equal{\opt@title@position@en}{male}}{Student}{Student}\space \opt@title@group@en\space курса \\
-                \opt@title@author@en \\
+                \opt@title@authorgenitive@en \\
                 \vskip 0.5em
                 Scientific advisor:\\
                 \opt@title@supervisorPosition@en\ \opt@title@supervisor@en \\
             }
-
+            
             \vskip 5em
             \ifthenelse{\equal{\opt@title@type@en}{bachelor}} % место для допуска
             {
@@ -467,7 +474,7 @@
     % Создаем фиктивный счетчик, чтобы включить первую страницу в нумерацию
     \newcounter{titlepages}
     \setcounter{titlepages}{1}
-
+    
     % Выводим титульную страницу
     \begin{spacing}{1.0}
         \ifthenelse{\isundefined{\opt@title@title@ru}}{}{
@@ -480,7 +487,7 @@
         }
     \end{spacing}
     \setcounter{page}{\value{titlepages}}
-
+    
     % убираем колонтитулы KOMA-Script
     \pagestyle{plain}
 }

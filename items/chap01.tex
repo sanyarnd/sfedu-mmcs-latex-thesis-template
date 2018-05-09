@@ -5,7 +5,7 @@
 \subsection{Цитирование и ссылки}
 Делать ссылки к библиографии несложно: достаточно поставить \texttt{\\cite\{ссылка\}}. Ссылки не пишутся слитно, поэтому перед \texttt{cite} нужен пробел. Выглядит это примерно так \cite{test}.
 
-Для уравнений можно использовать специальное окружение. Любые окружения (в т.ч. уравнения) можно помечать, чтобы в дальнейшем иметь возможность поставить ссылку. Для этого используется \texttt{label}. Для уравнений есть специальная (совсем не обязательная) версия: \texttt{label\{eq:имя\}} Пример:
+Для уравнений можно использовать специальное окружение. Любые окружения (в т.ч. уравнения) можно помечать, чтобы в дальнейшем иметь возможность поставить ссылку. Для этого используется \texttt{label}. Для уравнений есть специальная (совсем необязательная) версия: \texttt{label\{eq:имя\}} Пример:
 \begin{equation}\label{eq:some_eq}
     e^2 = E\{(F - Y)^2\},
 \end{equation}
@@ -15,7 +15,7 @@
 
 \subsection{Списки}
 
-Сущесвует 3 базовых окружения для списков.
+Существует 3 базовых окружения для списков.
 
 Маркированные списки:
 \begin{itemize}
@@ -101,11 +101,11 @@
     \centering
     \caption{\label{tab:widgets}Подпись к таблице --- сверху}
     \begin{tabular}{llr}
-        \toprule
-                  \multicolumn{2}{c}{Item}            &  \\
-        \cmidrule(r){1-2}
+    	\toprule
+    	          \multicolumn{2}{c}{Item}            &           \\
+    	\cmidrule(r){1-2}
         Животное & Описание & Цена (\$) \\ \midrule
-        Armadillo                          & frozen   &      8.99 \\ \bottomrule
+    	Armadillo                          & frozen   &      8.99 \\ \bottomrule
     \end{tabular}
 \end{table}
 
@@ -136,54 +136,54 @@
 \subsection{Загрузка и обработка CSV файлов, построение графиков Tikz}
 \newcommand{\timechart}[3]
 {
-	\begin{figure}[H]
-		\centering
-		\begin{tikzpicture}[rotate=90]
-		\begin{axis}
-		[			xlabel             = {Размер блока},
-					ylabel             = {Время, \SI{}{\milli\second}},
-					width              = 0.78\textheight,
-					height             = 0.9\textwidth,
-					% legend pos       = outer north east,
-					legend style       = {at = {(0.5, 0.95)}, anchor = north},
-					ymode              = log,
-					log ticks with fixed point,
-					scaled y ticks     = false,
-					y tick label style = {/pgf/number format/fixed,
-						/pgf/number format/1000 sep = \thinspace},
-					y label style      = {at = {(axis description cs: -0.09, 0.5)}, anchor = south}
-		]
-		
-		\addplot table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_omp_outer.csv};
-		\addlegendentry{Внешний \texttt{OpenMP}}
-		
-		\addplot +[restrict x to domain=6:960] table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_omp_inner.csv};
-		\addlegendentry{Внутренний \texttt{OpenMP}}
-		
-		\addplot table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_future.csv};
-		\addlegendentry{\texttt{std::future}}
-		
-		\addplot table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_seq.csv};
-		\addlegendentry{Последовательный}
-		\end{axis}
-		\end{tikzpicture}
-		\caption{#3, тип \texttt{#2}}
-	\end{figure}
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[rotate=90]
+        \begin{axis}
+        [           xlabel             = {Размер блока},
+                    ylabel             = {Время, \SI{}{\milli\second}},
+                    width              = 0.78\textheight,
+                    height             = 0.9\textwidth,
+                    % legend pos       = outer north east,
+                    legend style       = {at = {(0.5, 0.95)}, anchor = north},
+                    ymode              = log,
+                    log ticks with fixed point,
+                    scaled y ticks     = false,
+                    y tick label style = {/pgf/number format/fixed,
+                        /pgf/number format/1000 sep = \thinspace},
+                    y label style      = {at = {(axis description cs: -0.09, 0.5)}, anchor = south}
+        ]
+        
+        \addplot table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_omp_outer.csv};
+        \addlegendentry{Внешний \texttt{OpenMP}}
+        
+        \addplot +[restrict x to domain=6:960] table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_omp_inner.csv};
+        \addlegendentry{Внутренний \texttt{OpenMP}}
+        
+        \addplot table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_future.csv};
+        \addlegendentry{\texttt{std::future}}
+        
+        \addplot table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_seq.csv};
+        \addlegendentry{Последовательный}
+        \end{axis}
+        \end{tikzpicture}
+        \caption{#3, тип \texttt{#2}}
+    \end{figure}
 }
 
 \newcommand{\timetable}[2]
 {
-	\DTLloaddb{data_#1}{\datapath/#1}
-	\begin{table}[H]
-		\setlength{\columnsep}{1.5cm}
-		\setlength{\columnseprule}{0.2pt}
-		\begin{multicols}{3}
-			\begin{itemize}[noitemsep]
-				\DTLforeach{data_#1}{\a=blockSize,\b=time}{\item [\a] -- \b\, \SI{}{\milli\second}}
-			\end{itemize}
-		\end{multicols}
-		\caption{#2}
-	\end{table}
+    \DTLloaddb{data_#1}{\datapath/#1}
+    \begin{table}[H]
+        \setlength{\columnsep}{1.5cm}
+        \setlength{\columnseprule}{0.2pt}
+        \begin{multicols}{3}
+            \begin{itemize}[noitemsep]
+                \DTLforeach{data_#1}{\a=blockSize,\b=time}{\item [\a] -- \b\, \SI{}{\milli\second}}
+            \end{itemize}
+        \end{multicols}
+        \caption{#2}
+    \end{table}
 }
 
 Существует множество пакетов для загрузки данных из CSV, причем все они обладают различной функциональностью и капризностью (некоторые отказываются работать в одних окружениях, другие -- в других и т.п.). Поэтому если что-то не будет работать как нужно, возможно, потребуется использовать другой пакет.

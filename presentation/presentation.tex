@@ -1,9 +1,9 @@
-\documentclass
-[	10pt, 			% размер шрифта
-	aspectratio=43	% соотношение сторон слайдов
-]{beamer}	
+\documentclass[
+    10pt,           % размер шрифта
+    aspectratio=43  % соотношение сторон слайдов
+]{beamer}
 
-\usetheme[]{metropolis}				% тема презентации
+\usetheme[]{metropolis}             % тема презентации
 \usefonttheme[]{professionalfonts}  % запрещаем beamer'у перезаписывать мат. шрифты
 
 %% Пакеты и их настройки
@@ -38,86 +38,88 @@
 \setotherlanguage{english}
 
 %% Шрифты
-\defaultfontfeatures{Ligatures  = {TeX, Common},
-	Mapping    = tex-text}
+\defaultfontfeatures{
+    Ligatures  = {TeX, Common},
+    Mapping    = tex-text
+}
 
 %% Main font
-\setmainfont
-[   Path            = ../fonts/,
-	Extension       = .otf,
-	UprightFont     = *-Regular,
-	BoldFont        = *-Bold,
-	ItalicFont      = *-Italic,
-	BoldItalicFont  = *-BoldItalic
+\setmainfont[
+    Path            = ../fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
-\newfontfamily\cyrillicfont
-[   Path            = ../fonts/,
-	Extension       = .otf,
-	UprightFont     = *-Regular,
-	BoldFont        = *-Bold,
-	ItalicFont      = *-Italic,
-	BoldItalicFont  = *-BoldItalic
+\newfontfamily\cyrillicfont[
+    Path            = ../fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
 
 %% Roman font
-\setromanfont
-[   Path            = ../fonts/,
-	Extension       = .otf,
-	UprightFont     = *-Regular,
-	BoldFont        = *-Bold,
-	ItalicFont      = *-Italic,
-	BoldItalicFont  = *-BoldItalic
+\setromanfont[
+    Path            = ../fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
-\newfontfamily\cyrillicfontrm
-[   Path            = ../fonts/,
-	Extension       = .otf,
-	UprightFont     = *-Regular,
-	BoldFont        = *-Bold,
-	ItalicFont      = *-Italic,
-	BoldItalicFont  = *-BoldItalic
+\newfontfamily\cyrillicfontrm[
+    Path            = ../fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
 ]{FreeSerif}
 
 %% Sans font
-\setsansfont
-[   Path            = ../fonts/,
-	Extension       = .otf,
-	UprightFont     = *-Regular,
-	BoldFont        = *-Bold,
-	ItalicFont      = *-Oblique,
-	BoldItalicFont  = *-BoldOblique
+\setsansfont[
+    Path            = ../fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
 ]{FreeSans}
-\newfontfamily\cyrillicfontsf
-[   Path            = ../fonts/,
-	Extension       = .otf,
-	UprightFont     = *-Regular,
-	BoldFont        = *-Bold,
-	ItalicFont      = *-Oblique,
-	BoldItalicFont  = *-BoldOblique
+\newfontfamily\cyrillicfontsf[
+    Path            = ../fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
 ]{FreeSans}
 
 %% Mono font
-\setmonofont
-[   Path            = ../fonts/,
-	Extension       = .otf,
-	UprightFont     = *-Regular,
-	BoldFont        = *-Bold,
-	ItalicFont      = *-Oblique,
-	BoldItalicFont  = *-BoldOblique
+\setmonofont[
+    Path            = ../fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
 ]{FreeMono}
-\newfontfamily\cyrillicfonttt
-[   Path            = ../fonts/,
-	Extension       = .otf,
-	UprightFont     = *-Regular,
-	BoldFont        = *-Bold,
-	ItalicFont      = *-Oblique,
-	BoldItalicFont  = *-BoldOblique
+\newfontfamily\cyrillicfonttt[
+    Path            = ../fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
 ]{FreeMono}
 
 %% Math font
-\setmathfont
-[   Path        = ../fonts/,
-	Extension   = .otf,
-	BoldFont    = *Bold
+\setmathfont[
+    Path        = ../fonts/,
+    Extension   = .otf,
+    BoldFont    = *Bold
 ]{XITS-Math}
 
 
@@ -126,9 +128,11 @@
 %% ---------------------------------------------------------------------
 
 \graphicspath{{images/}}
-\metroset{numbering   = fraction,
-	      progressbar = frametitle,
-	      background  = light}
+\metroset{
+    numbering   = fraction,
+    progressbar = frametitle,
+    background  = light
+}
 
 \title{Тема презентации}
 %\subtitle{Южный Федеральный Университет\\ Институт ММиКН им. Воровича}
@@ -138,10 +142,10 @@
 
 
 \begin{document}
-	\maketitle
-	\include{slides/1}
-	\include{slides/2}
-	\include{slides/3}
-	\include{slides/4}
-	\include{slides/5}	
+    \maketitle
+    \include{slides/1}
+    \include{slides/2}
+    \include{slides/3}
+    \include{slides/4}
+    \include{slides/5}
 \end{document}
