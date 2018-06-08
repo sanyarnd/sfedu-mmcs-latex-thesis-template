@@ -32,12 +32,11 @@
 
 %% Выбираем нужный класс
 \ifopt@scrartcl
-\def\opt@class{scrartcl}
+    \def\opt@class{scrartcl}
 \fi
 \ifopt@scrbook
-\def\opt@class{scrbook}
+    \def\opt@class{scrbook}
 \fi
-
 
 %% Загружаем класс
 \LoadClass[
@@ -53,28 +52,19 @@
 
 
 %% Пакеты и их настройки
-\usepackage[]{fontspec}         % загрузка шрифтов, работа с кодировкой и пр.
-\usepackage[]{scrlayer-scrpage} % колонтитулы
-\usepackage[]{polyglossia}      % переносы слов
-\usepackage[]{microtype}        % различные исправления типографии
-\usepackage[]{indentfirst}      % красная строка в первом абзаце
-\usepackage[]{csquotes}         % правильные кавычки, цитирование
-\usepackage[shortcuts]{extdash} % Дополнительные команды для различных дефисов, тире и пр.
-\usepackage[]{amsthm}           % окружения теоремы и пр.
-\usepackage[]{amsfonts}         % поддержка ажурных шрифтов и пр.
-\usepackage[]{amsmath}          % верстка формул
-\usepackage[]{amssymb}          % дополнительные символы
-\usepackage[]{amscd}            % коммутативные диаграммы
-\usepackage[]{mathtools}        % доп. функции
-\usepackage[]{unicode-math}     % использование математических символов юникода
-
-\usepackage[onehalfspacing,
-nodisplayskipstretch]
-{setspace}                      % полуторный интервал
-
-\setlength{\parindent}{1.25cm}  %% Красная строка
-\frenchspacing                  %% убираем лишние отступы после точек
-
+\usepackage[]{fontspec}         %% загрузка шрифтов, работа с кодировкой и пр.
+\usepackage[]{scrlayer-scrpage} %% колонтитулы
+\usepackage[]{polyglossia}      %% переносы слов
+\usepackage[]{microtype}        %% различные исправления типографии
+\usepackage[]{indentfirst}      %% красная строка в первом абзаце
+\usepackage[]{csquotes}         %% правильные кавычки, цитирование
+\usepackage[]{amsmath}          %% верстка формул
+\usepackage[]{amssymb}          %% дополнительные символы
+\usepackage[]{unicode-math}     %% использование математических символов юникода
+\usepackage[
+    onehalfspacing,
+    nodisplayskipstretch
+]{setspace}                     %% полуторный интервал
 \usepackage[
     backend   = biber,
     maxnames  = 10,
@@ -83,128 +73,37 @@ nodisplayskipstretch]
     language  = auto,
     citestyle = gost-numeric,
     bibstyle  = gost-numeric
-]{biblatex}                      % оформление списка литературы
-\usepackage[
-    unicode,
-    colorlinks = true,
-    urlcolor   = black,
-    linkcolor  = black,
-    filecolor  = black,
-    citecolor  = black,
-    pdfkeywords={thesis}
-]{hyperref}                      % ссылки
+]{biblatex}                     %% оформление списка литературы
 
+
+\setlength{\parindent}{1.25cm}  %% Красная строка
+\frenchspacing                  %% убираем лишние отступы после точек
 
 %% Перенос слов
-\binoppenalty       = 10000 %% Запрет переносов строк в формулах
+\binoppenalty       = 10000     %% Запрет переносов строк в формулах
 \relpenalty         = 10000
-\pretolerance       = 5000  %% Настройки переноса
-\tolerance          = 9000  %% Настройки переноса
-\emergencystretch   = 0pt   %% Запрещаем выход за границы
-\righthyphenmin     = 2     %% целое число, равное наименьшему количеству букв в слове, которые можно переносить на следующую строку
+\pretolerance       = 5000      %% Настройки переноса
+\tolerance          = 9000      %% Настройки переноса
+\emergencystretch   = 0pt       %% Запрещаем выход за границы
+\righthyphenmin     = 2         %% целое число, равное наименьшему количеству букв в слове, которые можно переносить на следующую строку
 \lefthyphenmin      = 2
 \hyphenpenalty      = 500
-\clubpenalty        = 10000 %% Запрет разрывов страниц после первой
-\widowpenalty       = 10000 %% и перед предпоследней строкой абзаца
-
-
-%% Язык
-\setmainlanguage[spelling=modern]{russian}
-\setotherlanguage{english}
-
-
-%% Шрифты
-\defaultfontfeatures{
-    Ligatures  = {TeX, Common},
-    Mapping    = tex-text
-}
-
-%% Main font
-\setmainfont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Italic,
-    BoldItalicFont  = *-BoldItalic
-]{FreeSerif}
-\newfontfamily\cyrillicfont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Italic,
-    BoldItalicFont  = *-BoldItalic
-]{FreeSerif}
-
-%% Roman font
-\setromanfont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Italic,
-    BoldItalicFont  = *-BoldItalic
-]{FreeSerif}
-\newfontfamily\cyrillicfontrm[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Italic,
-    BoldItalicFont  = *-BoldItalic
-]{FreeSerif}
-
-%% Sans font
-\setsansfont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Oblique,
-    BoldItalicFont  = *-BoldOblique
-]{FreeSans}
-\newfontfamily\cyrillicfontsf[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Oblique,
-    BoldItalicFont  = *-BoldOblique
-]{FreeSans}
-
-%% Mono font
-\setmonofont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Oblique,
-    BoldItalicFont  = *-BoldOblique
-]{FreeMono}
-\newfontfamily\cyrillicfonttt[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Oblique,
-    BoldItalicFont  = *-BoldOblique
-]{FreeMono}
-
-%% Math font
-\setmathfont[
-    Path        = fonts/,
-    Extension   = .otf,
-    BoldFont    = *Bold,
-%    range       = {\mathup/{num}, \mathup/{greek,Greek,latin,Latin}, \mathit/{greek,Greek,latin,Latin}}
-]{XITS-Math}
+\clubpenalty        = 10000     %% Запрет разрывов страниц после первой
+\widowpenalty       = 10000     %% и перед предпоследней строкой абзаца
 
 
 %% Стиль для шрифта колонтитулов
 \setkomafont{pageheadfoot}{\upshape}
 
+%% Оглавление -> Содержание
+\AtBeginDocument{\renewcommand{\contentsname}{Содержание}}
+
+%% -------------------------------------
+%% Титульная страница
+%% -------------------------------------
 
 %% Параметры заполнения титульного листа
+
 \define@key[ru]         {opt@title}{university}                                                 {\def\opt@title@university@ru{#1}}
 \define@key[ru]         {opt@title}{faculty}                                                    {\def\opt@title@faculty@ru{#1}}
 \define@key[ru]         {opt@title}{chair}                                                      {\def\opt@title@chair@ru{#1}}
@@ -290,9 +189,12 @@ nodisplayskipstretch]
     
     \setkeys[#1]{opt@title}{#2}
     
-    \ifthenelse{\equal{#1}{ru}}
-    {\hypersetup{pdfauthor={\opt@title@author@ru{}}, pdftitle={\opt@title@title@ru{}}}}
-    {\hypersetup{pdfauthor={\opt@title@author@en{}}, pdftitle={\opt@title@title@en{}}}}
+    \@ifpackageloaded{hyperref}{
+        \ifthenelse{\equal{#1}{ru}}
+        {\hypersetup{pdfauthor={\opt@title@author@ru{}}, pdftitle={\opt@title@title@ru{}}}}
+        {\hypersetup{pdfauthor={\opt@title@author@en{}}, pdftitle={\opt@title@title@en{}}}}
+    }
+    {}
 }
 
 
@@ -468,7 +370,6 @@ nodisplayskipstretch]
 }
 
 
-
 %% Переопределяем maketitle
 \renewcommand\maketitle{
     % Создаем фиктивный счетчик, чтобы включить первую страницу в нумерацию
@@ -493,9 +394,93 @@ nodisplayskipstretch]
 }
 
 
-%% Оглавление -> Содержание
-\AtBeginDocument{\renewcommand{\contentsname}{Содержание}}
+%% -----------------------------------
+%% Шрифты и язык
+%% -----------------------------------
 
+\setmainlanguage[spelling=modern]{russian}
+\setotherlanguage{english}
 
-%\setcounter{secnumdepth}{4} %% глубина нумерации
-%\setcounter{tocdepth}{4}    %% глубина ToC
+\defaultfontfeatures{
+    Ligatures  = {TeX, Common},
+    Mapping    = tex-text
+}
+
+%% Main font
+\setmainfont[
+    Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+\newfontfamily\cyrillicfont[
+    Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+
+%% Roman font
+\setromanfont[
+    Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+\newfontfamily\cyrillicfontrm[
+    Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic
+]{FreeSerif}
+
+%% Sans font
+\setsansfont[
+    Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
+]{FreeSans}
+\newfontfamily\cyrillicfontsf[
+    Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
+]{FreeSans}
+
+%% Mono font
+\setmonofont[
+    Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
+]{FreeMono}
+\newfontfamily\cyrillicfonttt[
+    Path            = fonts/,
+    Extension       = .otf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Oblique,
+    BoldItalicFont  = *-BoldOblique
+]{FreeMono}
+
+%% Math font
+\setmathfont[
+    Path        = fonts/,
+    Extension   = .otf,
+    BoldFont    = *Bold
+]{XITS-Math}
