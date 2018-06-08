@@ -1,0 +1,29 @@
+% !TEX root = ../diploma.tex
+
+\section{Код и псевдокод}
+Вставить код тоже просто. Если настройки листинга не устраивают, их можно изменить. Макрос настройки находится в файле \texttt{commands}.
+
+\begin{lstlisting}[caption={Пример вызова БПФ в библиотеке \texttt{CuFFT}}]
+    cufftComplex *d_signal;
+    cudaMalloc((void **) &d_signal, mem_size);
+    cudaMemcpy(d_signal, fg, mem_size, cudaMemcpyHostToDevice);
+
+    cufftHandle plan;
+    cufftPlan2d(&plan, N, N, CUFFT_C2C);
+
+    cufftExecC2C(plan, (cufftComplex *)d_signal, (cufftComplex *)d_signal, CUFFT_FORWARD);
+\end{lstlisting}
+
+Также можно писать псевдокод. Ключевые слова можно переводить, вводить новые конструкции и т.д. Пример в файле \texttt{commands}.
+\begin{algorithm}[H]
+    \caption{Пример псевдокода}
+    \begin{algorithmic}[1] % The number tells where the line numbering should start
+        \Procedure{F}{$A$, $B$, $N$}
+        \State $E \gets A$
+        \For{$i := 1$ до $N$}
+        \State $\hat{E} = \texttt{fft}~E$
+        \EndFor
+        \State \textbf{вернуть} $E$
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}

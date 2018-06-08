@@ -1,0 +1,24 @@
+% !TEX root = ../diploma.tex
+
+\section{Фигуры}
+В окружение \texttt{figure} можно помещать обычный \texttt{includegraphics}, таблицы, элементы \texttt{tikz}, создавать массивы изображений и т.д.
+
+\paragraph{Пример массива изображений.}
+Подписи не обязательны. Нумерацию \\ \texttt{subfloat}'ов можно выключить в \texttt{captionsetup}. Там же находится набор других настроек внешнего вида подписей.
+
+Расстояние между картинками задается стандартными макросами шага: \texttt{quad, qquad} и т.д.
+
+Если картинки нет, но необходимо уже сейчас отрегулировать внешний вид и размер, то можно использовать стандартные \texttt{example-image-[a,b,c]}.
+
+\begin{figure}[H]
+    \centering
+    \captionsetup[subfigure]{justification=centering}
+    \subfloat[Пример]{\includegraphics[height=0.1\textwidth]{example-image-a}}%
+    \quad
+    \subfloat[Пример]{\includegraphics[height=0.15\textwidth]{example-image-b}}%
+    \quad
+    \subfloat[Пример]{\includegraphics[height=0.1\textwidth]{example-image-c}}%
+    \quad
+    \subfloat[Очень длинная подпись, которая перенесется на новую строку]{\includegraphics[height=0.15\textwidth]{example-image-a}}%
+    \caption{Общая подпись к фигуре}
+\end{figure}

@@ -1,0 +1,31 @@
+% !TEX root = ../diploma.tex
+
+\section{Таблицы}
+Здесь используется вспомогательное окружение \texttt{tabularx} (а также симметричное к нему \texttt{tabulary}), которое управляет шириной столбцов и автоматически переносит текст на новую строку в той же ячейке при нехватке размерности, доступной тексту.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{| X | X | X |}
+    	\hline
+    	\textbf{Размер изображения} & \textbf{Время GPU} & \textbf{Время CPU} \\ \hline
+    	$1920\times 1920$           & $6$ мс             & $75$ мс            \\ \hline
+    	$4096\times 4096$           & $24$ мс            & $520$ мс           \\ \hline
+    	$3648\times 5472$           & $35$ мс            & $625$ мс           \\ \hline
+    \end{tabularx}
+    \caption{Сравнение скорости работы}
+\end{table}
+
+Таблицы как выше просты в использовании, но их внешний вид оставляет желать лучшего. При оформлении работ можно руководствоваться следующим {\href{https://www.inf.ethz.ch/personal/markusp/teaching/guides/guide-tables.pdf}{\textbf{пособием}}.
+
+
+\begin{table}[H]
+    \centering
+    \caption{\label{tab:widgets}Подпись к таблице --- сверху}
+    \begin{tabular}{llr}
+    	\toprule
+    	          \multicolumn{2}{c}{Item}            &           \\
+    	\cmidrule(r){1-2}
+        Животное & Описание & Цена (\$) \\ \midrule
+    	Armadillo                          & frozen   &      8.99 \\ \bottomrule
+    \end{tabular}
+\end{table}

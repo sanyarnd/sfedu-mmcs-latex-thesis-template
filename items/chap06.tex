@@ -1,0 +1,61 @@
+% !TEX root = ../diploma.tex
+
+\section{Загрузка и обработка CSV файлов, построение графиков Tikz}
+\newcommand{\timechart}[3]
+{
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[rotate=90]
+        \begin{axis}
+        [           xlabel             = {Размер блока},
+                    ylabel             = {Время, \SI{}{\milli\second}},
+                    width              = 0.78\textheight,
+                    height             = 0.9\textwidth,
+                    % legend pos       = outer north east,
+                    legend style       = {at = {(0.5, 0.95)}, anchor = north},
+                    ymode              = log,
+                    log ticks with fixed point,
+                    scaled y ticks     = false,
+                    y tick label style = {/pgf/number format/fixed,
+                        /pgf/number format/1000 sep = \thinspace},
+                    y label style      = {at = {(axis description cs: -0.09, 0.5)}, anchor = south}
+        ]
+        
+        \addplot table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_omp_outer.csv};
+        \addlegendentry{Внешний \texttt{OpenMP}}
+        
+        \addplot +[restrict x to domain=6:960] table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_omp_inner.csv};
+        \addlegendentry{Внутренний \texttt{OpenMP}}
+        
+        \addplot table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_future.csv};
+        \addlegendentry{\texttt{std::future}}
+        
+        \addplot table [x=blockSize, y=time, col sep=comma] {\datapath/#1_#2_seq.csv};
+        \addlegendentry{Последовательный}
+        \end{axis}
+        \end{tikzpicture}
+        \caption{#3, тип \texttt{#2}}
+    \end{figure}
+}
+
+\newcommand{\timetable}[2]
+{
+    \DTLloaddb{data_#1}{\datapath/#1}
+    \begin{table}[H]
+        \setlength{\columnsep}{1.5cm}
+        \setlength{\columnseprule}{0.2pt}
+        \begin{multicols}{3}
+            \begin{itemize}[noitemsep]
+                \DTLforeach{data_#1}{\a=blockSize,\b=time}{\item [\a] -- \b\, \SI{}{\milli\second}}
+            \end{itemize}
+        \end{multicols}
+        \caption{#2}
+    \end{table}
+}
+
+Существует множество пакетов для загрузки данных из CSV, причем все они обладают различной функциональностью и капризностью (некоторые отказываются работать в одних окружениях, другие -- в других и т.п.). Поэтому если что-то не будет работать как нужно, возможно, потребуется использовать другой пакет.
+
+Команды для построения удобно обернуть в макросы, если планируется многократное (больше двух) использование.
+\timetable{gcc_int_seq.csv}{Время работы \texttt{GCC}, последовательный, тип \texttt{int}}
+
+\timechart{gcc}{int}{\texttt{GCC}}

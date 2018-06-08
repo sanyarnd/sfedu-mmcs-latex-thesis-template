@@ -1,0 +1,39 @@
+% !TEX root = ../diploma.tex
+
+\section{Списки}
+
+Существует 3 базовых окружения для списков.
+
+Маркированные списки:
+\begin{itemize}
+    \item пункт 1
+    \item пункт 2
+\end{itemize}
+
+Нумерованные списки:
+\begin{enumerate}
+    \item пункт 1
+    \item пункт 2
+\end{enumerate}
+
+Описания:
+\begin{description}
+    \item[Пункт] 1
+    \item[Пункт] 2
+\end{description}
+
+Иногда хочется сжать список. Чтобы не настраивать интервал между списками (это делается не очень удобно) достаточно передать параметр \texttt{[noitemsep]}. 
+Этот параметр (а также ряд других, которые можно посмотреть в документации) можно задать глобально после подключения пакета \texttt{enumitem}: \texttt{\backslash setlist[itemize]\{noitemsep, nolistsep\}}.
+
+
+Без сжатия:
+\begin{itemize}
+    \item пункт 1
+    \item пункт 2
+\end{itemize}
+
+Со сжатием:
+\begin{itemize}[noitemsep]
+    \item пункт 1
+    \item пункт 2
+\end{itemize}
