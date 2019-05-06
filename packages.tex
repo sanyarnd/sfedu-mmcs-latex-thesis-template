@@ -72,6 +72,10 @@
 %% ----------------
 %% Ссылки
 %% ----------------
+\usepackage[]{chngcntr}
+% модификация нумерации
+\counterwithout{figure}{chapter}
+\counterwithout{equation}{chapter}
 % Обычно загружается последним, если не сказано 
 % обратного в документации конфликтующего пакета
 \usepackage[
@@ -83,4 +87,21 @@
     citecolor  = black,
     pdfkeywords={thesis}
 ]{hyperref}
+
+%% ----------------
+%% Overleaf fix
+%% ----------------
+\makeatletter
+  \@ifpackagelater{microtype}{2017/07/05}{}{%
+    \patchcmd{\MT@is@composite}
+      {\expandafter\expandafter\expandafter}
+      {\ifx\UnicodeEncodingName\@undefined\else
+      \expandafter\expandafter\expandafter\MT@is@uni@comp\MT@char\iffontchar\else\fi\relax
+    \fi\expandafter\expandafter\expandafter}
+      {}{}
+    \def\MT@is@uni@comp#1\iffontchar#2\else#3\fi\relax{%
+      \ifx\\#2\\\else\edef\MT@char{\iffontchar#2\fi}\fi
+    }
+  }
+\makeatother
 
