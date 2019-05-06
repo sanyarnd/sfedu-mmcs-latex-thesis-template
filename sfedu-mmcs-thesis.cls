@@ -67,7 +67,6 @@
 ]{setspace}                     %% полуторный интервал
 \usepackage[
     backend   = biber,
-    maxnames  = 10,
     hyperref  = auto,
     sorting   = none,
     language  = auto,
