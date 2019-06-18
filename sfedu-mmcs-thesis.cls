@@ -54,10 +54,6 @@
 \usepackage{pdfpages}           %% возможность загружать PDF файлы
 \usepackage[]{chngcntr}         %% модификация нумерации
 \usepackage[]{csquotes}         %% правильные кавычки, цитирование
-\usepackage[]{amsmath}          %% верстка формул
-\usepackage[]{amssymb}          %% дополнительные символы
-\usepackage[]{mathtools}        %% различные исправления
-\usepackage[]{unicode-math}     %% использование математических символов юникода
 \usepackage[
     onehalfspacing,
     nodisplayskipstretch
@@ -338,9 +334,3 @@
     BoldItalicFont  = *-BoldOblique
 ]{FreeMono}
 
-%% Math font
-\setmathfont[
-    Path        = fonts/,
-    Extension   = .otf,
-    BoldFont    = *Bold
-]{XITS-Math}
