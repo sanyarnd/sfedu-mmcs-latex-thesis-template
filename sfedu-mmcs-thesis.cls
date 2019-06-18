@@ -55,6 +55,7 @@
 \usepackage[]{csquotes}         %% правильные кавычки, цитирование
 \usepackage[]{amsmath}          %% верстка формул
 \usepackage[]{amssymb}          %% дополнительные символы
+\usepackage[]{mathtools}        %% различные исправления
 \usepackage[]{unicode-math}     %% использование математических символов юникода
 \usepackage[
     onehalfspacing,
@@ -144,6 +145,7 @@
     
     \setkeys{opt@title}{#1}
     \@ifpackageloaded{hyperref}{
+        \pdfstringdefDisableCommands{\let\uppercase\@firstofone}
         \hypersetup{pdfauthor={\opt@title@author{}}, pdftitle={\opt@title@title{}}}
     }{}
 }
@@ -260,7 +262,7 @@
 \setotherlanguage{english}
 
 \defaultfontfeatures{
-    Ligatures  = {TeX, Common},
+    Ligatures  = {TeX},
     Mapping    = tex-text
 }
 
