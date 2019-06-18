@@ -51,6 +51,7 @@
 \usepackage[]{polyglossia}      %% переносы слов
 \usepackage[]{microtype}        %% различные исправления типографии
 \usepackage[]{indentfirst}      %% красная строка в первом абзаце
+\usepackage{pdfpages}           %% возможность загружать PDF файлы
 \usepackage[]{chngcntr}         %% модификация нумерации
 \usepackage[]{csquotes}         %% правильные кавычки, цитирование
 \usepackage[]{amsmath}          %% верстка формул
@@ -117,7 +118,7 @@
 \define@key         {opt@title}{chairHead}                             {\def\opt@title@chairHead{#1}}
 \define@key         {opt@title}{year}                                  {\def\opt@title@year{#1}}
 \define@key         {opt@title}{city}                                  {\def\opt@title@city{#1}}
-\define@key         {opt@title}{company}                               {\def\opt@title@company{#1}}
+\define@key         {opt@title}{titlepage}                             {\def\opt@title@titlepage{#1}}
 \define@choicekey*  {opt@title}{sex}    {male, female}                 {\def\opt@title@position{#1}}
 \define@choicekey*  {opt@title}{type}   {bachelor, master, coursework} {\def\opt@title@type{#1}}
 
@@ -129,7 +130,6 @@
         faculty             = {Институт математики, механики и компьютерных наук\\ имени И. И. Воровича},
         chair               = {Направление подготовки\\02.\ifthenelse{ \equal{\opt@title@type}{master} }{04}{03}.02 -- Фундаментальная информатика\\и информационные технологии},
         title               = {title},
-        company             = {company},
         sex                 = {male},
         course              = {course},
         author              = {author},
@@ -244,7 +244,7 @@
     
     % Выводим титульную страницу
     \begin{spacing}{1.0}
-        \makenewtitleru
+        \ifthenelse{\isundefined{\opt@title@titlepage}}{\makenewtitleru}{\includepdf[pages=-]{\opt@title@titlepage}}
         \addtocounter{titlepages}{1}
     \end{spacing}
     \setcounter{page}{\value{titlepages}}
