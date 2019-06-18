@@ -57,6 +57,7 @@
 \usepackage[]{polyglossia}      %% переносы слов
 \usepackage[]{microtype}        %% различные исправления типографии
 \usepackage[]{indentfirst}      %% красная строка в первом абзаце
+\usepackage[]{chngcntr}         %% модификация нумерации
 \usepackage[]{csquotes}         %% правильные кавычки, цитирование
 \usepackage[]{amsmath}          %% верстка формул
 \usepackage[]{amssymb}          %% дополнительные символы
@@ -90,6 +91,14 @@
 \clubpenalty        = 10000     %% Запрет разрывов страниц после первой
 \widowpenalty       = 10000     %% и перед предпоследней строкой абзаца
 
+%% Убираем нумерацию на уровне глав, прямая нумерация для всех окружений
+\makeatletter
+\@ifclassloaded{scrbook}{
+    \counterwithout{figure}{chapter}%
+    \counterwithout{equation}{chapter}%
+    \counterwithout{table}{chapter}
+}{}
+\makeatother
 
 %% Стиль для шрифта колонтитулов
 \setkomafont{pageheadfoot}{\upshape}
