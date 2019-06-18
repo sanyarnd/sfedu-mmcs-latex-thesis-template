@@ -85,13 +85,11 @@
 \widowpenalty       = 10000     %% и перед предпоследней строкой абзаца
 
 %% Убираем нумерацию на уровне глав, прямая нумерация для всех окружений
-\makeatletter
 \@ifclassloaded{scrbook}{
-    \counterwithout{figure}{chapter}%
-    \counterwithout{equation}{chapter}%
+    \counterwithout{figure}{chapter}
+    \counterwithout{equation}{chapter}
     \counterwithout{table}{chapter}
 }{}
-\makeatother
 
 %% Стиль для шрифта колонтитулов
 \setkomafont{pageheadfoot}{\upshape}
