@@ -25,9 +25,10 @@
 %% ----------------
 \usepackage[]{enumitem}
 \usepackage[]{tabularx}
-\usepackage[]{booktabs}
+\usepackage[]{tabulary}
 \usepackage[]{multicol}
-\usepackage[]{longtable}
+\usepackage[]{multirow}
+\usepackage[]{booktabs}
 
 %% ----------------------------
 %% Приложение
@@ -88,9 +89,9 @@
     pdfkeywords={thesis}
 ]{hyperref}
 
-%% ----------------
-%% Overleaf fix
-%% ----------------
+%% -----------------------------
+%% Ускорение работы для Overleaf
+%% -----------------------------
 \makeatletter
   \@ifpackagelater{microtype}{2017/07/05}{}{%
     \patchcmd{\MT@is@composite}
