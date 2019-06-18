@@ -7,7 +7,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sfedu-mmcs-thesis}[2017/10/14 SFedU MMCS thesis class]
 
-
 %% Для работы с опциями (автогенерирует макросы)
 \RequirePackage[]{kvoptions}
 %% Вспомогательные функции
@@ -17,18 +16,13 @@
 %% Макрос if <...> then <...> else <...>
 \RequirePackage[]{ifthen}
 
-
 %% Параметры
 \SetupKeyvalOptions{family=opt, prefix=opt@, setkeys=\kvsetkeys}
 \DeclareBoolOption[false]{scrartcl}
 \DeclareBoolOption[false]{scrbook}
-%\SetupKeyvalOptions{family=opt@page, prefix=opt@page@, setkeys=\kvsetkeys}
-% ...
-
 
 %% Запуск обработки опций
 \ProcessKeyvalOptions*
-
 
 %% Выбираем нужный класс
 \ifopt@scrartcl
@@ -75,7 +69,6 @@
     bibstyle  = gost-numeric
 ]{biblatex}                     %% оформление списка литературы
 
-
 \setlength{\parindent}{1.25cm}  %% Красная строка
 \frenchspacing                  %% убираем лишние отступы после точек
 
@@ -111,265 +104,130 @@
 %% -------------------------------------
 
 %% Параметры заполнения титульного листа
+\define@key         {opt@title}{university}                            {\def\opt@title@university{#1}}
+\define@key         {opt@title}{faculty}                               {\def\opt@title@faculty{#1}}
+\define@key         {opt@title}{chair}                                 {\def\opt@title@chair{#1}}
+\define@key         {opt@title}{title}                                 {\def\opt@title@title{#1}}
+\define@key         {opt@title}{course}                                {\def\opt@title@group{#1}}
+\define@key         {opt@title}{author}                                {\def\opt@title@author{#1}}
+\define@key         {opt@title}{authorgenitive}                        {\def\opt@title@authorgenitive{#1}}
+\define@key         {opt@title}{supervisor}                            {\def\opt@title@supervisor{#1}}
+\define@key         {opt@title}{supervisorPosition}                    {\def\opt@title@supervisorPosition{#1}}
+\define@key         {opt@title}{reviewer}                              {\def\opt@title@reviewer{#1}}
+\define@key         {opt@title}{reviewerPosition}                      {\def\opt@title@reviewerPosition{#1}}
+\define@key         {opt@title}{chairHead}                             {\def\opt@title@chairHead{#1}}
+\define@key         {opt@title}{year}                                  {\def\opt@title@year{#1}}
+\define@key         {opt@title}{city}                                  {\def\opt@title@city{#1}}
+\define@key         {opt@title}{company}                               {\def\opt@title@company{#1}}
+\define@choicekey*  {opt@title}{sex}    {male, female}                 {\def\opt@title@position{#1}}
+\define@choicekey*  {opt@title}{type}   {bachelor, master, coursework} {\def\opt@title@type{#1}}
 
-\define@key[ru]         {opt@title}{university}                                                 {\def\opt@title@university@ru{#1}}
-\define@key[ru]         {opt@title}{faculty}                                                    {\def\opt@title@faculty@ru{#1}}
-\define@key[ru]         {opt@title}{chair}                                                      {\def\opt@title@chair@ru{#1}}
-\define@key[ru]         {opt@title}{title}                                                      {\def\opt@title@title@ru{#1}}
-\define@key[ru]         {opt@title}{course}                                                     {\def\opt@title@group@ru{#1}}
-\define@key[ru]         {opt@title}{author}                                                     {\def\opt@title@author@ru{#1}}
-\define@key[ru]         {opt@title}{authorgenitive}                                             {\def\opt@title@authorgenitive@ru{#1}}
-\define@key[ru]         {opt@title}{supervisor}                                                 {\def\opt@title@supervisor@ru{#1}}
-\define@key[ru]         {opt@title}{supervisorPosition}                                         {\def\opt@title@supervisorPosition@ru{#1}}
-\define@key[ru]         {opt@title}{reviewer}                                                   {\def\opt@title@reviewer@ru{#1}}
-\define@key[ru]         {opt@title}{reviewerPosition}                                           {\def\opt@title@reviewerPosition@ru{#1}}
-\define@key[ru]         {opt@title}{chairHead}                                                  {\def\opt@title@chairHead@ru{#1}}
-\define@key[ru]         {opt@title}{year}                                                       {\def\opt@title@year@ru{#1}}
-\define@key[ru]         {opt@title}{city}                                                       {\def\opt@title@city@ru{#1}}
-\define@key[ru]         {opt@title}{company}                                                    {\def\opt@title@company@ru{#1}}
-\define@choicekey*[ru]  {opt@title}{sex}    {male, female}                                      {\def\opt@title@position@ru{#1}}
-\define@choicekey*[ru]  {opt@title}{type}   {bachelor, master, coursework}                      {\def\opt@title@type@ru{#1}}
 
-\define@key[en]         {opt@title}{university}                                                 {\def\opt@title@university@en{#1}}
-\define@key[en]         {opt@title}{faculty}                                                    {\def\opt@title@faculty@en{#1}}
-\define@key[en]         {opt@title}{chair}                                                      {\def\opt@title@chair@en{#1}}
-\define@key[en]         {opt@title}{title}                                                      {\def\opt@title@title@en{#1}}
-\define@key[en]         {opt@title}{course}                                                     {\def\opt@title@group@en{#1}}
-\define@key[en]         {opt@title}{author}                                                     {\def\opt@title@author@en{#1}}
-\define@key[en]         {opt@title}{authorgenitive}                                             {\def\opt@title@authorgenitive@en{#1}}
-\define@key[en]         {opt@title}{supervisor}                                                 {\def\opt@title@supervisor@en{#1}}
-\define@key[en]         {opt@title}{supervisorPosition}                                         {\def\opt@title@supervisorPosition@en{#1}}
-\define@key[en]         {opt@title}{reviewer}                                                   {\def\opt@title@reviewer@en{#1}}
-\define@key[en]         {opt@title}{reviewerPosition}                                           {\def\opt@title@reviewerPosition@en{#1}}
-\define@key[en]         {opt@title}{chairHead}                                                  {\def\opt@title@chairHead@en{#1}}
-\define@key[en]         {opt@title}{year}                                                       {\def\opt@title@year@en{#1}}
-\define@key[en]         {opt@title}{city}                                                       {\def\opt@title@city@en{#1}}
-\define@key[en]         {opt@title}{company}                                                    {\def\opt@title@company@en{#1}}
-\define@choicekey*[en]  {opt@title}{sex}    {male, female}                                      {\def\opt@title@position@en{#1}}
-\define@choicekey*[en]  {opt@title}{type}   {bachelor, master, coursework}                      {\def\opt@title@type@en{#1}}
-
-\newcommand\filltitle[2]{
-    \ifthenelse{\equal{#1}{ru}}
-    {
-        \presetkeys[#1]{opt@title}{
-            type                = {bachelor},
-            university          = {Федеральное государственное автономное образовательное\\учреждение высшего образования\\ \vspace*{0.1cm}\uppercase{Южный Федеральный Университет}},
-            faculty             = {Институт математики, механики и компьютерных наук\\ имени И. И. Воровича},
-            chair               = {Направление подготовки\\02.\ifthenelse{ \equal{\opt@title@type@ru}{master} }{04}{03}.02 -- Фундаментальная информатика\\и информационные технологии},
-            title               = {title},
-            company             = {company},
-            sex                 = {male},
-            course              = {course},
-            author              = {author},
-            authorgenitive      = {authorgenitive},
-            supervisor          = {supervisor},
-            supervisorPosition  = {supervisorPosition},
-            reviewer            = {reviewer},
-            reviewerPosition    = {reviewerPosition},
-            chairHead           = {chairHead},
-            city                = {Ростов-на-Дону},
-            year                = {\the\year},
-        }{}
+\newcommand\filltitle[1]{
+    \presetkeys{opt@title}{
+        type                = {bachelor},
+        university          = {Федеральное государственное автономное образовательное\\учреждение высшего образования\\ \vspace*{0.1cm}\uppercase{Южный Федеральный Университет}},
+        faculty             = {Институт математики, механики и компьютерных наук\\ имени И. И. Воровича},
+        chair               = {Направление подготовки\\02.\ifthenelse{ \equal{\opt@title@type}{master} }{04}{03}.02 -- Фундаментальная информатика\\и информационные технологии},
+        title               = {title},
+        company             = {company},
+        sex                 = {male},
+        course              = {course},
+        author              = {author},
+        authorgenitive      = {authorgenitive},
+        supervisor          = {supervisor},
+        supervisorPosition  = {supervisorPosition},
+        reviewer            = {reviewer},
+        reviewerPosition    = {reviewerPosition},
+        chairHead           = {chairHead},
+        city                = {Ростов-на-Дону},
+        year                = {\the\year},
     }{}
     
-    \ifthenelse{\equal{#1}{en}}
-    {
-        \presetkeys[#1]{opt@title}{
-            type                = {bachelor},
-            university          = {Federal state autonomous educational \\ institution of higher education \\ \vspace*{0.1cm}\uppercase{Southern Federal University}},
-            faculty             = {Institute of Mathematics, Mechanics and Computer Science \\ named after I.I. Voronovich},
-            chair               = {Program \\02.\ifthenelse{ \equal{\opt@title@type@en}{master} }{04}{03}.02 -- Fundamental informatics\\ and information technology},
-            title               = {title},
-            company             = {company},
-            sex                 = {male},
-            course              = {course},
-            author              = {author},
-            authorgenitive      = {authorgenitive},
-            supervisor          = {supervisor},
-            supervisorPosition  = {supervisorPosition},
-            reviewer            = {reviewer},
-            reviewerPosition    = {reviewerPosition},
-            chairHead           = {chairHead},
-            city                = {Rostov-on-Don},
-            year                = {\the\year},
-        }{}
-    }{}
-    
-    \setkeys[#1]{opt@title}{#2}
-    
+    \setkeys{opt@title}{#1}
     \@ifpackageloaded{hyperref}{
-        \ifthenelse{\equal{#1}{ru}}
-        {\hypersetup{pdfauthor={\opt@title@author@ru{}}, pdftitle={\opt@title@title@ru{}}}}
-        {\hypersetup{pdfauthor={\opt@title@author@en{}}, pdftitle={\opt@title@title@en{}}}}
-    }
-    {}
+        \hypersetup{pdfauthor={\opt@title@author{}}, pdftitle={\opt@title@title{}}}
+    }{}
 }
-
 
 \newcommand\makenewtitleru{%
     \begin{titlepage}
         \thispagestyle{scrheadings}
         \cfoot
-        { \parbox[b]{\textwidth}{\centering \opt@title@city@ru\\ \opt@title@year@ru} }
+        { \parbox[b]{\textwidth}{\centering \opt@title@city\\ \opt@title@year} }
         
         \begin{center}
             \vskip 1em
             \uppercase{министерство образования и науки рф} \\
             \vskip 1em
-            \opt@title@university@ru \\
+            \opt@title@university \\
             \vskip 1em
-            \opt@title@faculty@ru \\
+            \opt@title@faculty \\
             \vskip 1em
-            \opt@title@chair@ru
+            \opt@title@chair
             \vskip 1em
             
-            \ifthenelse{ \equal{\opt@title@type@ru}{master} }
+            \ifthenelse{ \equal{\opt@title@type}{master} }
             {
                 \vskip 4em
-                \opt@title@author@ru \\
+                \opt@title@author \\
                 \vskip 1em
             }
             %else
             { \vskip 3em }
             
-            \opt@title@title@ru \\
+            \opt@title@title \\
             \vskip 1em
             
-            \ifthenelse{ \equal{\opt@title@type@ru}{coursework} }
+            \ifthenelse{ \equal{\opt@title@type}{coursework} }
             { Курсовая работа }
             %else
             {
-                \ifthenelse{ \equal{\opt@title@type@ru}{master} }
+                \ifthenelse{ \equal{\opt@title@type}{master} }
                 { Магистерская диссертация }
                 %else
                 {
-                    \ifthenelse{ \equal{\opt@title@type@ru}{bachelor} }
+                    \ifthenelse{ \equal{\opt@title@type}{bachelor} }
                     { Выпускная квалификационная работа\\на степень бакалавра }
                 }
                 \\
             }
             \vskip 3em
             
-            \ifthenelse{\equal{\opt@title@type@ru}{master}} % магистерская
+            \ifthenelse{\equal{\opt@title@type}{master}} % магистерская
             {
                 \vskip 4em
                 \normalsize \raggedleft
                 Научный руководитель:\\
-                \opt@title@supervisorPosition@ru\ \opt@title@supervisor@ru \\
+                \opt@title@supervisorPosition\ \opt@title@supervisor \\
                 \vskip 0.5em
                 Рецензент:\\
-                \opt@title@reviewerPosition@ru\ \opt@title@reviewer@ru
+                \opt@title@reviewerPosition\ \opt@title@reviewer
             }
             %else % бакалаврская или курсовая
             {
                 \normalsize\raggedleft
-                \ifthenelse{\equal{\opt@title@position@ru}{male}}{Студента}{Студентки}\space \opt@title@group@ru\space курса \\
-                \opt@title@authorgenitive@ru \\
+                \ifthenelse{\equal{\opt@title@position}{male}}{Студента}{Студентки}\space \opt@title@group\space курса \\
+                \opt@title@authorgenitive \\
                 \vskip 0.5em
                 Научный руководитель:\\
-                \opt@title@supervisorPosition@ru\ \opt@title@supervisor@ru \\
+                \opt@title@supervisorPosition\ \opt@title@supervisor \\
             }
             
             \vskip 5em
-            \ifthenelse{\equal{\opt@title@type@ru}{bachelor}} % место для допуска
+            \ifthenelse{\equal{\opt@title@type}{bachelor}} % место для допуска
             {
                 \begin{flushleft}
                     Допущено к защите: \\
-                    руководитель направления ФИИТ \underline{\hspace{4cm}} \opt@title@chairHead@ru
+                    руководитель направления ФИИТ \underline{\hspace{4cm}} \opt@title@chairHead
                 \end{flushleft}
             }{}
-            \ifthenelse{\equal{\opt@title@type@ru}{coursework}} % место для рейтинга
+            \ifthenelse{\equal{\opt@title@type}{coursework}} % место для рейтинга
             {
                 \begin{flushleft}
                     \begin{tabular}{cc}
                         \underline{\hspace{4cm}}&\underline{\hspace{5cm}}\\
                         {\small оценка (рейтинг)} & {\small  подпись руководителя}\\
-                    \end{tabular}
-                \end{flushleft}
-            }{}
-        \end{center}
-    \end{titlepage}
-}
-
-
-\newcommand\makenewtitleen{%
-    \begin{titlepage}
-        \thispagestyle{scrheadings}
-        \cfoot
-        { \parbox[b]{\textwidth}{\centering \opt@title@city@en\\ \opt@title@year@en} }
-        
-        \begin{center}
-            \vskip 1em
-            \uppercase{Ministry of Education and Science of the Russian Federation} \\
-            \vskip 1em
-            \opt@title@university@en \\
-            \vskip 1em
-            \opt@title@faculty@en \\
-            \vskip 1em
-            \opt@title@chair@en
-            \vskip 1em
-            
-            \ifthenelse{ \equal{\opt@title@type@en}{master} }
-            {
-                \vskip 4em
-                \opt@title@author@en \\
-                \vskip 1em
-            }
-            %else
-            { \vskip 3em }
-            
-            \opt@title@title@en \\
-            \vskip 1em
-            
-            \ifthenelse{ \equal{\opt@title@type@en}{coursework} }
-            { Course work }
-            %else
-            {
-                \ifthenelse{ \equal{\opt@title@type@en}{master} }
-                { Master's thesis }
-                %else
-                {
-                    \ifthenelse{ \equal{\opt@title@type@en}{bachelor} }
-                    { Graduation qualification work \\ for a bachelor's degree }
-                }
-                \\
-            }
-            \vskip 3em
-            
-            \ifthenelse{\equal{\opt@title@type@en}{master}} % магистерская
-            {
-                \vskip 4em
-                \normalsize \raggedleft
-                Scientific advisor:\\
-                \opt@title@supervisorPosition@en\ \opt@title@supervisor@en \\
-                \vskip 0.5em
-                Reviewer:\\
-                \opt@title@reviewerPosition@en\ \opt@title@reviewer@en
-            }
-            %else % бакалаврская или курсовая
-            {
-                \normalsize\raggedleft
-                \ifthenelse{\equal{\opt@title@position@en}{male}}{Student}{Student}\space \opt@title@group@en\space курса \\
-                \opt@title@authorgenitive@en \\
-                \vskip 0.5em
-                Scientific advisor:\\
-                \opt@title@supervisorPosition@en\ \opt@title@supervisor@en \\
-            }
-            
-            \vskip 5em
-            \ifthenelse{\equal{\opt@title@type@en}{bachelor}} % место для допуска
-            {
-                \begin{flushleft}
-                    Approved for defense: \\
-                    head of FIIT \underline{\hspace{4cm}} \opt@title@chairHead@en
-                \end{flushleft}
-            }{}
-            \ifthenelse{\equal{\opt@title@type@en}{coursework}} % место для рейтинга
-            {
-                \begin{flushleft}
-                    \begin{tabular}{cc}
-                        \underline{\hspace{4cm}}&\underline{\hspace{5cm}}\\
-                        {\small score (rating)} & {\small  supervisor's signature}\\
                     \end{tabular}
                 \end{flushleft}
             }{}
@@ -386,14 +244,8 @@
     
     % Выводим титульную страницу
     \begin{spacing}{1.0}
-        \ifthenelse{\isundefined{\opt@title@title@ru}}{}{
-            \makenewtitleru
-            \addtocounter{titlepages}{1}
-        }
-        \ifthenelse{\isundefined{\opt@title@title@en}}{}{
-            \makenewtitleen
-            \addtocounter{titlepages}{1}
-        }
+        \makenewtitleru
+        \addtocounter{titlepages}{1}
     \end{spacing}
     \setcounter{page}{\value{titlepages}}
     
