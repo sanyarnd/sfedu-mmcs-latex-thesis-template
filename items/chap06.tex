@@ -65,3 +65,96 @@
 
 График строится пакетом \texttt{pgfplots} (обе оси логарифмические):
 \timechart{gcc}{int}{Время работы \texttt{GCC}}
+
+\paragraph{Гистограммы.} Столбчатая диаграмма строится стилем \texttt{ybar}
+(\autoref{fig:bar}), накопительная~--- \texttt{ybar stacked}
+(\autoref{fig:stacked}).
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                ybar,
+                width        = 0.9\textwidth,
+                height       = 6cm,
+                bar width    = 12pt,
+                ymin         = 0,
+                ylabel       = {Время, \unit{\milli\second}},
+                symbolic x coords = {GCC, Clang, MSVC},
+                xtick        = data,
+                nodes near coords,
+                enlarge x limits = 0.25,
+                ymax         = 520,
+                legend style = {at={(0.5,1.03)}, anchor=south, draw=none,
+                                /tikz/every even column/.append style={column sep=1em}},
+                legend columns = 2,
+            ]
+            \addplot coordinates {(GCC, 415) (Clang, 402) (MSVC, 447)};
+            \addplot coordinates {(GCC, 99)  (Clang, 95)  (MSVC, 121)};
+            \legend{последовательный, \texttt{OpenMP}}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Сравнение компиляторов}\label{fig:bar}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                ybar stacked,
+                width        = 0.9\textwidth,
+                height       = 6cm,
+                bar width    = 20pt,
+                ymin         = 0,
+                ylabel       = {Время, \unit{\second}},
+                xlabel       = {Число потоков},
+                symbolic x coords = {1, 2, 4, 8},
+                xtick        = data,
+                enlarge x limits = 0.15,
+                legend style = {at={(0.5,1.03)}, anchor=south, draw=none,
+                                /tikz/every even column/.append style={column sep=1em}},
+                legend columns = 3,
+            ]
+            \addplot coordinates {(1, 2.0) (2, 2.0) (4, 2.0) (8, 2.0)};
+            \addplot coordinates {(1, 8.0) (2, 4.1) (4, 2.2) (8, 1.3)};
+            \addplot coordinates {(1, 0.0) (2, 0.3) (4, 0.6) (8, 1.1)};
+            \legend{чтение данных, вычисления, синхронизация}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Структура времени работы}\label{fig:stacked}
+\end{figure}
+
+\paragraph{Круговая диаграмма} строится пакетом \texttt{pgf-pie}
+(\autoref{fig:pie}). Значения указываются в процентах.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[radius=2.5, text=legend]{55/вычисления, 25/чтение данных, 15/синхронизация, 5/прочее}
+    \end{tikzpicture}
+    \caption{Доля этапов в общем времени работы}\label{fig:pie}
+\end{figure}
+
+\paragraph{Вычисления в тексте.} Чтобы не пересчитывать числа вручную после
+каждого эксперимента, их можно вычислять при компиляции командой
+\verb+\fpeval+: ускорение \texttt{OpenMP} для \texttt{GCC}
+(\autoref{fig:bar}) составляет \num{\fpeval{round(415 / 99, 1)}}~раза.
+
+\paragraph{Циклы.} Команда \verb+\foreach+ повторяет фрагмент для каждого
+элемента списка, например рисует массив (\autoref{fig:foreach}).
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \foreach \x [count=\i] in {2, 3, 5, 8, 13, 21, 34} {
+            \draw (\i, 0) rectangle ++(1, 1);
+            \node at (\i + 0.5, 0.5) {\x};
+            \node[below] at (\i + 0.5, 0) {\small \i};
+        }
+    \end{tikzpicture}
+    \caption{Массив, нарисованный циклом \texttt{\textbackslash foreach}}\label{fig:foreach}
+\end{figure}
+
+Графики, которые удобнее строить в Python (например, matplotlib), лучше
+сохранять скриптом в PDF и подключать через \verb+\includegraphics+:
+так сборка документа не зависит от Python.

@@ -9,17 +9,51 @@
 стандартные заглушки \texttt{example-image-a}, \texttt{example-image-b},
 \texttt{example-image-c}.
 
-Размер изображения можно задать:
+Размер изображения задаётся (\autoref{fig:scale}):
 \begin{itemize}
-    \item относительно страницы: \verb+width=0.5\textwidth+;
-    \item в абсолютных единицах: \verb+height=3cm+;
-    \item или не задавать вовсе.
+    \item относительно ширины текста: \verb+width=0.3\textwidth+;
+    \item в абсолютных единицах: \verb+height=2cm+;
+    \item масштабом относительно исходного размера: \verb+scale=0.15+;
+    \item рамкой, в которую изображение вписывается без искажения:
+        \verb+width+ и \verb+height+ вместе с \verb+keepaspectratio+.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{example-image}
+        \caption{30\,\% ширины текста}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.2\textwidth}
+        \centering
+        \includegraphics[height=2cm]{example-image}
+        \caption{высота 2\,см}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.2\textwidth}
+        \centering
+        \includegraphics[scale=0.15]{example-image}
+        \caption{масштаб 15\,\%}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.2\textwidth}
+        \centering
+        \includegraphics[width=3cm, height=3cm, keepaspectratio]{example-image}
+        \caption{рамка $3 \times 3$\,см}
+    \end{subfigure}
+    \caption{Способы задать размер изображения}\label{fig:scale}
+\end{figure}
+
+Если изображение взято из чужого источника, под ним указывается источник
+и, при необходимости, лицензия (\autoref{fig:example}).
+
+\begin{figure}[H]
+    \centering
     \includegraphics[width=0.4\textwidth]{example-image}
-    \caption{Одиночный рисунок}\label{fig:example}
+    \caption{Изображение-заглушка}\label{fig:example}
+    \small Источник: \cite{mwe}, лицензия LPPL~1.3c.
 \end{figure}
 
 \paragraph{Набор изображений} оформляется окружениями \texttt{subfigure}
