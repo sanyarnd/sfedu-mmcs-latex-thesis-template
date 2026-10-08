@@ -106,14 +106,17 @@ expect_pages() {
 
 A4="595.276 x 841.89|595.28 x 841.89"
 
-# Предупреждения unicode-math о переопределении команд ожидаемы
-UNICODE_MATH='unicode-math Warning'
+# Ожидаемые предупреждения:
+#   unicode-math переопределяет команды amsmath;
+#   datatool 3.x не имеет русского языкового модуля (datatool-russian).
+EXPECTED_WARNINGS="unicode-math Warning|No \`datatool' support for dialect"
+
 
 test_diploma() {
     echo "== diploma"
     local out="$BUILD/diploma"
     build "$ROOT" diploma.tex "$out" || return 0
-    check_log "$out/diploma.log" "$UNICODE_MATH"
+    check_log "$out/diploma.log" "$EXPECTED_WARNINGS"
     check_pdf "$out/diploma.pdf" "$A4"
     expect_text "$out/diploma.pdf" \
         "МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ" \
@@ -136,7 +139,7 @@ test_master() {
     echo "== tests/master"
     local out="$BUILD/tests"
     build "$ROOT" tests/master.tex "$out" || return 0
-    check_log "$out/master.log" "$UNICODE_MATH"
+    check_log "$out/master.log" "$EXPECTED_WARNINGS"
     check_pdf "$out/master.pdf" "$A4"
     expect_text "$out/master.pdf" \
         "02.04.02" \
@@ -156,7 +159,7 @@ test_coursework() {
     echo "== tests/coursework"
     local out="$BUILD/tests"
     build "$ROOT" tests/coursework.tex "$out" || return 0
-    check_log "$out/coursework.log" "$UNICODE_MATH"
+    check_log "$out/coursework.log" "$EXPECTED_WARNINGS"
     check_pdf "$out/coursework.pdf" "$A4"
     expect_text "$out/coursework.pdf" \
         "Курсовая работа" \
@@ -171,7 +174,7 @@ test_titlepage_pdf() {
     echo "== tests/titlepage-pdf"
     local out="$BUILD/tests"
     build "$ROOT" tests/titlepage-pdf.tex "$out" || return 0
-    check_log "$out/titlepage-pdf.log" "$UNICODE_MATH"
+    check_log "$out/titlepage-pdf.log" "$EXPECTED_WARNINGS"
     expect_pages "$out/titlepage-pdf.pdf" 2
     expect_text "$out/titlepage-pdf.pdf" \
         "Введение" \
@@ -187,7 +190,7 @@ test_presentation() {
     # поддерживает моноширинные цифры, а титульный слайд темы даёт
     # небольшой Overfull \vbox -- это известные особенности темы.
     check_log "$out/presentation.log" \
-        "$UNICODE_MATH|metropolis Warning|Numbers=Monospaced|Overfull \\\\vbox"
+        "$EXPECTED_WARNINGS|metropolis Warning|Numbers=Monospaced|Overfull \\\\vbox"
     check_pdf "$out/presentation.pdf" "453.543 x 255.118|453.54 x 255.12"
     expect_text "$out/presentation.pdf" "Тема презентации" "Спасибо за внимание"
 }
