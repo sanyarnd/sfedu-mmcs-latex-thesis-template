@@ -108,8 +108,9 @@ A4="595.276 x 841.89|595.28 x 841.89"
 
 # Ожидаемые предупреждения:
 #   unicode-math переопределяет команды amsmath;
-#   datatool 3.x не имеет русского языкового модуля (datatool-russian).
-EXPECTED_WARNINGS="unicode-math Warning|No \`datatool' support for dialect"
+#   datatool 3.x не имеет русского языкового модуля (datatool-russian);
+#   scrhack сообщает, что патч для новой версии listings не нужен.
+EXPECTED_WARNINGS="unicode-math Warning|No \`datatool' support for dialect|scrhack Warning: unknown .lstlistoflistings"
 
 
 test_diploma() {
