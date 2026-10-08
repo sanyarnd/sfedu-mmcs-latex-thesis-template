@@ -1,16 +1,14 @@
 % !TEX root = diploma.tex
-%% Пакеты, которые подключаются в преамбуле diploma.tex.
-%% Базовые пакеты (шрифты, язык, поля, библиография) подключены в .cls файле.
+%% Шрифты, язык, поля и biblatex подключены в .cls файле
 
 %% ----------------------
 %% Математика
 %% ----------------------
-\usepackage{amsmath}                %% верстка формул
-\usepackage{mathtools}              %% исправления и расширения amsmath
-\usepackage{amsthm}                 %% окружения теорем
-\usepackage{unicode-math}           %% математические шрифты OpenType,
-                                    %% заменяет amssymb и amsfonts
-\usepackage[shortcuts]{extdash}     %% команды для дефисов и тире: \-/, \--
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{unicode-math}           %% amssymb и amsfonts не нужны
+\usepackage[shortcuts]{extdash}
 
 %% -------------------------
 %% Алгоритмы и листинги кода
@@ -37,16 +35,16 @@
 %% Изображения и графики
 %% ----------------------------------
 \usepackage{graphicx}
-\usepackage{subcaption}             %% вложенные рисунки (вместо устаревшего subfig)
-\usepackage{float}                  %% размещение [H] -- "строго здесь"
+\usepackage{subcaption}
+\usepackage{float}
 
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows.meta, babel}
-\usepackage{tikz-cd}                %% коммутативные диаграммы
+\usepackage{tikz-cd}
 \usepackage{pgfplots}
 \pgfplotsset{
-    compat = 1.18,                  %% фиксируем версию, чтобы вид графиков не менялся
-    /pgf/number format/use comma,   %% десятичная запятая
+    compat = 1.18,
+    /pgf/number format/use comma,
     /pgf/number format/1000 sep = {\,},
 }
 
@@ -60,10 +58,7 @@
 %% -----------------------
 \usepackage{siunitx}
 
-%% --------------------------------------
-%% Показать границы полей -- удобно для
-%% проверки выхода текста за поля
-%% --------------------------------------
+%% Показать границы полей
 % \usepackage{showframe}
 
 %% ----------------
@@ -72,7 +67,7 @@
 %% hyperref обычно подключается последним
 \usepackage[
     unicode,
-    hidelinks,                      %% ссылки без рамок и цвета (для печати)
+    hidelinks,
     bookmarksnumbered,
     bookmarksopen,
 ]{hyperref}

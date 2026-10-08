@@ -1,5 +1,4 @@
 % !TEX root = diploma.tex
-%% Пользовательские настройки и команды.
 
 %% ----------------------
 %% Стандартные каталоги
@@ -15,7 +14,6 @@
 %% ---------------------------
 %% Списки
 %% ---------------------------
-%% Маркер списка -- тире, без лишних вертикальных отступов
 \setlist{nosep}
 \setlist[itemize]{label=\textendash}
 \setlist[enumerate,1]{label=\arabic*)}
@@ -43,7 +41,7 @@
 %% Единицы измерения
 %% ---------------------------
 \sisetup{
-    output-decimal-marker = {,},    %% десятичная запятая
+    output-decimal-marker = {,},
     group-separator       = {\,},
     per-mode              = symbol,
     list-final-separator  = { и },
@@ -82,8 +80,7 @@
 %% ------------
 %% Мат. символы
 %% ------------
-%% unicode-math переопределяет символы в начале документа,
-%% поэтому замены делаем там же.
+%% unicode-math определяет символы в \begin{document}
 \AtBeginDocument{%
     \let\epsilon\varepsilon
     \let\phi\varphi
@@ -99,11 +96,11 @@
 %% Алгоритмы
 %% --------------
 \floatname{algorithm}{Алгоритм}
-%% В FreeSerif нет капители, поэтому имена процедур -- обычным шрифтом
+%% В FreeSerif нет капители
 \algrenewcommand\textproc{\textrm}
 \renewcommand{\listalgorithmname}{Список алгоритмов}
 
-%% Перевод ключевых слов (по желанию)
+%% Перевод ключевых слов
 % \algrenewcommand\algorithmicprocedure{\textbf{процедура}}
 % \algrenewcommand\algorithmicrequire{\textbf{Вход:}}
 % \algrenewcommand\algorithmicensure{\textbf{Выход:}}

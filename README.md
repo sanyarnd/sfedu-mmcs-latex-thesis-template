@@ -6,52 +6,23 @@
 
 Альтернативный шаблон для курсовых и выпускных работ студентов ФИИТ ИММиКН им. Воровича.
 
-В шаблоне присутствуют следующие варианты работ:
-* Курсовая работа (`coursework`)
-* Выпускная квалификационная работа бакалавра (`bachelor`)
-* Магистерская диссертация (`master`)
+Варианты работ: курсовая, ВКР бакалавра, магистерская диссертация. Также есть пример презентации (`presentation/`) и отзыва о практике (`reference.tex`).
 
-Также есть пример презентации на `Beamer` (каталог `presentation/`) и пример отзыва о прохождении практики (`reference.tex`).
+Собранные PDF: [релизы](https://github.com/sanyarnd/sfedu-mmcs-latex-thesis-template/releases) или артефакт `pdf` на странице [Actions](https://github.com/sanyarnd/sfedu-mmcs-latex-thesis-template/actions/workflows/build.yml).
 
-Собранные PDF последней версии шаблона можно скачать на странице [Actions](https://github.com/sanyarnd/sfedu-mmcs-latex-thesis-template/actions/workflows/build.yml) (артефакт `pdf`) или в [релизах](https://github.com/sanyarnd/sfedu-mmcs-latex-thesis-template/releases).
-
-Если вы не хотите устанавливать `LaTeX` локально, можно работать в облачном сервисе `Overleaf`. В этом случае из инструкции достаточно прочитать раздел [Как пользоваться](#как-пользоваться) и [Overleaf](#overleaf).
+Без локальной установки `LaTeX` можно работать в `Overleaf`: достаточно разделов [Overleaf](#overleaf) и [Как пользоваться](#как-пользоваться).
 
 [Шаблон в `Overleaf`](https://www.overleaf.com/read/prpvyzswtpbr), в меню слева есть кнопка `Copy project`.
 
 
-## Содержание
-* [Зависимости](#зависимости)
-    * [Установка TeX Live](#установка-tex-live)
-* [Сборка](#сборка)
-    * [Overleaf](#overleaf)
-    * [TeXstudio](#texstudio)
-    * [VS Code](#vs-code)
-    * [Командная строка](#командная-строка)
-* [Как пользоваться](#как-пользоваться)
-    * [Тип работы](#тип-работы)
-    * [Титульный лист](#титульный-лист)
-    * [Структура документа](#структура-документа)
-    * [Оформление](#оформление)
-* [Проверки и CI](#проверки-и-ci)
-* [Стандартные ошибки при работе с LaTeX](#стандартные-ошибки-при-работе-с-latex)
-
-
 ## Зависимости
-* Дистрибутив `TeX Live` 2023 или новее (проверяется в CI на 2023 и последней версии).
-* Компилятор `XeLaTeX`, система библиографии `biber` (стиль ГОСТ из пакета `biblatex-gost`).
-* Редактор: [TeXstudio](https://www.texstudio.org/), [VS Code](https://code.visualstudio.com/) с расширением [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) или любой другой.
-
-Шрифты (FreeSerif, FreeSans, FreeMono и XITS Math) лежат в каталоге `fonts/` и устанавливать их не нужно. При необходимости их можно заменить в файле `sfedu-mmcs-thesis.cls` (раздел «Язык и шрифты») и в `style.tex` (математический шрифт).
+`TeX Live` 2023 или новее, `XeLaTeX` и `biber`. Шрифты лежат в `fonts/`, устанавливать их не нужно.
 
 ### Установка TeX Live
-Кроссплатформенный дистрибутив [TeX Live](https://www.tug.org/texlive/) распространяется в виде образа .iso (~5 ГБ) и сетевого установщика.
-
 #### Windows и macOS
-Скачайте сетевой установщик или образ на сайте [TeX Live](https://www.tug.org/texlive/acquire-netinstall.html). Для macOS есть сборка [MacTeX](https://www.tug.org/mactex/).
+[Установщик TeX Live](https://www.tug.org/texlive/acquire-netinstall.html), для macOS — [MacTeX](https://www.tug.org/mactex/).
 
 #### Linux
-Пакеты есть в репозиториях всех популярных дистрибутивов, но они могут отставать от актуальной версии. Если нужен свежий `TeX Live`, используйте официальный установщик.
 
 ##### Ubuntu, Debian, Mint
 ```sh
@@ -68,85 +39,55 @@ sudo pacman -S texlive texlive-langcyrillic texlive-bibtexextra biber
 sudo dnf install texlive-scheme-full
 ```
 
-_В некоторых дистрибутивах `biber` распространяется отдельным пакетом._
-
 
 ## Сборка
-Документ собирается командой `xelatex` → `biber` → `xelatex` (×2). Проще всего поручить это утилите `latexmk`: настройки для неё уже лежат в файле `.latexmkrc`.
+Порядок сборки: `xelatex` → `biber` → `xelatex` ×2. Это делает `latexmk` с настройками из `.latexmkrc`.
 
 ### Overleaf
-`Menu` → `Settings` → `Compiler`: выберите `XeLaTeX`. `TeX Live version`: 2023 или новее. Основной документ (`Main document`) — `diploma.tex`.
+`Menu` → `Settings`: `Compiler` — `XeLaTeX`, `Main document` — `diploma.tex`.
 
 ### TeXstudio
 `Options` → `Configure TeXstudio` → `Build`:
 * `Default Compiler`: `XeLaTeX`;
 * `Default Bibliography Tool`: `Biber`.
 
-Либо выберите `Default Compiler`: `Latexmk` — тогда будут использоваться настройки из `.latexmkrc`.
-
 <img src="./images/settings.png" width="70%">
 
 #### LanguageTool
-Дополнительно можно установить средство проверки орфографии и грамматики [LanguageTool](https://languagetool.org/ru/) (требуется Java).
-
-Зайдите в настройки `TeXstudio` и перейдите на вкладку `Language Checking`. В `Server URL` введите `http://localhost:8081`, а в `LT Path` укажите путь к `languagetool-server.jar`. Для проверки орфографии потребуется [русский словарь](https://extensions.libreoffice.org/en/extensions/show/russian-dictionary-pack); выберите `Default Language` как `ru_RU`.
+Проверка орфографии и грамматики: [LanguageTool](https://languagetool.org/ru/) (нужна Java). В `Language Checking` укажите `Server URL` — `http://localhost:8081`, `LT Path` — путь к `languagetool-server.jar`, `Default Language` — `ru_RU` ([словарь](https://extensions.libreoffice.org/en/extensions/show/russian-dictionary-pack)).
 
 <img src="./images/languagetool.png" width="70%">
 
 ### VS Code
-Установите расширение [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop). Оно по умолчанию собирает документ через `latexmk` и учитывает `.latexmkrc`. Для проверки орфографии подойдёт расширение [LTeX+](https://marketplace.visualstudio.com/items?itemName=ltex-plus.vscode-ltex-plus).
+Расширения [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) и [LTeX+](https://marketplace.visualstudio.com/items?itemName=ltex-plus.vscode-ltex-plus) для орфографии.
 
 ### Командная строка
 ```sh
-make              # собрать diploma.pdf
-make watch        # пересобирать при каждом сохранении
-make presentation # собрать презентацию
-make reference    # собрать отзыв о практике
-make all          # собрать всё
-make test         # собрать всё и проверить (то же, что в CI)
-make clean        # удалить временные файлы
+make              # diploma.pdf
+make watch        # пересборка при сохранении
+make all          # плюс презентация и отзыв
+make test         # проверки
+make clean
 ```
-
-Без `make`: `latexmk diploma.tex`.
 
 
 ## Как пользоваться
-Откройте `diploma.tex` и впишите свои данные в команду `\filltitle`. В окружении `document` уже есть заготовки стандартных разделов работы.
+Впишите свои данные в `\filltitle` в `diploma.tex`. Главы лежат в `items/` и подключаются через `\include` (с новой страницы) или `\input` ([разница](https://tex.stackexchange.com/a/32058/72742)). Не используйте кириллицу и пробелы в именах файлов.
 
-Создайте в каталоге `items/` нужные вам .tex файлы по аналогии с существующими и подключите их в `diploma.tex` командой `\include` (каждый файл начинается с новой страницы) или `\input` ([разница](https://tex.stackexchange.com/a/32058/72742)). Не используйте кириллицу и пробелы в именах файлов.
+Первая строка каждого файла, `% !TEX root = ../diploma.tex`, указывает корневой документ, поэтому компилировать можно из любого файла.
 
-Первая строка каждого файла — так называемый магический комментарий:
-
-```latex
-% !TEX root = ../diploma.tex
-```
-
-Он указывает корневой документ, поэтому компиляцию можно запускать из любого файла проекта. Его понимают TeXstudio, VS Code (LaTeX Workshop) и Overleaf.
-
-Изображения кладите в каталог `images/` — он корневой для `\includegraphics`. Внутри можно создавать подкаталоги: для файла `images/chap01/image.png` команда будет `\includegraphics{chap01/image}`. Расширение указывать не обязательно.
-
-Данные для таблиц и графиков (CSV) лежат в каталоге `data/`, пример их использования — в `items/chap06.tex`.
+Изображения кладите в `images/`: файл `images/chap01/image.png` подключается как `\includegraphics{chap01/image}`. CSV-данные для таблиц и графиков — в `data/`.
 
 ### Тип работы
-Тип работы задаётся опцией класса в первой строке `diploma.tex`:
+Опция класса: `\documentclass[bachelor|coursework|master]{sfedu-mmcs-thesis}`. В магистерской главы оформляются через `\chapter` ([требования](http://it.mmcs.sfedu.ru/docs/IT-papers-2015.pdf)).
 
-```latex
-\documentclass[bachelor]{sfedu-mmcs-thesis}   % ВКР бакалавра (по умолчанию)
-\documentclass[coursework]{sfedu-mmcs-thesis} % курсовая работа
-\documentclass[master]{sfedu-mmcs-thesis}     % магистерская диссертация
-```
-
-Для магистерской диссертации базовым классом становится `scrbook`: используйте `\chapter` для глав, `\section` для разделов и т.д. Такое оформление требуется [формальными требованиями](http://it.mmcs.sfedu.ru/docs/IT-papers-2015.pdf). Также укажите `type = master` в `\filltitle`.
-
-Для ненумеруемых разделов (Введение, Заключение) используйте `\unnumbered{Введение}` — команда сама выберет нужный уровень заголовка (`\chapter` или `\section`) и добавит его в содержание. `\unnumbered*{...}` — без записи в содержании.
+Введение и Заключение: `\unnumbered{Введение}` — подходит для любого типа работы.
 
 ### Титульный лист
-Все параметры перечислены в `diploma.tex`. Основные:
 
 | Параметр | Описание |
 |---|---|
 | `title` | Название работы |
-| `type` | `bachelor`, `master` или `coursework` |
 | `sex` | `male` или `female` (Студента / Студентки) |
 | `course` | Курс |
 | `author`, `authorgenitive` | Автор в именительном и родительном падеже |
@@ -157,46 +98,23 @@ make clean        # удалить временные файлы
 | `year`, `city` | Год и город |
 | `titlepage` | Готовый PDF титульного листа вместо шаблонного |
 
-Если требования к титульному листу изменились, можно сделать его в любом редакторе, сохранить в PDF и указать `titlepage = {front.pdf}` — файл заменит шаблонный титульный лист.
-
 ### Оформление
-Класс настраивает оформление по ГОСТ 7.32-2017:
-* поля: левое 30 мм, правое 15 мм, верхнее и нижнее 20 мм;
-* шрифт 14 pt, полуторный интервал, абзацный отступ 1,25 см;
-* номер страницы внизу по центру, титульный лист входит в нумерацию, но номер на нём не ставится;
-* подписи «Рисунок 1 – Название» под рисунком и «Таблица 1 – Название» над таблицей;
-* сквозная нумерация рисунков, таблиц и формул;
-* список литературы по ГОСТ Р 7.0.5-2008 (`biblatex-gost`).
-
-Пользовательские настройки (списки, листинги, теоремы, единицы измерения) находятся в `commands.tex`, подключаемые пакеты — в `packages.tex`.
+Поля, шрифт, интервалы и подписи настроены по ГОСТ 7.32-2017, список литературы — по ГОСТ Р 7.0.5-2008. Пакеты подключаются в `packages.tex`, настройки списков, листингов, теорем и единиц измерения — в `commands.tex`.
 
 
-## Проверки и CI
-При каждом push и pull request GitHub Actions собирает все документы на `TeX Live` последней версии и 2023 года и запускает `tests/run.sh`. Скрипт проверяет, что:
-* документы компилируются без ошибок;
-* в логах нет неопределённых ссылок и цитат, выходов текста за поля (`Overfull \hbox`), отсутствующих в шрифте символов и других предупреждений;
-* PDF имеет формат A4 и все шрифты внедрены;
-* титульные листы всех типов работ содержат нужный текст (`tests/*.tex`).
-
-Тот же скрипт можно запустить локально: `make test` (нужны `latexmk` и `poppler-utils`). Он удобен и для проверки собственной работы перед сдачей: выходы строк за поля и битые ссылки легко пропустить глазами.
-
-Собранные PDF доступны как артефакты сборки, а при публикации тега `v*` прикрепляются к релизу.
+## Проверки
+`make test` собирает все документы и падает, если в логах есть предупреждения (битые ссылки, выход строк за поля и т.п.) или в PDF нет ожидаемого текста. Нужны `latexmk` и `poppler-utils`. Это же запускается в CI на TeX Live 2023 и последней версии.
 
 
 ## Стандартные ошибки при работе с LaTeX
-* **Отсутствуют пакеты.** Доустановите их через менеджер `TeX Live` (`tlmgr install <пакет>`) или установите соответствующий пакет `texlive-*` вашего дистрибутива. Проще всего сразу поставить полную версию (`scheme-full`).
+* **Отсутствуют пакеты.** `tlmgr install <пакет>` или пакет `texlive-*` дистрибутива.
 
-* **Не появляется список литературы.** `biber` нужно запускать отдельно (в TeXstudio: `Tools` → `Bibliography`) или собирать документ через `latexmk`, который сделает всё сам.
+* **Нет списка литературы.** Запустите `biber` (в TeXstudio: `Tools` → `Bibliography`) или собирайте через `latexmk`.
 
-* **Вместо номера ссылки выводится `??`.** Запустите компиляцию ещё раз: `LaTeX` требует нескольких проходов, чтобы собрать ссылки, содержание и список литературы. Последовательность действий:
-    + `LaTeX` записывает информацию о `\cite` и `\label` во вспомогательные файлы (.aux, .bcf);
-    + `biber` читает их, сортирует и оформляет записи библиографии в файл .bbl;
-    + при следующем запуске `LaTeX` подставляет готовые ссылки.
+* **`??` вместо номера ссылки.** Скомпилируйте ещё раз: ссылки, содержание и библиография собираются за несколько проходов. Если не помогло — метки с таким именем нет.
 
-    Если `??` не исчезают, проверьте, что метка с таким именем существует.
+* **Источника из `biblio.bib` нет в списке.** Выводятся только процитированные; для всех — `\nocite{*}`.
 
-* **Источник есть в `biblio.bib`, но его нет в списке литературы.** По умолчанию выводятся только источники, на которые есть ссылки `\cite`. Чтобы вывести все, добавьте `\nocite{*}`.
+* **Ошибка при вставке .jpg/.png.** Пересохраните изображение.
 
-* **Ошибка при вставке .jpg/.png.** Пересохраните изображение (при необходимости в другой программе).
-
-* **Долгая первая сборка.** При первом запуске `XeLaTeX` строит кеш шрифтов — это нормально. Если сборка остаётся медленной, обновите кеш: `fc-cache -f` (Linux) или `fc-cache.exe -f` из каталога `bin` установленного `TeX Live` (Windows).
+* **Долгая сборка.** Обновите кеш шрифтов: `fc-cache -f`.

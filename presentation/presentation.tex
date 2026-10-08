@@ -1,13 +1,9 @@
 % !TEX TS-program = xelatex
-\documentclass[
-    10pt,               % размер шрифта
-    aspectratio=169,    % соотношение сторон: 169 (16:9) или 43 (4:3)
-]{beamer}
+\documentclass[10pt, aspectratio=169]{beamer} % 4:3 -- aspectratio=43
 
-\usetheme{metropolis}               % тема презентации
-\usefonttheme{professionalfonts}    % не даём beamer'у менять мат. шрифты
+\usetheme{metropolis}
+\usefonttheme{professionalfonts}
 
-%% Пакеты
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \usepackage{microtype}
@@ -19,11 +15,9 @@
 
 \frenchspacing
 
-%% Язык
 \setdefaultlanguage{russian}
 \setotherlanguage{english}
 
-%% Шрифты (те же, что и в работе)
 \defaultfontfeatures{Ligatures=TeX, Path=../fonts/, Extension=.otf}
 \setmainfont{FreeSerif}[
     UprightFont    = *-Regular,
@@ -46,13 +40,9 @@
 ]
 \setmathfont{XITS-Math}[BoldFont = XITS-MathBold]
 
-%% Подписи без номеров
 \captionsetup{labelformat=empty}
 \captionsetup[sub]{labelformat=empty}
 
-%% ---------------------------------------------------------------------
-%% Настройки пользователя
-%% ---------------------------------------------------------------------
 \graphicspath{{images/}}
 \metroset{
     numbering   = fraction,
@@ -60,7 +50,6 @@
     background  = light,
 }
 
-%% Вид строк для метаданных PDF
 \pdfstringdefDisableCommands{\def\\{, }\def\,{ }}
 
 \title{Тема презентации}

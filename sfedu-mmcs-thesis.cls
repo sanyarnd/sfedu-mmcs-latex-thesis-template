@@ -4,13 +4,7 @@
 %%
 %% Александр Бирюков <sanya.rnd@gmail.com>
 %%
-%% Компилятор: XeLaTeX, библиография: biber.
-%%
-%% Опции класса:
-%%   bachelor   -- выпускная квалификационная работа бакалавра (по умолчанию)
-%%   coursework -- курсовая работа
-%%   master     -- магистерская диссертация (основа -- scrbook, главы через \chapter)
-%%   scrartcl, scrbook -- явный выбор базового класса KOMA-Script
+%% Опции: bachelor (по умолчанию), coursework, master (на основе scrbook).
 
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesClass{sfedu-mmcs-thesis}[2026/10/08 v2.0 SFedU MMCS thesis class]
@@ -29,7 +23,6 @@
 \DeclareOption*{\ClassWarning{sfedu-mmcs-thesis}{Unknown option `\CurrentOption'}}
 \ProcessOptions\relax
 
-%% Если базовый класс не задан явно, выбираем его по типу работы
 \RequirePackage{etoolbox}
 \ifdefempty\sfedu@baseclass{%
     \ifdefstring\sfedu@worktype{master}
@@ -40,7 +33,7 @@
 %% ---------------------------------------------------------------------
 %% Базовый класс
 %% ---------------------------------------------------------------------
-%% Размер бумаги и поля задаются ниже пакетом geometry.
+%% Поля задаёт geometry, DIV=calc лишь убирает предупреждение typearea
 \PassOptionsToPackage{DIV=calc}{typearea}
 \LoadClass[
     oneside,
@@ -54,19 +47,16 @@
 %% Пакеты
 %% ---------------------------------------------------------------------
 \RequirePackage{iftex}
-\RequireTUTeX                       %% нужен Unicode-движок (XeLaTeX)
-\RequirePackage{scrhack}            %% совместимость KOMA-Script с float, listings и др.
-\RequirePackage{fontspec}           %% загрузка шрифтов
-\RequirePackage{polyglossia}        %% язык и переносы
-\RequirePackage{microtype}          %% типографские улучшения
-\RequirePackage{indentfirst}        %% абзацный отступ в первом абзаце
-\RequirePackage{pdfpages}           %% вставка PDF (готовый титульный лист)
-\RequirePackage{csquotes}           %% кавычки и цитаты
-\RequirePackage[
-    onehalfspacing,
-    nodisplayskipstretch
-]{setspace}                         %% полуторный интервал
-\RequirePackage[singlespacing=true]{scrlayer-scrpage} %% колонтитулы
+\RequireTUTeX
+\RequirePackage{scrhack}
+\RequirePackage{fontspec}
+\RequirePackage{polyglossia}
+\RequirePackage{microtype}
+\RequirePackage{indentfirst}
+\RequirePackage{pdfpages}
+\RequirePackage{csquotes}
+\RequirePackage[onehalfspacing, nodisplayskipstretch]{setspace}
+\RequirePackage[singlespacing=true]{scrlayer-scrpage}
 \RequirePackage[
     a4paper,
     left=30mm,
@@ -74,8 +64,8 @@
     top=20mm,
     bottom=20mm,
     footskip=10mm,
-]{geometry}                         %% поля по ГОСТ 7.32-2017
-\RequirePackage{caption}            %% оформление подписей
+]{geometry}                         %% ГОСТ 7.32-2017
+\RequirePackage{caption}
 \RequirePackage[
     backend=biber,
     hyperref=auto,
@@ -83,7 +73,7 @@
     language=autobib,
     autolang=other,
     style=gost-numeric,
-]{biblatex}                         %% библиография по ГОСТ Р 7.0.5-2008
+]{biblatex}
 
 %% ---------------------------------------------------------------------
 %% Язык и шрифты
@@ -91,8 +81,6 @@
 \setdefaultlanguage{russian}
 \setotherlanguage{english}
 
-%% Все шрифты лежат в каталоге fonts/ и содержат кириллицу, поэтому
-%% отдельные \cyrillicfont* не нужны.
 \defaultfontfeatures{Ligatures=TeX, Path=fonts/, Extension=.otf}
 
 \setmainfont{FreeSerif}[
@@ -118,59 +106,50 @@
 %% ---------------------------------------------------------------------
 %% Абзацы и переносы
 %% ---------------------------------------------------------------------
-\setlength{\parindent}{1.25cm}      %% абзацный отступ
-\frenchspacing                      %% одинаковые пробелы после точек
+\setlength{\parindent}{1.25cm}
+\frenchspacing
 
-\binoppenalty     = 10000           %% запрет переноса формул
+\binoppenalty     = 10000
 \relpenalty       = 10000
 \pretolerance     = 5000
 \tolerance        = 9000
-\emergencystretch = 1em             %% меньше выходов за поля
+\emergencystretch = 1em
 \lefthyphenmin    = 2
 \righthyphenmin   = 2
 \hyphenpenalty    = 500
-\clubpenalty      = 10000           %% висячие строки
+\clubpenalty      = 10000
 \widowpenalty     = 10000
 
 %% ---------------------------------------------------------------------
 %% Заголовки, колонтитулы, нумерация
 %% ---------------------------------------------------------------------
-%% Заголовки тем же шрифтом с засечками, что и текст
 \setkomafont{disposition}{\normalcolor\bfseries}
 \setkomafont{descriptionlabel}{\bfseries}
 \setkomafont{pageheadfoot}{\upshape}
 \setkomafont{pagenumber}{\normalfont}
 
-%% Номер страницы внизу по центру
 \pagestyle{plain.scrheadings}
 \clearpairofpagestyles
 \cfoot*{\pagemark}
 
-%% Сквозная нумерация рисунков, таблиц и формул в магистерской
 \@ifclassloaded{scrbook}{%
     \counterwithout{figure}{chapter}
     \counterwithout{table}{chapter}
     \counterwithout{equation}{chapter}
 }{}
 
-%% Подписи: "Рисунок 1 -- Название", "Таблица 1 -- Название" (подпись сверху)
 \captionsetup{labelformat=simple, labelsep=endash, justification=centering, singlelinecheck=false}
 \captionsetup[figure]{name=Рисунок, position=bottom}
 \captionsetup[table]{position=top}
 
-%% Ненумеруемые структурные элементы (Введение, Заключение и т.п.):
-%% \unnumbered{...}  -- с записью в содержании,
-%% \unnumbered*{...} -- без записи.
-%% Автоматически выбирается уровень (chapter/section) по классу.
+%% Введение, Заключение и т.п.; со звёздочкой -- без записи в содержании
 \NewDocumentCommand\unnumbered{s m}{%
     \@ifundefined{chapter}
         {\IfBooleanTF{#1}{\addsec*{#2}}{\addsec{#2}}}
         {\IfBooleanTF{#1}{\addchap*{#2}}{\addchap{#2}}}%
 }
 
-%% Русские имена для \autoref и <<Содержание>> вместо <<Оглавление>>.
-%% Добавляются к \captionsrussian, чтобы polyglossia и hyperref
-%% не перезаписали их при переключении языка.
+%% Через \captionsrussian, иначе polyglossia их перезапишет
 \newcommand\sfedu@russiannames{%
     \def\contentsname{Содержание}%
     \def\equationautorefname{формула}%
@@ -245,8 +224,7 @@
     year              = {\the\year},
   }
 
-%% \filltitle{ключ = значение, ...} -- см. diploma.tex
-%% Пустые строки между ключами допускаются.
+%% \par убирается, чтобы между ключами можно было оставлять пустые строки
 \cs_generate_variant:Nn \keys_set:nn { nV }
 \NewDocumentCommand \filltitle { +m }
   {
@@ -256,7 +234,6 @@
   }
 \ExplSyntaxOff
 
-%% Код направления зависит от уровня образования
 \newcommand\sfedu@defaultprogramcode{%
     \ifdefstring\sfedu@worktype{master}{02.04.02}{02.03.02}%
 }
@@ -352,7 +329,7 @@
     \end{titlepage}
 }
 
-%% Титульный лист входит в нумерацию, но номер на нём не печатается
+%% Титульный лист считается первой страницей
 \renewcommand\maketitle{%
     \begingroup
     \singlespacing
