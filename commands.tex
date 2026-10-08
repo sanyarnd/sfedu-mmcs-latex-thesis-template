@@ -30,7 +30,8 @@
     breaklines       = true,
     tabsize          = 4,
     showstringspaces = false,
-    extendedchars    = true,
+    extendedchars    = false,           %% иначе теряются пробелы в кириллице
+    keepspaces       = true,
     numbers          = left,
     numberstyle      = \scriptsize,
     numbersep        = 5pt,
@@ -100,10 +101,9 @@
 \algrenewcommand\textproc{\textrm}
 \renewcommand{\listalgorithmname}{Список алгоритмов}
 
-%% Перевод ключевых слов
+\algrenewcommand\algorithmicrequire{\textbf{Вход:}}
+\algrenewcommand\algorithmicensure{\textbf{Выход:}}
 % \algrenewcommand\algorithmicprocedure{\textbf{процедура}}
-% \algrenewcommand\algorithmicrequire{\textbf{Вход:}}
-% \algrenewcommand\algorithmicensure{\textbf{Выход:}}
 % \algrenewcommand\algorithmicif{\textbf{если}}
 % \algrenewcommand\algorithmicthen{\textbf{то}}
 % \algrenewcommand\algorithmicelse{\textbf{иначе}}

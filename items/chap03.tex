@@ -36,3 +36,33 @@ cufftExecC2C(plan, d_signal, d_signal, CUFFT_FORWARD);
         \EndProcedure
     \end{algorithmic}
 \end{algorithm}
+
+Более полный пример: входные и выходные данные, функция, цикл
+\texttt{while}, ветвления и комментарии (\autoref{alg:binsearch}).
+\begin{algorithm}[H]
+    \caption{Бинарный поиск}\label{alg:binsearch}
+    \begin{algorithmic}[1]
+        \Require массив $A[1..n]$, упорядоченный по возрастанию; значение $x$
+        \Ensure индекс $i$, такой что $A[i] = x$, или $0$
+        \Function{BinarySearch}{$A$, $n$, $x$}
+            \State $l \gets 1$, $r \gets n$
+            \While{$l \le r$}
+                \State $m \gets \lfloor (l + r) / 2 \rfloor$
+                \If{$A[m] = x$}
+                    \State \Return $m$
+                \ElsIf{$A[m] < x$}
+                    \State $l \gets m + 1$ \Comment{ищем в правой половине}
+                \Else
+                    \State $r \gets m - 1$ \Comment{ищем в левой половине}
+                \EndIf
+            \EndWhile
+            \State \Return $0$
+        \EndFunction
+        \Statex
+        \State $k \gets \Call{BinarySearch}{A, n, x}$
+    \end{algorithmic}
+\end{algorithm}
+
+Кроме того, доступны циклы \verb+\ForAll+, \verb+\Repeat+\dots\verb+\Until+,
+\verb+\Loop+ и процедуры \verb+\Procedure+. Ключевые слова переводятся
+командами \verb+\algrenewcommand+ (см. \texttt{commands.tex}).
