@@ -1,107 +1,73 @@
 % !TEX root = diploma.tex
+%% Шрифты, язык, поля и biblatex подключены в .cls файле
 
 %% ----------------------
-%% Математические пакеты
+%% Математика
 %% ----------------------
-\usepackage[]{amsmath}          %% верстка формул
-\usepackage[]{amssymb}          %% дополнительные символы
-\usepackage[]{mathtools}        %% различные исправления
-\usepackage[]{unicode-math}     %% использование математических символов юникода
-\usepackage[shortcuts]{extdash} % Дополнительные команды для различных дефисов, тире и пр.
-\usepackage[]{amsthm}           % окружения теоремы и пр.
-\usepackage[]{amsfonts}         % поддержка ажурных шрифтов и пр.
-\usepackage[]{amscd}            % коммутативные диаграммы
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{unicode-math}           %% amssymb и amsfonts не нужны
+\usepackage[shortcuts]{extdash}
 
 %% -------------------------
-%% Окружения для алгоритмов
+%% Алгоритмы и листинги кода
 %% -------------------------
-\usepackage[]{algorithm}
-\usepackage[]{algpseudocode}
-
-%% --------------------
-%% Листинги кода
-%% --------------------
-\usepackage[]{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
 
 %% ----------------
 %% Таблицы и списки
 %% ----------------
-\usepackage[]{enumitem}
-\usepackage[]{tabularx}
-\usepackage[]{tabulary}
-\usepackage[]{multicol}
-\usepackage[]{multirow}
-\usepackage[]{booktabs}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{booktabs}
 
 %% ----------------------------
-%% Приложение
+%% Приложения
 %% ----------------------------
 \usepackage[titletoc]{appendix}
 
 %% ----------------------------------
-%% Работа с изображениями и графиками
+%% Изображения и графики
 %% ----------------------------------
-\usepackage[]{graphicx}
-\usepackage[]{subfig}
-\usepackage[]{float}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
 
-\usepackage[]{tikz}
-\usepackage[]{pgfplots}
-\pgfplotsset{compat=newest}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, babel}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{
+    compat = 1.18,
+    /pgf/number format/use comma,
+    /pgf/number format/1000 sep = {\,},
+}
 
 %% --------------------
 %% Загрузка данных
 %% --------------------
-\usepackage[]{datatool}
+\usepackage{datatool}
 
 %% -----------------------
-%% Единицы изменения
+%% Единицы измерения
 %% -----------------------
-\usepackage[
-    binary-units = true, 
-    per-mode     = symbol
-]{siunitx}
+\usepackage{siunitx}
 
-%% --------------------------------------
-%% Показать границы страницы, удобно для
-%% проверки нарушения размерности
-%% --------------------------------------
-%\usepackage[]{showframe}
-
-%% --------------------------
-%% Использование языка Python
-%% --------------------------
-%\usepackage[]{pythontex}
+%% Показать границы полей
+% \usepackage{showframe}
 
 %% ----------------
 %% Ссылки
 %% ----------------
-% Обычно загружается последним, если не сказано 
-% обратного в документации конфликтующего пакета
+%% hyperref обычно подключается последним
 \usepackage[
     unicode,
-    colorlinks = true,
-    urlcolor   = black,
-    linkcolor  = black,
-    filecolor  = black,
-    citecolor  = black,
-    pdfkeywords={thesis}
+    hidelinks,
+    bookmarksnumbered,
+    bookmarksopen,
 ]{hyperref}
-
-%% -----------------------------
-%% Ускорение работы для Overleaf
-%% -----------------------------
-\makeatletter
-  \@ifpackagelater{microtype}{2017/07/05}{}{%
-    \patchcmd{\MT@is@composite}
-      {\expandafter\expandafter\expandafter}
-      {\ifx\UnicodeEncodingName\@undefined\else
-      \expandafter\expandafter\expandafter\MT@is@uni@comp\MT@char\iffontchar\else\fi\relax
-    \fi\expandafter\expandafter\expandafter}
-      {}{}
-    \def\MT@is@uni@comp#1\iffontchar#2\else#3\fi\relax{%
-      \ifx\\#2\\\else\edef\MT@char{\iffontchar#2\fi}\fi
-    }
-  }
-\makeatother
-

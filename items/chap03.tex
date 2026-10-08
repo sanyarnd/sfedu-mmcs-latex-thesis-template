@@ -1,29 +1,38 @@
 % !TEX root = ../diploma.tex
 
 \section{Код и псевдокод}
-В \LaTeX~есть поддержка как вставки кода, так и псевдокода. Оба окружения имеют настраиваемый вид.
+\LaTeX{} позволяет вставлять как исходный код (пакет \texttt{listings}),
+так и псевдокод (пакет \texttt{algpseudocode}). Оформление обоих окружений
+настраивается в \texttt{commands.tex}.
 
-\begin{lstlisting}[caption={Пример вызова БПФ в библиотеке \texttt{CuFFT}}]
-    cufftComplex *d_signal;
-    cudaMalloc((void **) &d_signal, mem_size);
-    cudaMemcpy(d_signal, fg, mem_size, cudaMemcpyHostToDevice);
+\begin{lstlisting}[caption={Вызов БПФ в библиотеке \texttt{cuFFT}}, label={lst:cufft}]
+cufftComplex *d_signal;
+cudaMalloc((void **) &d_signal, mem_size);
+cudaMemcpy(d_signal, fg, mem_size, cudaMemcpyHostToDevice);
 
-    cufftHandle plan;
-    cufftPlan2d(&plan, N, N, CUFFT_C2C);
+cufftHandle plan;
+cufftPlan2d(&plan, N, N, CUFFT_C2C);
 
-    cufftExecC2C(plan, (cufftComplex *)d_signal, (cufftComplex *)d_signal, CUFFT_FORWARD);
+// прямое преобразование
+cufftExecC2C(plan, d_signal, d_signal, CUFFT_FORWARD);
 \end{lstlisting}
 
-Ключевые слова в псевдокод-окружении можно переводить, вводить новые конструкции и т.п. Пример в файле \texttt{commands}.
+Код можно подключать и из отдельного файла:
+\begin{center}
+    \verb+\lstinputlisting[language=Python]{code/main.py}+
+\end{center}
+
+Ключевые слова псевдокода можно переводить (см. \texttt{commands.tex}),
+см. \autoref{alg:example}.
 \begin{algorithm}[H]
-    \caption{Пример псевдокода}
+    \caption{Пример псевдокода}\label{alg:example}
     \begin{algorithmic}[1]
         \Procedure{F}{$A$, $B$, $N$}
-        \State $E \gets A$
-        \For{$i := 1$ до $N$}
-        \State $\hat{E} = \texttt{fft}~E$
-        \EndFor
-        \State \Return $E$
+            \State $E \gets A$
+            \For{$i \gets 1$ \textbf{to} $N$}
+                \State $\hat{E} \gets \Call{FFT}{E}$
+            \EndFor
+            \State \Return $E$
         \EndProcedure
     \end{algorithmic}
 \end{algorithm}

@@ -1,34 +1,42 @@
 % !TEX root = ../diploma.tex
 
 \section{Таблицы}
-Здесь используется вспомогательное окружение \texttt{tabularx}, которое управляет шириной столбцов и автоматически переносит текст на новую строку в той же ячейке при нехватке размерности, доступной тексту.
+По ГОСТ 7.32-2017 подпись таблицы располагается \emph{над} таблицей:
+<<Таблица~1~-- Название>>. Поэтому \verb+\caption+ ставится перед
+окружением \texttt{tabular}.
+
+Окружение \texttt{tabularx} растягивает таблицу на заданную ширину и переносит
+текст в столбцах типа \texttt{X} (\autoref{tab:speed}).
 
 \begin{table}[H]
-    \centering
-    \begin{tabularx}{\textwidth}{| X | X | X |}
-    	\hline
-    	\textbf{Размер изображения} & \textbf{Время GPU} & \textbf{Время CPU} \\ \hline
-    	$1920\times 1920$           & $6$ мс             & $75$ мс            \\ \hline
-    	$4096\times 4096$           & $24$ мс            & $520$ мс           \\ \hline
-    	$3648\times 5472$           & $35$ мс            & $625$ мс           \\ \hline
+    \caption{Сравнение скорости работы}\label{tab:speed}
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+        \hline
+        \textbf{Размер изображения} & \textbf{Время GPU, \unit{\milli\second}} & \textbf{Время CPU, \unit{\milli\second}} \\ \hline
+        $1920 \times 1920$ & 6  & 75  \\ \hline
+        $4096 \times 4096$ & 24 & 520 \\ \hline
+        $3648 \times 5472$ & 35 & 625 \\ \hline
     \end{tabularx}
-    \caption{Сравнение скорости работы}
 \end{table}
 
-Таблицы как выше просты в использовании, но их внешний вид оставляет желать лучшего. При оформлении работ можно руководствоваться следующим пособием:
-\begin{center}
-    \href{https://www.inf.ethz.ch/personal/markusp/teaching/guides/guide-tables.pdf}{https://www.inf.ethz.ch/personal/markusp/teaching/guides/guide-tables.pdf}
-\end{center}
+Таблицы с вертикальными линиями просты, но выглядят тяжеловесно. Пакет
+\texttt{booktabs} даёт более аккуратные горизонтальные линейки, а столбец
+типа \texttt{S} из \texttt{siunitx} выравнивает числа по десятичной запятой
+(\autoref{tab:booktabs}). Подробнее об оформлении таблиц:
+\url{https://people.inf.ethz.ch/markusp/teaching/guides/guide-tables.pdf}.
 
-Пример красивой таблицы:
 \begin{table}[H]
     \centering
-    \caption{Подпись к таблице}
-    \begin{tabular}{llr}
-    	\toprule
-    	          \multicolumn{2}{c}{Item}            &           \\
-    	\cmidrule(r){1-2}
-        Животное & Описание & Цена (\$) \\ \midrule
-    	Armadillo                          & frozen   &      8.99 \\ \bottomrule
+    \caption{Пример таблицы с \texttt{booktabs}}\label{tab:booktabs}
+    \begin{tabular}{llS[table-format=3.2]}
+        \toprule
+        \multicolumn{2}{c}{Товар} & {Цена, руб.} \\
+        \cmidrule(r){1-2}
+        Животное & Описание & \\
+        \midrule
+        Броненосец & замороженный & 8.99   \\
+        Гну        & чучело       & 91.5   \\
+        Эму        & живой        & 133.25 \\
+        \bottomrule
     \end{tabular}
 \end{table}

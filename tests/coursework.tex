@@ -1,0 +1,23 @@
+% Пустая строка в \filltitle -- намеренно
+\documentclass[coursework]{sfedu-mmcs-thesis}
+\input{packages}
+\input{commands}
+\input{style}
+
+\filltitle{
+    title          = {Тестовая курсовая работа},
+
+    sex            = female,
+    course         = 3,
+    authorgenitive = {Г.\,Г.~Студенткиной},
+    supervisor     = {А.\,А.~Профессор},
+}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \unnumbered{Введение}
+    Текст введения.
+    \section{Первый раздел}
+    Текст раздела.
+\end{document}

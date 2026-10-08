@@ -1,30 +1,73 @@
-@ONLINE{test,
-    title       = {Тестовая запись},
-    language    = {russian},
-    hyphenation = {russian},
-    url         = {https://www.ru/},
+% langid определяет язык служебных слов: "и др." или "et al." и т.п.
+
+@book{knuth1986,
+    author    = {Knuth, Donald E.},
+    title     = {The {\TeX}book},
+    publisher = {Addison-Wesley},
+    location  = {Reading, MA},
+    year      = {1986},
+    pagetotal = {483},
+    isbn      = {0-201-13447-0},
+    langid    = {english},
 }
 
-% Разделять авторов можно с помощью 'and'
-@MVBOOK{book,
-    author      = {Author A and Author B},
-    title       = {Book name},
-    year        = {2005},
-    publisher   = {AAA},
-    language    = {russian},
-    hyphenation = {russian},
-    ISBN        = {12345},
+@book{lamport1994,
+    author    = {Lamport, Leslie},
+    title     = {{\LaTeX}: A Document Preparation System},
+    edition   = {2},
+    publisher = {Addison-Wesley},
+    location  = {Reading, MA},
+    year      = {1994},
+    pagetotal = {272},
+    langid    = {english},
 }
 
-@article{article, 
-    author      = {Author}, 
-    journal     = {journal}, 
-    number      = {1}, 
-    title       = {$1*2$ title}, 
-    volume      = {62}, 
-    month       = {Jan},
-    year        = {1972},
-    doi         = {doi number},
-    language    = {russian},
-    hyphenation = {russian},
+@book{lvovsky2003,
+    author    = {Львовский, Сергей Михайлович},
+    title     = {Набор и вёрстка в системе {\LaTeX}},
+    edition   = {3},
+    publisher = {МЦНМО},
+    location  = {М.},
+    year      = {2003},
+    pagetotal = {448},
+    isbn      = {5-94057-091-7},
+    langid    = {russian},
+}
+
+@article{article,
+    author    = {Иванов, Иван Иванович and Петров, Пётр Петрович},
+    title     = {Пример статьи в журнале},
+    journal   = {Известия вузов. Северо-Кавказский регион. Естественные науки},
+    year      = {2020},
+    number    = {1},
+    pages     = {10--15},
+    doi       = {10.0000/example},
+    langid    = {russian},
+}
+
+@book{gost732,
+    title     = {ГОСТ 7.32-2017. Отчет о научно-исследовательской работе.
+                 Структура и правила оформления},
+    publisher = {Стандартинформ},
+    location  = {М.},
+    year      = {2017},
+    pagetotal = {32},
+    langid    = {russian},
+}
+
+@book{gost705,
+    title     = {ГОСТ Р 7.0.5-2008. Библиографическая ссылка.
+                 Общие требования и правила составления},
+    publisher = {Стандартинформ},
+    location  = {М.},
+    year      = {2008},
+    pagetotal = {19},
+    langid    = {russian},
+}
+
+@online{ctan,
+    title     = {Comprehensive {\TeX} Archive Network},
+    url       = {https://ctan.org},
+    urldate   = {2026-10-01},
+    langid    = {english},
 }

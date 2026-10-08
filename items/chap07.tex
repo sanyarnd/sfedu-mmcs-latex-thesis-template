@@ -1,5 +1,38 @@
 % !TEX root = ../diploma.tex
 
-\section{Здесь пока ничего нет}
+\section{Математика}
 
-Здесь пока ничего нет
+Теоремы, леммы и определения оформляются окружениями пакета \texttt{amsthm},
+их названия задаются в файле \texttt{commands.tex}.
+
+\begin{definition}\label{def:norm}
+    \emph{Нормой} вектора $x \in \mathbb{R}^n$ называется величина
+    $\|x\| = \sqrt{\sum_{i=1}^{n} x_i^2}$.
+\end{definition}
+
+\begin{theorem}[неравенство треугольника]\label{thm:triangle}
+    Для любых $x, y \in \mathbb{R}^n$ выполняется $\|x + y\| \le \|x\| + \|y\|$.
+\end{theorem}
+
+\begin{proof}
+    Следует из неравенства Коши--Буняковского.
+\end{proof}
+
+Многострочные формулы удобно набирать окружением \texttt{align}:
+\begin{align}
+    f(x) &= \int_{0}^{\infty} e^{-\epsilon t} \phi(t) \, dt, \label{eq:laplace} \\
+    g(x) &= \sum_{k=1}^{\infty} \frac{\kappa^k}{k!}. \nonumber
+\end{align}
+Ссылка на формулу: \eqref{eq:laplace}, на теорему: \autoref{thm:triangle}.
+
+Обратите внимание: в \texttt{commands.tex} символы \verb+\epsilon+, \verb+\phi+,
+\verb+\kappa+, \verb+\le+ и \verb+\ge+ заменены на варианты, принятые
+в русской традиции: $\epsilon$, $\phi$, $\kappa$, $\le$, $\ge$.
+
+Коммутативная диаграмма (пакет \texttt{tikz-cd}):
+\[
+    \begin{tikzcd}
+        A \arrow[r, "f"] \arrow[d, "h"'] & B \arrow[d, "g"] \\
+        C \arrow[r, "k"']                & D
+    \end{tikzcd}
+\]

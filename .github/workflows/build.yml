@@ -1,0 +1,71 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: TeX Live ${{ matrix.texlive }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        texlive: [latest, TL2023-historic]
+    container:
+      image: texlive/texlive:${{ matrix.texlive }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install poppler-utils
+        run: apt-get update -qq && apt-get install -y -qq --no-install-recommends poppler-utils
+
+      - name: Build and test
+        run: tests/run.sh
+
+      - name: Upload logs
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: logs-${{ matrix.texlive }}
+          path: build/**/*.log
+
+      - name: Upload PDFs
+        if: matrix.texlive == 'latest'
+        uses: actions/upload-artifact@v7
+        with:
+          name: pdf
+          path: |
+            build/diploma/diploma.pdf
+            build/presentation/presentation.pdf
+            build/reference/reference.pdf
+            build/tests/*.pdf
+
+  release:
+    name: Release
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: pdf
+
+      - name: Publish PDFs
+        uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            diploma/diploma.pdf
+            presentation/presentation.pdf
+            reference/reference.pdf
