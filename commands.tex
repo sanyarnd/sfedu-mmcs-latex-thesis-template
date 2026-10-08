@@ -1,92 +1,117 @@
 % !TEX root = diploma.tex
+%% Пользовательские настройки и команды.
 
 %% ----------------------
 %% Стандартные каталоги
 %% ----------------------
 \graphicspath{{images/}}
-\def\datapath{data/}
-
+\newcommand{\datapath}{data}
 
 %% ------------------------
 %% Файл с библиографией
 %% ------------------------
 \addbibresource{biblio.bib}
 
+%% ---------------------------
+%% Списки
+%% ---------------------------
+%% Маркер списка -- тире, без лишних вертикальных отступов
+\setlist{nosep}
+\setlist[itemize]{label=\textendash}
+\setlist[enumerate,1]{label=\arabic*)}
 
 %% ---------------------------
-%% Параметры для листинга кода
+%% Листинги кода
 %% ---------------------------
 \renewcommand{\lstlistingname}{Листинг}
 \lstset{
-    language        = [ISO]C++,
-    basicstyle      = \footnotesize\ttfamily,
-    keywordstyle    = \footnotesize\ttfamily\bfseries,
-    stringstyle     = \footnotesize\ttfamily,
-    commentstyle    = \footnotesize\textit,
-    breaklines      = true,
-    tabsize         = 2,
-    literate        = {\ \ }{{\ }}1,
-    showstringspaces= false,
-    inputencoding   = utf8x,
-    numbers         = left,
-    stepnumber      = 1,
-    numbersep       = 5pt,
-    backgroundcolor = \color{white},
-    frame           = tb
+    language         = [ISO]C++,
+    basicstyle       = \footnotesize\ttfamily,
+    keywordstyle     = \bfseries,
+    commentstyle     = \itshape,
+    breaklines       = true,
+    tabsize          = 4,
+    showstringspaces = false,
+    extendedchars    = true,
+    numbers          = left,
+    numberstyle      = \scriptsize,
+    numbersep        = 5pt,
+    frame            = tb,
 }
 
+%% ---------------------------
+%% Единицы измерения
+%% ---------------------------
+\sisetup{
+    output-decimal-marker = {,},    %% десятичная запятая
+    group-separator       = {\,},
+    per-mode              = symbol,
+    list-final-separator  = { и },
+    range-phrase          = {\textendash},
+}
+%% Русские обозначения единиц (ГОСТ 8.417-2002)
+\DeclareSIPrefix\kilo{к}{3}
+\DeclareSIPrefix\mega{М}{6}
+\DeclareSIPrefix\giga{Г}{9}
+\DeclareSIPrefix\milli{м}{-3}
+\DeclareSIPrefix\micro{мк}{-6}
+\DeclareSIPrefix\nano{н}{-9}
+\DeclareSIUnit\second{с}
+\DeclareSIUnit\metre{м}
+\DeclareSIUnit\gram{г}
+\DeclareSIUnit\hertz{Гц}
+\DeclareSIUnit\byte{Б}
 
 %% -----------------------------------
-%% Переименование теорем, аксиом и пр.
+%% Теоремы
 %% -----------------------------------
 \newtheorem{theorem}{Теорема}[section]
-\newtheorem{axiom}{Аксиома}[section]
-\newtheorem{corollary}{Следствие}[theorem]
 \newtheorem{lemma}{Лемма}[section]
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{axiom}{Аксиома}[section]
 
 \theoremstyle{definition}
 \newtheorem{definition}{Определение}[section]
 
-% Черный квадрат в конце доказательства
-\renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Замечание}
 
+\renewcommand{\proofname}{Доказательство}
+\renewcommand{\qedsymbol}{\ensuremath{\mdlgblksquare}}
 
 %% ------------
 %% Мат. символы
 %% ------------
-\renewcommand{\epsilon}{\ensuremath{\varepsilon}}
-\renewcommand{\phi}{\ensuremath{\varphi}}
-\renewcommand{\kappa}{\ensuremath{\varkappa}}
-\renewcommand{\le}{\ensuremath{\leqslant}}
-\renewcommand{\leq}{\ensuremath{\leqslant}}
-\renewcommand{\ge}{\ensuremath{\geqslant}}
-\renewcommand{\geq}{\ensuremath{\geqslant}}
-\renewcommand{\emptyset}{\varnothing}
-
+%% unicode-math переопределяет символы в начале документа,
+%% поэтому замены делаем там же.
+\AtBeginDocument{%
+    \let\epsilon\varepsilon
+    \let\phi\varphi
+    \let\kappa\varkappa
+    \let\le\leqslant
+    \let\leq\leqslant
+    \let\ge\geqslant
+    \let\geq\geqslant
+    \let\emptyset\varnothing
+}
 
 %% --------------
-%% Для алгоритмов
+%% Алгоритмы
 %% --------------
-\makeatletter
-\renewcommand{\ALG@name}{Алгоритм}
-%\renewcommand{\listalgorithmname}{Список \ALG@name ов}
-\makeatother
+\floatname{algorithm}{Алгоритм}
+%% В FreeSerif нет капители, поэтому имена процедур -- обычным шрифтом
+\algrenewcommand\textproc{\textrm}
+\renewcommand{\listalgorithmname}{Список алгоритмов}
 
-% Перевод
-%\renewcommand{\algorithmicprocedure}{\textbf{процедура}}
-%\renewcommand{\algorithmicrequire}{\textbf{Требуется:}}
-%\renewcommand{\algorithmicensure}{\textbf{Проверить:}}
-%\renewcommand{\algorithmiccomment}[1]{\{#1\}}
-%\renewcommand{\algorithmicend}{\textbf{конец}}
-%\renewcommand{\algorithmicif}{\textbf{if}}
-%\renewcommand{\algorithmicthen}{\textbf{then}}
-%\renewcommand{\algorithmicelse}{\textbf{else}}
-%\renewcommand{\algorithmicfor}{\textbf{для}}
-%\renewcommand{\algorithmicforall}{\textbf{для всех}}
-%\renewcommand{\algorithmicdo}{\textbf{делать}}
-%\renewcommand{\algorithmicwhile}{\textbf{пока}}
-
-% Новые команды
-\newcommand{\algorithmicelsif}{\algorithmicelse\ \algorithmicif}
-\newcommand{\algorithmicendif}{\algorithmicend\ \algorithmicif}
-\newcommand{\algorithmicendfor}{\algorithmicend\ \algorithmicfor}
+%% Перевод ключевых слов (по желанию)
+% \algrenewcommand\algorithmicprocedure{\textbf{процедура}}
+% \algrenewcommand\algorithmicrequire{\textbf{Вход:}}
+% \algrenewcommand\algorithmicensure{\textbf{Выход:}}
+% \algrenewcommand\algorithmicif{\textbf{если}}
+% \algrenewcommand\algorithmicthen{\textbf{то}}
+% \algrenewcommand\algorithmicelse{\textbf{иначе}}
+% \algrenewcommand\algorithmicfor{\textbf{для}}
+% \algrenewcommand\algorithmicdo{\textbf{выполнять}}
+% \algrenewcommand\algorithmicwhile{\textbf{пока}}
+% \algrenewcommand\algorithmicend{\textbf{конец}}
+% \algrenewcommand\algorithmicreturn{\textbf{вернуть}}

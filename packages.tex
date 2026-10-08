@@ -1,107 +1,78 @@
 % !TEX root = diploma.tex
+%% Пакеты, которые подключаются в преамбуле diploma.tex.
+%% Базовые пакеты (шрифты, язык, поля, библиография) подключены в .cls файле.
 
 %% ----------------------
-%% Математические пакеты
+%% Математика
 %% ----------------------
-\usepackage[]{amsmath}          %% верстка формул
-\usepackage[]{amssymb}          %% дополнительные символы
-\usepackage[]{mathtools}        %% различные исправления
-\usepackage[]{unicode-math}     %% использование математических символов юникода
-\usepackage[shortcuts]{extdash} % Дополнительные команды для различных дефисов, тире и пр.
-\usepackage[]{amsthm}           % окружения теоремы и пр.
-\usepackage[]{amsfonts}         % поддержка ажурных шрифтов и пр.
-\usepackage[]{amscd}            % коммутативные диаграммы
+\usepackage{amsmath}                %% верстка формул
+\usepackage{mathtools}              %% исправления и расширения amsmath
+\usepackage{amsthm}                 %% окружения теорем
+\usepackage{unicode-math}           %% математические шрифты OpenType,
+                                    %% заменяет amssymb и amsfonts
+\usepackage[shortcuts]{extdash}     %% команды для дефисов и тире: \-/, \--
 
 %% -------------------------
-%% Окружения для алгоритмов
+%% Алгоритмы и листинги кода
 %% -------------------------
-\usepackage[]{algorithm}
-\usepackage[]{algpseudocode}
-
-%% --------------------
-%% Листинги кода
-%% --------------------
-\usepackage[]{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
 
 %% ----------------
 %% Таблицы и списки
 %% ----------------
-\usepackage[]{enumitem}
-\usepackage[]{tabularx}
-\usepackage[]{tabulary}
-\usepackage[]{multicol}
-\usepackage[]{multirow}
-\usepackage[]{booktabs}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{booktabs}
 
 %% ----------------------------
-%% Приложение
+%% Приложения
 %% ----------------------------
 \usepackage[titletoc]{appendix}
 
 %% ----------------------------------
-%% Работа с изображениями и графиками
+%% Изображения и графики
 %% ----------------------------------
-\usepackage[]{graphicx}
-\usepackage[]{subfig}
-\usepackage[]{float}
+\usepackage{graphicx}
+\usepackage{subcaption}             %% вложенные рисунки (вместо устаревшего subfig)
+\usepackage{float}                  %% размещение [H] -- "строго здесь"
 
-\usepackage[]{tikz}
-\usepackage[]{pgfplots}
-\pgfplotsset{compat=newest}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, babel}
+\usepackage{tikz-cd}                %% коммутативные диаграммы
+\usepackage{pgfplots}
+\pgfplotsset{
+    compat = 1.18,                  %% фиксируем версию, чтобы вид графиков не менялся
+    /pgf/number format/use comma,   %% десятичная запятая
+    /pgf/number format/1000 sep = {\,},
+}
 
 %% --------------------
 %% Загрузка данных
 %% --------------------
-\usepackage[]{datatool}
+\usepackage{datatool}
 
 %% -----------------------
-%% Единицы изменения
+%% Единицы измерения
 %% -----------------------
-\usepackage[
-    binary-units = true, 
-    per-mode     = symbol
-]{siunitx}
+\usepackage{siunitx}
 
 %% --------------------------------------
-%% Показать границы страницы, удобно для
-%% проверки нарушения размерности
+%% Показать границы полей -- удобно для
+%% проверки выхода текста за поля
 %% --------------------------------------
-%\usepackage[]{showframe}
-
-%% --------------------------
-%% Использование языка Python
-%% --------------------------
-%\usepackage[]{pythontex}
+% \usepackage{showframe}
 
 %% ----------------
 %% Ссылки
 %% ----------------
-% Обычно загружается последним, если не сказано 
-% обратного в документации конфликтующего пакета
+%% hyperref обычно подключается последним
 \usepackage[
     unicode,
-    colorlinks = true,
-    urlcolor   = black,
-    linkcolor  = black,
-    filecolor  = black,
-    citecolor  = black,
-    pdfkeywords={thesis}
+    hidelinks,                      %% ссылки без рамок и цвета (для печати)
+    bookmarksnumbered,
+    bookmarksopen,
 ]{hyperref}
-
-%% -----------------------------
-%% Ускорение работы для Overleaf
-%% -----------------------------
-\makeatletter
-  \@ifpackagelater{microtype}{2017/07/05}{}{%
-    \patchcmd{\MT@is@composite}
-      {\expandafter\expandafter\expandafter}
-      {\ifx\UnicodeEncodingName\@undefined\else
-      \expandafter\expandafter\expandafter\MT@is@uni@comp\MT@char\iffontchar\else\fi\relax
-    \fi\expandafter\expandafter\expandafter}
-      {}{}
-    \def\MT@is@uni@comp#1\iffontchar#2\else#3\fi\relax{%
-      \ifx\\#2\\\else\edef\MT@char{\iffontchar#2\fi}\fi
-    }
-  }
-\makeatother
-

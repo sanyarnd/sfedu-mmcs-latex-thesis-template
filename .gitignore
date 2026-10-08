@@ -1,3 +1,14 @@
+## Каталог сборки (make test, latexmk -outdir=build)
+/build/
+
+## Собранные PDF (раскомментируйте, если не хотите хранить их в репозитории)
+# /diploma.pdf
+# /reference.pdf
+# /presentation/presentation.pdf
+
+## XeLaTeX
+*.xdv
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

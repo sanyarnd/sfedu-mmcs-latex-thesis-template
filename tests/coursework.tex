@@ -1,0 +1,24 @@
+% Тест: курсовая работа студентки, пустые строки в \filltitle
+\documentclass[coursework]{sfedu-mmcs-thesis}
+\input{packages}
+\input{commands}
+\input{style}
+
+\filltitle{
+    title          = {Тестовая курсовая работа},
+    type           = coursework,
+
+    sex            = female,
+    course         = 3,
+    authorgenitive = {Г.\,Г.~Студенткиной},
+    supervisor     = {А.\,А.~Профессор},
+}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \unnumbered{Введение}
+    Текст введения.
+    \section{Первый раздел}
+    Текст раздела.
+\end{document}

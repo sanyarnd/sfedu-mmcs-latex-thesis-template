@@ -3,334 +3,363 @@
 %% https://github.com/sanyarnd/sfedu-mmcs-latex-thesis-template
 %%
 %% Александр Бирюков <sanya.rnd@gmail.com>
+%%
+%% Компилятор: XeLaTeX, библиография: biber.
+%%
+%% Опции класса:
+%%   bachelor   -- выпускная квалификационная работа бакалавра (по умолчанию)
+%%   coursework -- курсовая работа
+%%   master     -- магистерская диссертация (основа -- scrbook, главы через \chapter)
+%%   scrartcl, scrbook -- явный выбор базового класса KOMA-Script
 
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sfedu-mmcs-thesis}[2017/10/14 SFedU MMCS thesis class]
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesClass{sfedu-mmcs-thesis}[2026/10/08 v2.0 SFedU MMCS thesis class]
 
-%% Для работы с опциями (автогенерирует макросы)
-\RequirePackage[]{kvoptions}
-%% Вспомогательные функции
-\RequirePackage[]{etoolbox}
-%% Контейнер типа 'словарь'
-\RequirePackage[]{xkeyval}
-%% Макрос if <...> then <...> else <...>
-\RequirePackage[]{ifthen}
+%% ---------------------------------------------------------------------
+%% Опции класса
+%% ---------------------------------------------------------------------
+\newcommand\sfedu@baseclass{}
+\newcommand\sfedu@worktype{bachelor}
 
-%% Параметры
-\SetupKeyvalOptions{family=opt, prefix=opt@, setkeys=\kvsetkeys}
-\DeclareBoolOption[false]{scrartcl}
-\DeclareBoolOption[false]{scrbook}
+\DeclareOption{bachelor}  {\def\sfedu@worktype{bachelor}}
+\DeclareOption{coursework}{\def\sfedu@worktype{coursework}}
+\DeclareOption{master}    {\def\sfedu@worktype{master}}
+\DeclareOption{scrartcl}  {\def\sfedu@baseclass{scrartcl}}
+\DeclareOption{scrbook}   {\def\sfedu@baseclass{scrbook}}
+\DeclareOption*{\ClassWarning{sfedu-mmcs-thesis}{Unknown option `\CurrentOption'}}
+\ProcessOptions\relax
 
-%% Запуск обработки опций
-\ProcessKeyvalOptions*
-
-%% Выбираем нужный класс
-\ifopt@scrartcl
-    \def\opt@class{scrartcl}
-\fi
-\ifopt@scrbook
-    \def\opt@class{scrbook}
-\fi
-
-%% Загружаем класс
-\LoadClass[
-    a4paper,
-    oneside,
-    fontsize       = 14pt,
-    DIV            = 12,
-    headings       = normal,
-    chapterprefix  = true,
-    appendixprefix = true,
-    numbers        = endperiod
-]{\opt@class}
-
-
-%% Пакеты и их настройки
-\usepackage[]{fontspec}         %% загрузка шрифтов, работа с кодировкой и пр.
-\usepackage[]{scrlayer-scrpage} %% колонтитулы
-\usepackage[]{polyglossia}      %% переносы слов
-\usepackage[]{microtype}        %% различные исправления типографии
-\usepackage[]{indentfirst}      %% красная строка в первом абзаце
-\usepackage{pdfpages}           %% возможность загружать PDF файлы
-\usepackage[]{chngcntr}         %% модификация нумерации
-\usepackage[]{csquotes}         %% правильные кавычки, цитирование
-\usepackage[
-    onehalfspacing,
-    nodisplayskipstretch
-]{setspace}                     %% полуторный интервал
-\usepackage[
-    backend   = biber,
-    hyperref  = auto,
-    sorting   = none,
-    language  = auto,
-    citestyle = gost-numeric,
-    bibstyle  = gost-numeric
-]{biblatex}                     %% оформление списка литературы
-
-\setlength{\parindent}{1.25cm}  %% Красная строка
-\frenchspacing                  %% убираем лишние отступы после точек
-
-%% Перенос слов
-\binoppenalty       = 10000     %% Запрет переносов строк в формулах
-\relpenalty         = 10000
-\pretolerance       = 5000      %% Настройки переноса
-\tolerance          = 9000      %% Настройки переноса
-\emergencystretch   = 0pt       %% Запрещаем выход за границы
-\righthyphenmin     = 2         %% целое число, равное наименьшему количеству букв в слове, которые можно переносить на следующую строку
-\lefthyphenmin      = 2
-\hyphenpenalty      = 500
-\clubpenalty        = 10000     %% Запрет разрывов страниц после первой
-\widowpenalty       = 10000     %% и перед предпоследней строкой абзаца
-
-%% Убираем нумерацию на уровне глав, прямая нумерация для всех окружений
-\@ifclassloaded{scrbook}{
-    \counterwithout{figure}{chapter}
-    \counterwithout{equation}{chapter}
-    \counterwithout{table}{chapter}
+%% Если базовый класс не задан явно, выбираем его по типу работы
+\RequirePackage{etoolbox}
+\ifdefempty\sfedu@baseclass{%
+    \ifdefstring\sfedu@worktype{master}
+        {\def\sfedu@baseclass{scrbook}}
+        {\def\sfedu@baseclass{scrartcl}}%
 }{}
 
-%% Стиль для шрифта колонтитулов
+%% ---------------------------------------------------------------------
+%% Базовый класс
+%% ---------------------------------------------------------------------
+%% Размер бумаги и поля задаются ниже пакетом geometry.
+\PassOptionsToPackage{DIV=calc}{typearea}
+\LoadClass[
+    oneside,
+    fontsize=14pt,
+    headings=normal,
+    numbers=endperiod,
+]{\sfedu@baseclass}
+\@ifclassloaded{scrbook}{\KOMAoptions{chapterprefix=true, appendixprefix=true}}{}
+
+%% ---------------------------------------------------------------------
+%% Пакеты
+%% ---------------------------------------------------------------------
+\RequirePackage{iftex}
+\RequireTUTeX                       %% нужен Unicode-движок (XeLaTeX)
+\RequirePackage{scrhack}            %% совместимость KOMA-Script с float, listings и др.
+\RequirePackage{fontspec}           %% загрузка шрифтов
+\RequirePackage{polyglossia}        %% язык и переносы
+\RequirePackage{microtype}          %% типографские улучшения
+\RequirePackage{indentfirst}        %% абзацный отступ в первом абзаце
+\RequirePackage{pdfpages}           %% вставка PDF (готовый титульный лист)
+\RequirePackage{csquotes}           %% кавычки и цитаты
+\RequirePackage[
+    onehalfspacing,
+    nodisplayskipstretch
+]{setspace}                         %% полуторный интервал
+\RequirePackage[singlespacing=true]{scrlayer-scrpage} %% колонтитулы
+\RequirePackage[
+    a4paper,
+    left=30mm,
+    right=15mm,
+    top=20mm,
+    bottom=20mm,
+    footskip=10mm,
+]{geometry}                         %% поля по ГОСТ 7.32-2017
+\RequirePackage{caption}            %% оформление подписей
+\RequirePackage[
+    backend=biber,
+    hyperref=auto,
+    sorting=none,
+    language=autobib,
+    autolang=other,
+    style=gost-numeric,
+]{biblatex}                         %% библиография по ГОСТ Р 7.0.5-2008
+
+%% ---------------------------------------------------------------------
+%% Язык и шрифты
+%% ---------------------------------------------------------------------
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+
+%% Все шрифты лежат в каталоге fonts/ и содержат кириллицу, поэтому
+%% отдельные \cyrillicfont* не нужны.
+\defaultfontfeatures{Ligatures=TeX, Path=fonts/, Extension=.otf}
+
+\setmainfont{FreeSerif}[
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+\setsansfont{FreeSans}[
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Oblique,
+    BoldItalicFont = *-BoldOblique,
+]
+\setmonofont{FreeMono}[
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Oblique,
+    BoldItalicFont = *-BoldOblique,
+    Scale          = MatchLowercase,
+]
+
+%% ---------------------------------------------------------------------
+%% Абзацы и переносы
+%% ---------------------------------------------------------------------
+\setlength{\parindent}{1.25cm}      %% абзацный отступ
+\frenchspacing                      %% одинаковые пробелы после точек
+
+\binoppenalty     = 10000           %% запрет переноса формул
+\relpenalty       = 10000
+\pretolerance     = 5000
+\tolerance        = 9000
+\emergencystretch = 1em             %% меньше выходов за поля
+\lefthyphenmin    = 2
+\righthyphenmin   = 2
+\hyphenpenalty    = 500
+\clubpenalty      = 10000           %% висячие строки
+\widowpenalty     = 10000
+
+%% ---------------------------------------------------------------------
+%% Заголовки, колонтитулы, нумерация
+%% ---------------------------------------------------------------------
+%% Заголовки тем же шрифтом с засечками, что и текст
+\setkomafont{disposition}{\normalcolor\bfseries}
+\setkomafont{descriptionlabel}{\bfseries}
 \setkomafont{pageheadfoot}{\upshape}
+\setkomafont{pagenumber}{\normalfont}
 
-%% Оглавление -> Содержание
-\AtBeginDocument{\renewcommand{\contentsname}{Содержание}}
+%% Номер страницы внизу по центру
+\pagestyle{plain.scrheadings}
+\clearpairofpagestyles
+\cfoot*{\pagemark}
 
-%% -------------------------------------
-%% Титульная страница
-%% -------------------------------------
+%% Сквозная нумерация рисунков, таблиц и формул в магистерской
+\@ifclassloaded{scrbook}{%
+    \counterwithout{figure}{chapter}
+    \counterwithout{table}{chapter}
+    \counterwithout{equation}{chapter}
+}{}
 
-%% Параметры заполнения титульного листа
-\define@key         {opt@title}{university}                            {\def\opt@title@university{#1}}
-\define@key         {opt@title}{faculty}                               {\def\opt@title@faculty{#1}}
-\define@key         {opt@title}{chair}                                 {\def\opt@title@chair{#1}}
-\define@key         {opt@title}{title}                                 {\def\opt@title@title{#1}}
-\define@key         {opt@title}{course}                                {\def\opt@title@group{#1}}
-\define@key         {opt@title}{author}                                {\def\opt@title@author{#1}}
-\define@key         {opt@title}{authorgenitive}                        {\def\opt@title@authorgenitive{#1}}
-\define@key         {opt@title}{supervisor}                            {\def\opt@title@supervisor{#1}}
-\define@key         {opt@title}{supervisorPosition}                    {\def\opt@title@supervisorPosition{#1}}
-\define@key         {opt@title}{reviewer}                              {\def\opt@title@reviewer{#1}}
-\define@key         {opt@title}{reviewerPosition}                      {\def\opt@title@reviewerPosition{#1}}
-\define@key         {opt@title}{chairHead}                             {\def\opt@title@chairHead{#1}}
-\define@key         {opt@title}{year}                                  {\def\opt@title@year{#1}}
-\define@key         {opt@title}{city}                                  {\def\opt@title@city{#1}}
-\define@key         {opt@title}{titlepage}                             {\def\opt@title@titlepage{#1}}
-\define@choicekey*  {opt@title}{sex}    {male, female}                 {\def\opt@title@position{#1}}
-\define@choicekey*  {opt@title}{type}   {bachelor, master, coursework} {\def\opt@title@type{#1}}
+%% Подписи: "Рисунок 1 -- Название", "Таблица 1 -- Название" (подпись сверху)
+\captionsetup{labelformat=simple, labelsep=endash, justification=centering, singlelinecheck=false}
+\captionsetup[figure]{name=Рисунок, position=bottom}
+\captionsetup[table]{position=top}
 
+%% Ненумеруемые структурные элементы (Введение, Заключение и т.п.):
+%% \unnumbered{...}  -- с записью в содержании,
+%% \unnumbered*{...} -- без записи.
+%% Автоматически выбирается уровень (chapter/section) по классу.
+\NewDocumentCommand\unnumbered{s m}{%
+    \@ifundefined{chapter}
+        {\IfBooleanTF{#1}{\addsec*{#2}}{\addsec{#2}}}
+        {\IfBooleanTF{#1}{\addchap*{#2}}{\addchap{#2}}}%
+}
 
-\newcommand\filltitle[1]{
-    \presetkeys{opt@title}{
-        type                = {bachelor},
-        university          = {Федеральное государственное автономное образовательное\\учреждение высшего образования\\ \vspace*{0.1cm}\uppercase{Южный Федеральный Университет}},
-        faculty             = {Институт математики, механики и компьютерных наук\\ имени И. И. Воровича},
-        chair               = {Направление подготовки\\02.\ifthenelse{ \equal{\opt@title@type}{master} }{04}{03}.02 -- Фундаментальная информатика\\и информационные технологии},
-        title               = {title},
-        sex                 = {male},
-        course              = {course},
-        author              = {author},
-        authorgenitive      = {authorgenitive},
-        supervisor          = {supervisor},
-        supervisorPosition  = {supervisorPosition},
-        reviewer            = {reviewer},
-        reviewerPosition    = {reviewerPosition},
-        chairHead           = {chairHead},
-        city                = {Ростов-на-Дону},
-        year                = {\the\year},
-    }{}
-    
-    \setkeys{opt@title}{#1}
-    \@ifpackageloaded{hyperref}{
-        \pdfstringdefDisableCommands{\let\uppercase\@firstofone}
-        \hypersetup{pdfauthor={\opt@title@author{}}, pdftitle={\opt@title@title{}}}
-    }{}
+%% Русские имена для \autoref и <<Содержание>> вместо <<Оглавление>>.
+%% Добавляются к \captionsrussian, чтобы polyglossia и hyperref
+%% не перезаписали их при переключении языка.
+\newcommand\sfedu@russiannames{%
+    \def\contentsname{Содержание}%
+    \def\equationautorefname{формула}%
+    \def\figureautorefname{рисунок}%
+    \def\tableautorefname{таблица}%
+    \def\sectionautorefname{раздел}%
+    \def\subsectionautorefname{подраздел}%
+    \def\subsubsectionautorefname{подраздел}%
+    \def\chapterautorefname{глава}%
+    \def\appendixautorefname{приложение}%
+    \def\Itemautorefname{пункт}%
+    \def\theoremautorefname{теорема}%
+    \def\algorithmautorefname{алгоритм}%
+    \def\lstlistingautorefname{листинг}%
+    \def\pageautorefname{страница}%
+}
+\appto\captionsrussian{\sfedu@russiannames}
+\AtBeginDocument{\sfedu@russiannames}
+
+%% ---------------------------------------------------------------------
+%% Данные титульного листа
+%% ---------------------------------------------------------------------
+\ExplSyntaxOn
+\keys_define:nn { sfedu / title }
+  {
+    ministry           .tl_set:N = \sfedu@ministry,
+    university         .tl_set:N = \sfedu@university,
+    faculty            .tl_set:N = \sfedu@faculty,
+    chair              .tl_set:N = \sfedu@chair,
+    programCode        .tl_set:N = \sfedu@programcode,
+    programName        .tl_set:N = \sfedu@programname,
+    title              .tl_set:N = \sfedu@title,
+    course             .tl_set:N = \sfedu@course,
+    author             .tl_set:N = \sfedu@author,
+    authorgenitive     .tl_set:N = \sfedu@authorgenitive,
+    supervisor         .tl_set:N = \sfedu@supervisor,
+    supervisorPosition .tl_set:N = \sfedu@supervisorposition,
+    reviewer           .tl_set:N = \sfedu@reviewer,
+    reviewerPosition   .tl_set:N = \sfedu@reviewerposition,
+    chairHead          .tl_set:N = \sfedu@chairhead,
+    chairHeadPosition  .tl_set:N = \sfedu@chairheadposition,
+    city               .tl_set:N = \sfedu@city,
+    year               .tl_set:N = \sfedu@year,
+    titlepage          .tl_set:N = \sfedu@titlepage,
+    type               .choices:nn =
+      { bachelor, master, coursework } { \tl_set_eq:NN \sfedu@worktype \l_keys_choice_tl },
+    sex                .choices:nn =
+      { male, female } { \tl_set_eq:NN \sfedu@sex \l_keys_choice_tl },
+    gender             .meta:n = { sex = #1 },
+  }
+\keys_set:nn { sfedu / title }
+  {
+    ministry          = {Министерство~науки~и~высшего~образования\\Российской~Федерации},
+    university        = {Федеральное~государственное~автономное~образовательное\\
+                         учреждение~высшего~образования\\[0.1cm]
+                         \MakeUppercase{Южный~федеральный~университет}},
+    faculty           = {Институт~математики,~механики~и~компьютерных~наук\\
+                         имени~И.\,И.~Воровича},
+    programName       = {Фундаментальная~информатика\\и~информационные~технологии},
+    title             = {Название~работы},
+    sex               = male,
+    course            = {4},
+    author            = {И.\,О.~Фамилия},
+    authorgenitive    = {И.\,О.~Фамилии},
+    supervisor        = {И.\,О.~Фамилия},
+    supervisorPosition= {},
+    reviewer          = {И.\,О.~Фамилия},
+    reviewerPosition  = {},
+    chairHead         = {И.\,О.~Фамилия},
+    chairHeadPosition = {руководитель~направления~ФИИТ},
+    city              = {Ростов-на-Дону},
+    year              = {\the\year},
+  }
+
+%% \filltitle{ключ = значение, ...} -- см. diploma.tex
+%% Пустые строки между ключами допускаются.
+\cs_generate_variant:Nn \keys_set:nn { nV }
+\NewDocumentCommand \filltitle { +m }
+  {
+    \tl_set:Nn \l_tmpa_tl {#1}
+    \tl_replace_all:Nnn \l_tmpa_tl { \par } { }
+    \keys_set:nV { sfedu / title } \l_tmpa_tl
+  }
+\ExplSyntaxOff
+
+%% Код направления зависит от уровня образования
+\newcommand\sfedu@defaultprogramcode{%
+    \ifdefstring\sfedu@worktype{master}{02.04.02}{02.03.02}%
+}
+\newcommand\sfedu@chairtext{%
+    \ifdefvoid\sfedu@chair
+        {Направление подготовки\\
+         \ifdefvoid\sfedu@programcode{\sfedu@defaultprogramcode}{\sfedu@programcode}
+         \textendash\ \sfedu@programname}
+        {\sfedu@chair}%
+}
+
+\AtBeginDocument{%
+    \@ifpackageloaded{hyperref}{%
+        \pdfstringdefDisableCommands{%
+            \let\MakeUppercase\@firstofone
+            \let\uppercase\@firstofone
+            \def\\{ }%
+            \def\,{ }%
+        }%
+        \hypersetup{
+            pdfauthor = {\sfedu@author},
+            pdftitle  = {\sfedu@title},
+            pdflang   = {ru-RU},
+        }%
+    }{}%
+}
+
+%% ---------------------------------------------------------------------
+%% Титульный лист
+%% ---------------------------------------------------------------------
+\newcommand\sfedu@worktitle{%
+    \ifdefstring\sfedu@worktype{coursework}{Курсовая работа}{}%
+    \ifdefstring\sfedu@worktype{bachelor}%
+        {Выпускная квалификационная работа\\на степень бакалавра}{}%
+    \ifdefstring\sfedu@worktype{master}{Магистерская диссертация}{}%
 }
 
 \newcommand\makenewtitleru{%
     \begin{titlepage}
-        \thispagestyle{scrheadings}
-        \cfoot
-        { \parbox[b]{\textwidth}{\centering \opt@title@city\\ \opt@title@year} }
-        
-        \begin{center}
-            \vskip 1em
-            \uppercase{министерство образования и науки рф} \\
-            \vskip 1em
-            \opt@title@university \\
-            \vskip 1em
-            \opt@title@faculty \\
-            \vskip 1em
-            \opt@title@chair
-            \vskip 1em
-            
-            \ifthenelse{ \equal{\opt@title@type}{master} }
-            {
-                \vskip 4em
-                \opt@title@author \\
-                \vskip 1em
-            }
-            %else
-            { \vskip 3em }
-            
-            \opt@title@title \\
-            \vskip 1em
-            
-            \ifthenelse{ \equal{\opt@title@type}{coursework} }
-            { Курсовая работа }
-            %else
-            {
-                \ifthenelse{ \equal{\opt@title@type}{master} }
-                { Магистерская диссертация }
-                %else
-                {
-                    \ifthenelse{ \equal{\opt@title@type}{bachelor} }
-                    { Выпускная квалификационная работа\\на степень бакалавра }
-                }
-                \\
-            }
-            \vskip 3em
-            
-            \ifthenelse{\equal{\opt@title@type}{master}} % магистерская
-            {
-                \vskip 4em
-                \normalsize \raggedleft
-                Научный руководитель:\\
-                \opt@title@supervisorPosition\ \opt@title@supervisor \\
-                \vskip 0.5em
-                Рецензент:\\
-                \opt@title@reviewerPosition\ \opt@title@reviewer
-            }
-            %else % бакалаврская или курсовая
-            {
-                \normalsize\raggedleft
-                \ifthenelse{\equal{\opt@title@position}{male}}{Студента}{Студентки}\space \opt@title@group\space курса \\
-                \opt@title@authorgenitive \\
-                \vskip 0.5em
-                Научный руководитель:\\
-                \opt@title@supervisorPosition\ \opt@title@supervisor \\
-            }
-            
-            \vskip 5em
-            \ifthenelse{\equal{\opt@title@type}{bachelor}} % место для допуска
-            {
-                \begin{flushleft}
-                    Допущено к защите: \\
-                    руководитель направления ФИИТ \underline{\hspace{4cm}} \opt@title@chairHead
-                \end{flushleft}
-            }{}
-            \ifthenelse{\equal{\opt@title@type}{coursework}} % место для рейтинга
-            {
-                \begin{flushleft}
-                    \begin{tabular}{cc}
-                        \underline{\hspace{4cm}}&\underline{\hspace{5cm}}\\
-                        {\small оценка (рейтинг)} & {\small  подпись руководителя}\\
-                    \end{tabular}
-                \end{flushleft}
-            }{}
-        \end{center}
+        \centering
+        \MakeUppercase{\sfedu@ministry}\par
+        \vspace{1em}
+        \sfedu@university\par
+        \vspace{1em}
+        \sfedu@faculty\par
+        \vspace{1em}
+        \sfedu@chairtext\par
+
+        \ifdefstring\sfedu@worktype{master}
+            {\vspace{3em}\sfedu@author\par\vspace{1em}}
+            {\vspace{3em}}
+
+        {\sfedu@title\par}
+        \vspace{1em}
+        \sfedu@worktitle\par
+        \vspace{3em}
+
+        {\raggedleft
+        \ifdefstring\sfedu@worktype{master}{%
+            Научный руководитель:\\
+            \ifdefvoid\sfedu@supervisorposition{}{\sfedu@supervisorposition\ }%
+            \sfedu@supervisor\par
+            \vspace{0.5em}
+            Рецензент:\\
+            \ifdefvoid\sfedu@reviewerposition{}{\sfedu@reviewerposition\ }%
+            \sfedu@reviewer\par
+        }{%
+            \ifdefstring\sfedu@sex{female}{Студентки}{Студента}~\sfedu@course~курса\\
+            \sfedu@authorgenitive\par
+            \vspace{0.5em}
+            Научный руководитель:\\
+            \ifdefvoid\sfedu@supervisorposition{}{\sfedu@supervisorposition\ }%
+            \sfedu@supervisor\par
+        }}
+
+        \vspace{3em}
+        \ifdefstring\sfedu@worktype{bachelor}{%
+            {\raggedright
+            Допущено к защите:\\
+            \sfedu@chairheadposition\ \underline{\hspace{4cm}}\ \sfedu@chairhead\par}
+        }{}%
+        \ifdefstring\sfedu@worktype{coursework}{%
+            {\raggedright
+            \begin{tabular}{cc}
+                \underline{\hspace{4cm}} & \underline{\hspace{5cm}}\\
+                {\small оценка (рейтинг)} & {\small подпись руководителя}\\
+            \end{tabular}\par}
+        }{}%
+
+        \vfill
+        \sfedu@city\\
+        \sfedu@year
     \end{titlepage}
 }
 
-
-%% Переопределяем maketitle
-\renewcommand\maketitle{
-    % Создаем фиктивный счетчик, чтобы включить первую страницу в нумерацию
-    \newcounter{titlepages}
-    \setcounter{titlepages}{1}
-    
-    % Выводим титульную страницу
-    \begin{spacing}{1.0}
-        \ifthenelse{\isundefined{\opt@title@titlepage}}{\makenewtitleru}{\includepdf[pages=-]{\opt@title@titlepage}}
-        \addtocounter{titlepages}{1}
-    \end{spacing}
-    \setcounter{page}{\value{titlepages}}
-    
-    % убираем колонтитулы KOMA-Script
-    \pagestyle{plain}
+%% Титульный лист входит в нумерацию, но номер на нём не печатается
+\renewcommand\maketitle{%
+    \begingroup
+    \singlespacing
+    \ifdefvoid\sfedu@titlepage
+        {\makenewtitleru\setcounter{page}{2}}
+        {\includepdf[pages=-]{\sfedu@titlepage}}%
+    \endgroup
 }
 
-
-%% -----------------------------------
-%% Шрифты и язык
-%% -----------------------------------
-
-\setmainlanguage[spelling=modern]{russian}
-\setotherlanguage{english}
-
-\defaultfontfeatures{
-    Ligatures  = {TeX},
-    Mapping    = tex-text
-}
-
-%% Main font
-\setmainfont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Italic,
-    BoldItalicFont  = *-BoldItalic
-]{FreeSerif}
-\newfontfamily\cyrillicfont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Italic,
-    BoldItalicFont  = *-BoldItalic
-]{FreeSerif}
-
-%% Roman font
-\setromanfont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Italic,
-    BoldItalicFont  = *-BoldItalic
-]{FreeSerif}
-\newfontfamily\cyrillicfontrm[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Italic,
-    BoldItalicFont  = *-BoldItalic
-]{FreeSerif}
-
-%% Sans font
-\setsansfont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Oblique,
-    BoldItalicFont  = *-BoldOblique
-]{FreeSans}
-\newfontfamily\cyrillicfontsf[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Oblique,
-    BoldItalicFont  = *-BoldOblique
-]{FreeSans}
-
-%% Mono font
-\setmonofont[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Oblique,
-    BoldItalicFont  = *-BoldOblique
-]{FreeMono}
-\newfontfamily\cyrillicfonttt[
-    Path            = fonts/,
-    Extension       = .otf,
-    UprightFont     = *-Regular,
-    BoldFont        = *-Bold,
-    ItalicFont      = *-Oblique,
-    BoldItalicFont  = *-BoldOblique
-]{FreeMono}
-
+\endinput

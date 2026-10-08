@@ -1,0 +1,38 @@
+% Тест: магистерская диссертация (scrbook, главы, рецензент)
+\documentclass[master]{sfedu-mmcs-thesis}
+\input{packages}
+\input{commands}
+\input{style}
+
+\filltitle{
+    title              = {Тестовая магистерская диссертация},
+    type               = master,
+
+    author             = {Б.\,Б.~Магистров},
+    supervisorPosition = {д.\,ф.-м.\,н., профессор},
+    supervisor         = {А.\,А.~Профессор},
+    reviewerPosition   = {к.\,ф.-м.\,н., доцент},
+    reviewer           = {В.\,В.~Рецензентов},
+    year               = {2030},
+}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \unnumbered{Введение}
+    Текст введения~\cite{knuth1986}.
+    \chapter{Первая глава}
+    \section{Раздел}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=3cm]{example-image}
+        \caption{Рисунок в главе}\label{fig:test}
+    \end{figure}
+    Ссылка: \autoref{fig:test}, \autoref{eq:test}.
+    \begin{equation}\label{eq:test}
+        x = 1.
+    \end{equation}
+    \unnumbered{Заключение}
+    Текст заключения.
+    \printbibliography[heading=bibintoc]
+\end{document}

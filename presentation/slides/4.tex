@@ -1,16 +1,19 @@
 % !TEX root = ../presentation.tex
 
-\begin{frame}{Слайд 4}
-Описание слайда
-    \begin{table}[H]
-    \centering
-    \caption{\label{tab:widgets}Подпись к таблице --- сверху}
+\begin{frame}{Таблица}
+    Описание слайда.
+    \begin{table}
+        \centering
+        \caption{Подпись к таблице}
         \begin{tabular}{llr}
             \toprule
-                  \multicolumn{2}{c}{Item}        &           \\
+            \multicolumn{2}{c}{Товар} & \\
             \cmidrule(r){1-2}
-        Животное & Описание & Цена (\$) \\ \midrule
-            Armadillo                  & frozen   &      8.99 \\ \bottomrule
+            Животное   & Описание     & Цена, руб. \\
+            \midrule
+            Броненосец & замороженный & 8,99       \\
+            Гну        & чучело       & 91,50      \\
+            \bottomrule
         \end{tabular}
     \end{table}
 \end{frame}

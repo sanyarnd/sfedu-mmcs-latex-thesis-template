@@ -1,11 +1,18 @@
 % !TEX root = ../presentation.tex
 
-\begin{frame}{Слайд 3. Изображения}
-\begin{figure}[H]
-    \captionsetup[subfigure]{justification=centering, labelformat=empty}
-    \subfloat[Наблюдаемое изображение]{\includegraphics[width=0.4\textwidth]{wiener_blurred}}%
-    \quad
-    \subfloat[Восстановленное изображение]{\includegraphics[height=0.4\textwidth]{wiener_nsr_nonzero}}%
-\end{figure}
-    
+\begin{frame}{Изображения}
+    \begin{figure}
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[height=0.55\textheight]{wiener_blurred}
+            \caption{Наблюдаемое изображение}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[height=0.55\textheight]{wiener_nsr_nonzero}
+            \caption{Восстановленное изображение}
+        \end{subfigure}
+    \end{figure}
 \end{frame}
